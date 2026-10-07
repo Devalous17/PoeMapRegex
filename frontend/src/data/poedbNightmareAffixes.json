@@ -1,0 +1,796 @@
+[
+  {
+    "group": "MabUberModChaining",
+    "name": "Chaining",
+    "level": 1,
+    "kind": "prefix",
+    "weight": 50,
+    "text": "Monsters' skills Chain 3 additional times\nMonsters' Projectiles can Chain when colliding with Terrain\n16% increased Quantity of Items found in this Area\n56% increased Rarity of Items found in this Area\n6% increased Pack size",
+    "effects": [
+      "Monsters' skills Chain 3 additional times",
+      "Monsters' Projectiles can Chain when colliding with Terrain"
+    ],
+    "rewards": [
+      "16% increased Quantity of Items found in this Area",
+      "56% increased Rarity of Items found in this Area",
+      "6% increased Pack size"
+    ]
+  },
+  {
+    "group": "MapMonstersPowerChargeOnHit",
+    "name": "of Power",
+    "level": 1,
+    "kind": "suffix",
+    "weight": 100,
+    "text": "Monsters have +1 to Maximum Power Charges\nMonsters gain a Power Charge on Hit\n13% increased Quantity of Items found in this Area\n8% increased Rarity of Items found in this Area\n5% increased Pack size\n35% more Maps found in Area",
+    "effects": [
+      "Monsters have +1 to Maximum Power Charges",
+      "Monsters gain a Power Charge on Hit"
+    ],
+    "rewards": [
+      "13% increased Quantity of Items found in this Area",
+      "8% increased Rarity of Items found in this Area",
+      "5% increased Pack size",
+      "35% more Maps found in Area"
+    ]
+  },
+  {
+    "group": "MapMonstersFrenzyChargeOnHit",
+    "name": "of Frenzy",
+    "level": 1,
+    "kind": "suffix",
+    "weight": 100,
+    "text": "Monsters have +1 to Maximum Frenzy Charges\nMonsters gain a Frenzy Charge on Hit\n13% increased Quantity of Items found in this Area\n8% increased Rarity of Items found in this Area\n5% increased Pack size\n35% more Maps found in Area",
+    "effects": [
+      "Monsters have +1 to Maximum Frenzy Charges",
+      "Monsters gain a Frenzy Charge on Hit"
+    ],
+    "rewards": [
+      "13% increased Quantity of Items found in this Area",
+      "8% increased Rarity of Items found in this Area",
+      "5% increased Pack size",
+      "35% more Maps found in Area"
+    ]
+  },
+  {
+    "group": "MapMonstersEnduranceChargeOnHit",
+    "name": "of Endurance",
+    "level": 1,
+    "kind": "suffix",
+    "weight": 100,
+    "text": "Monsters have +1 to Maximum Endurance Charges\nMonsters gain an Endurance Charge when hit\n13% increased Quantity of Items found in this Area\n8% increased Rarity of Items found in this Area\n5% increased Pack size\n35% more Maps found in Area",
+    "effects": [
+      "Monsters have +1 to Maximum Endurance Charges",
+      "Monsters gain an Endurance Charge when hit"
+    ],
+    "rewards": [
+      "13% increased Quantity of Items found in this Area",
+      "8% increased Rarity of Items found in this Area",
+      "5% increased Pack size",
+      "35% more Maps found in Area"
+    ]
+  },
+  {
+    "group": "MapPlayerMaxResists",
+    "name": "of Exposure",
+    "level": 1,
+    "kind": "suffix",
+    "weight": 50,
+    "text": "Players have -20% to all maximum Resistances\n19% increased Quantity of Items found in this Area\n11% increased Rarity of Items found in this Area\n20% increased Pack size",
+    "effects": [
+      "Players have -20% to all maximum Resistances"
+    ],
+    "rewards": [
+      "19% increased Quantity of Items found in this Area",
+      "11% increased Rarity of Items found in this Area",
+      "20% increased Pack size"
+    ]
+  },
+  {
+    "group": "MapMonsterMultipleProjectiles",
+    "name": "Magnifying",
+    "level": 1,
+    "kind": "prefix",
+    "weight": 100,
+    "text": "Monsters have 100% increased Area of Effect\nMonsters fire 2 additional Projectiles\n19% increased Quantity of Items found in this Area\n56% increased Rarity of Items found in this Area\n7% increased Pack size",
+    "effects": [
+      "Monsters have 100% increased Area of Effect",
+      "Monsters fire 2 additional Projectiles"
+    ],
+    "rewards": [
+      "19% increased Quantity of Items found in this Area",
+      "56% increased Rarity of Items found in this Area",
+      "7% increased Pack size"
+    ]
+  },
+  {
+    "group": "MapMonsterCriticalStrikesAndDamage",
+    "name": "of Deadliness",
+    "level": 1,
+    "kind": "suffix",
+    "weight": 100,
+    "text": "Monsters have (650—700)% increased Critical Strike Chance\n+(70—75)% to Monster Critical Strike Multiplier\n16% increased Quantity of Items found in this Area\n56% increased Rarity of Items found in this Area\n6% increased Pack size",
+    "effects": [
+      "Monsters have (650—700)% increased Critical Strike Chance",
+      "+(70—75)% to Monster Critical Strike Multiplier"
+    ],
+    "rewards": [
+      "16% increased Quantity of Items found in this Area",
+      "56% increased Rarity of Items found in this Area",
+      "6% increased Pack size"
+    ]
+  },
+  {
+    "group": "MapPoisoning",
+    "name": "of Venom",
+    "level": 1,
+    "kind": "suffix",
+    "weight": 50,
+    "text": "Monsters Poison on Hit\nAll Damage from Monsters' Hits can Poison\nMonsters have 100% increased Poison Duration\n16% increased Quantity of Items found in this Area\n49% increased Rarity of Items found in this Area\n6% increased Pack size",
+    "effects": [
+      "Monsters Poison on Hit",
+      "All Damage from Monsters' Hits can Poison",
+      "Monsters have 100% increased Poison Duration"
+    ],
+    "rewards": [
+      "16% increased Quantity of Items found in this Area",
+      "49% increased Rarity of Items found in this Area",
+      "6% increased Pack size"
+    ]
+  },
+  {
+    "group": "MapMonsterDamage",
+    "name": "Savage",
+    "level": 1,
+    "kind": "prefix",
+    "weight": 100,
+    "text": "(30—40)% increased Monster Damage\n19% increased Quantity of Items found in this Area\n56% increased Rarity of Items found in this Area\n7% increased Pack size",
+    "effects": [
+      "(30—40)% increased Monster Damage"
+    ],
+    "rewards": [
+      "19% increased Quantity of Items found in this Area",
+      "56% increased Rarity of Items found in this Area",
+      "7% increased Pack size"
+    ]
+  },
+  {
+    "group": "MapMonstersMaximumLifeAddedEnergyShield",
+    "name": "Buffered",
+    "level": 1,
+    "kind": "prefix",
+    "weight": 100,
+    "text": "Monsters gain (70—80)% of Maximum Life as Extra Maximum Energy Shield\n13% increased Quantity of Items found in this Area\n8% increased Rarity of Items found in this Area\n5% increased Pack size\n35% more Maps found in Area",
+    "effects": [
+      "Monsters gain (70—80)% of Maximum Life as Extra Maximum Energy Shield"
+    ],
+    "rewards": [
+      "13% increased Quantity of Items found in this Area",
+      "8% increased Rarity of Items found in this Area",
+      "5% increased Pack size",
+      "35% more Maps found in Area"
+    ]
+  },
+  {
+    "group": "MapBossIsPossessed",
+    "name": "Enthralled",
+    "level": 1,
+    "kind": "prefix",
+    "weight": 50,
+    "text": "Unique Bosses are Possessed\n16% increased Quantity of Items found in this Area\n56% increased Rarity of Items found in this Area\n6% increased Pack size",
+    "effects": [
+      "Unique Bosses are Possessed"
+    ],
+    "rewards": [
+      "16% increased Quantity of Items found in this Area",
+      "56% increased Rarity of Items found in this Area",
+      "6% increased Pack size"
+    ]
+  },
+  {
+    "group": "MapMonstersChanceToSuppressSpells",
+    "name": "Oppressive",
+    "level": 1,
+    "kind": "prefix",
+    "weight": 60,
+    "text": "Monsters have +100% chance to Suppress Spell Damage\n13% increased Quantity of Items found in this Area\n8% increased Rarity of Items found in this Area\n5% increased Pack size\n35% more Maps found in Area",
+    "effects": [
+      "Monsters have +100% chance to Suppress Spell Damage"
+    ],
+    "rewards": [
+      "13% increased Quantity of Items found in this Area",
+      "8% increased Rarity of Items found in this Area",
+      "5% increased Pack size",
+      "35% more Maps found in Area"
+    ]
+  },
+  {
+    "group": "MapUberModMonsterAttackBlock",
+    "name": "Stalwart",
+    "level": 1,
+    "kind": "prefix",
+    "weight": 60,
+    "text": "Monsters have +50% Chance to Block Attack Damage\n13% increased Quantity of Items found in this Area\n8% increased Rarity of Items found in this Area\n5% increased Pack size\n47% more Currency found in Area",
+    "effects": [
+      "Monsters have +50% Chance to Block Attack Damage"
+    ],
+    "rewards": [
+      "13% increased Quantity of Items found in this Area",
+      "8% increased Rarity of Items found in this Area",
+      "5% increased Pack size",
+      "47% more Currency found in Area"
+    ]
+  },
+  {
+    "group": "MapMonsterLifeLeechImmunity",
+    "name": "of Congealment",
+    "level": 1,
+    "kind": "suffix",
+    "weight": 30,
+    "text": "Players have (50—60)% reduced Maximum total Life, Mana and Energy Shield Recovery per second from Leech\n16% increased Quantity of Items found in this Area\n49% increased Rarity of Items found in this Area\n6% increased Pack size",
+    "effects": [
+      "Players have (50—60)% reduced Maximum total Life, Mana and Energy Shield Recovery per second from Leech"
+    ],
+    "rewards": [
+      "16% increased Quantity of Items found in this Area",
+      "49% increased Rarity of Items found in this Area",
+      "6% increased Pack size"
+    ]
+  },
+  {
+    "group": "MapMonsterPhysicalReflection",
+    "name": "Punishing",
+    "level": 1,
+    "kind": "prefix",
+    "weight": 40,
+    "text": "Rare Monsters have Physical Thorns reflecting 1500 Physical Damage\nRare Monsters have Elemental Thorns reflecting 2500 Elemental Damage\n10% increased Quantity of Items found in this Area\n8% increased Rarity of Items found in this Area\n5% increased Pack size\n47% more Currency found in Area",
+    "effects": [
+      "Rare Monsters have Physical Thorns reflecting 1500 Physical Damage",
+      "Rare Monsters have Elemental Thorns reflecting 2500 Elemental Damage"
+    ],
+    "rewards": [
+      "10% increased Quantity of Items found in this Area",
+      "8% increased Rarity of Items found in this Area",
+      "5% increased Pack size",
+      "47% more Currency found in Area"
+    ]
+  },
+  {
+    "group": "MapPlayerTemporalChains",
+    "name": "of Curses",
+    "level": 1,
+    "kind": "suffix",
+    "weight": 60,
+    "text": "Players are Cursed with Vulnerability\nPlayers are Cursed with Temporal Chains\nPlayers are Cursed with Elemental Weakness\n13% increased Quantity of Items found in this Area\n11% increased Rarity of Items found in this Area\n6% increased Pack size\n35% more Scarabs found in Area",
+    "effects": [
+      "Players are Cursed with Vulnerability",
+      "Players are Cursed with Temporal Chains",
+      "Players are Cursed with Elemental Weakness"
+    ],
+    "rewards": [
+      "13% increased Quantity of Items found in this Area",
+      "11% increased Rarity of Items found in this Area",
+      "6% increased Pack size",
+      "35% more Scarabs found in Area"
+    ]
+  },
+  {
+    "group": "MapPlayersAoERadius",
+    "name": "of Impotence",
+    "level": 1,
+    "kind": "suffix",
+    "weight": 100,
+    "text": "Players have (25—30)% less Area of Effect\n13% increased Quantity of Items found in this Area\n69% increased Rarity of Items found in this Area\n5% increased Pack size",
+    "effects": [
+      "Players have (25—30)% less Area of Effect"
+    ],
+    "rewards": [
+      "13% increased Quantity of Items found in this Area",
+      "69% increased Rarity of Items found in this Area",
+      "5% increased Pack size"
+    ]
+  },
+  {
+    "group": "MapMonstersBaseSelfCriticalMultiplier",
+    "name": "of Toughness",
+    "level": 1,
+    "kind": "suffix",
+    "weight": 30,
+    "text": "Monsters take (35—45)% reduced Extra Damage from Critical Strikes\n10% increased Quantity of Items found in this Area\n56% increased Rarity of Items found in this Area\n5% increased Pack size",
+    "effects": [
+      "Monsters take (35—45)% reduced Extra Damage from Critical Strikes"
+    ],
+    "rewards": [
+      "10% increased Quantity of Items found in this Area",
+      "56% increased Rarity of Items found in this Area",
+      "5% increased Pack size"
+    ]
+  },
+  {
+    "group": "MapMonsterLife",
+    "name": "Fecund",
+    "level": 1,
+    "kind": "prefix",
+    "weight": 100,
+    "text": "(90—100)% more Monster Life\n13% increased Quantity of Items found in this Area\n8% increased Rarity of Items found in this Area\n5% increased Pack size\n47% more Currency found in Area",
+    "effects": [
+      "(90—100)% more Monster Life"
+    ],
+    "rewards": [
+      "13% increased Quantity of Items found in this Area",
+      "8% increased Rarity of Items found in this Area",
+      "5% increased Pack size",
+      "47% more Currency found in Area"
+    ]
+  },
+  {
+    "group": "MapRareMonsters",
+    "name": "Antagonist's",
+    "level": 1,
+    "kind": "prefix",
+    "weight": 30,
+    "text": "(35—45)% increased number of Rare Monsters\nRare Monsters each have 1 additional Modifiers\n13% increased Quantity of Items found in this Area\n8% increased Rarity of Items found in this Area\n5% increased Pack size",
+    "effects": [
+      "(35—45)% increased number of Rare Monsters",
+      "Rare Monsters each have 1 additional Modifiers"
+    ],
+    "rewards": [
+      "13% increased Quantity of Items found in this Area",
+      "8% increased Rarity of Items found in this Area",
+      "5% increased Pack size"
+    ]
+  },
+  {
+    "group": "MapUberModShrineBuff",
+    "name": "of Domination",
+    "level": 1,
+    "kind": "suffix",
+    "weight": 50,
+    "text": "Unique Monsters have 1 random Shrine Buffs\n13% increased Quantity of Items found in this Area\n8% increased Rarity of Items found in this Area\n5% increased Pack size\n35% more Maps found in Area",
+    "effects": [
+      "Unique Monsters have 1 random Shrine Buffs"
+    ],
+    "rewards": [
+      "13% increased Quantity of Items found in this Area",
+      "8% increased Rarity of Items found in this Area",
+      "5% increased Pack size",
+      "35% more Maps found in Area"
+    ]
+  },
+  {
+    "group": "MapUberModVines",
+    "name": "Grasping",
+    "level": 1,
+    "kind": "prefix",
+    "weight": 50,
+    "text": "Monsters inflict 2 Grasping Vines on Hit\n13% increased Quantity of Items found in this Area\n8% increased Rarity of Items found in this Area\n5% increased Pack size\n40% more Maps found in Area",
+    "effects": [
+      "Monsters inflict 2 Grasping Vines on Hit"
+    ],
+    "rewards": [
+      "13% increased Quantity of Items found in this Area",
+      "8% increased Rarity of Items found in this Area",
+      "5% increased Pack size",
+      "40% more Maps found in Area"
+    ]
+  },
+  {
+    "group": "MapUberModVolatiles",
+    "name": "Volatile",
+    "level": 1,
+    "kind": "prefix",
+    "weight": 50,
+    "text": "Rare Monsters have Volatile Cores\n13% increased Quantity of Items found in this Area\n11% increased Rarity of Items found in this Area\n5% increased Pack size\n53% more Scarabs found in Area",
+    "effects": [
+      "Rare Monsters have Volatile Cores"
+    ],
+    "rewards": [
+      "13% increased Quantity of Items found in this Area",
+      "11% increased Rarity of Items found in this Area",
+      "5% increased Pack size",
+      "53% more Scarabs found in Area"
+    ]
+  },
+  {
+    "group": "MapUberModDamageAsElemental",
+    "name": "Prismatic",
+    "level": 1,
+    "kind": "prefix",
+    "weight": 100,
+    "text": "Monsters gain (180—200)% of their Physical Damage as Extra Damage of a random Element\n16% increased Quantity of Items found in this Area\n71% increased Rarity of Items found in this Area\n6% increased Pack size",
+    "effects": [
+      "Monsters gain (180—200)% of their Physical Damage as Extra Damage of a random Element"
+    ],
+    "rewards": [
+      "16% increased Quantity of Items found in this Area",
+      "71% increased Rarity of Items found in this Area",
+      "6% increased Pack size"
+    ]
+  },
+  {
+    "group": "MapMonsterChaosDamage",
+    "name": "Profane",
+    "level": 1,
+    "kind": "prefix",
+    "weight": 50,
+    "text": "Monsters gain (80—100)% of their Physical Damage as Extra Chaos Damage\n16% increased Quantity of Items found in this Area\n46% increased Rarity of Items found in this Area\n6% increased Pack size",
+    "effects": [
+      "Monsters gain (80—100)% of their Physical Damage as Extra Chaos Damage"
+    ],
+    "rewards": [
+      "16% increased Quantity of Items found in this Area",
+      "46% increased Rarity of Items found in this Area",
+      "6% increased Pack size"
+    ]
+  },
+  {
+    "group": "MapTurbo",
+    "name": "Fleet",
+    "level": 1,
+    "kind": "prefix",
+    "weight": 100,
+    "text": "(25—30)% increased Monster Movement Speed\n(35—45)% increased Monster Attack Speed\n(35—45)% increased Monster Cast Speed\n19% increased Quantity of Items found in this Area\n56% increased Rarity of Items found in this Area\n7% increased Pack size",
+    "effects": [
+      "(25—30)% increased Monster Movement Speed",
+      "(35—45)% increased Monster Attack Speed",
+      "(35—45)% increased Monster Cast Speed"
+    ],
+    "rewards": [
+      "19% increased Quantity of Items found in this Area",
+      "56% increased Rarity of Items found in this Area",
+      "7% increased Pack size"
+    ]
+  },
+  {
+    "group": "MapUberModAmbush",
+    "name": "Ultimate",
+    "level": 1,
+    "kind": "prefix",
+    "weight": 50,
+    "text": "Players are assaulted by Bloodstained Sawblades\n13% increased Quantity of Items found in this Area\n8% increased Rarity of Items found in this Area\n5% increased Pack size\n47% more Currency found in Area",
+    "effects": [
+      "Players are assaulted by Bloodstained Sawblades"
+    ],
+    "rewards": [
+      "13% increased Quantity of Items found in this Area",
+      "8% increased Rarity of Items found in this Area",
+      "5% increased Pack size",
+      "47% more Currency found in Area"
+    ]
+  },
+  {
+    "group": "MapMonstersCantBeSlowedOrTaunted",
+    "name": "of the Juggernaut",
+    "level": 1,
+    "kind": "suffix",
+    "weight": 40,
+    "text": "Monsters cannot be Stunned\nMonsters' Action Speed cannot be modified to below Base Value\nMonsters' Movement Speed cannot be modified to below Base Value\n13% increased Quantity of Items found in this Area\n8% increased Rarity of Items found in this Area\n5% increased Pack size\n47% more Currency found in Area",
+    "effects": [
+      "Monsters cannot be Stunned",
+      "Monsters' Action Speed cannot be modified to below Base Value",
+      "Monsters' Movement Speed cannot be modified to below Base Value"
+    ],
+    "rewards": [
+      "13% increased Quantity of Items found in this Area",
+      "8% increased Rarity of Items found in this Area",
+      "5% increased Pack size",
+      "47% more Currency found in Area"
+    ]
+  },
+  {
+    "group": "MapUberModFlaskMeteor",
+    "name": "of Imbibing",
+    "level": 1,
+    "kind": "suffix",
+    "weight": 50,
+    "text": "Players are targeted by a Meteor when they use a Flask\n13% increased Quantity of Items found in this Area\n8% increased Rarity of Items found in this Area\n5% increased Pack size\n45% more Currency found in Area",
+    "effects": [
+      "Players are targeted by a Meteor when they use a Flask"
+    ],
+    "rewards": [
+      "13% increased Quantity of Items found in this Area",
+      "8% increased Rarity of Items found in this Area",
+      "5% increased Pack size",
+      "45% more Currency found in Area"
+    ]
+  },
+  {
+    "group": "MapUberModGlobalDefences",
+    "name": "of Miring",
+    "level": 1,
+    "kind": "suffix",
+    "weight": 60,
+    "text": "Players have (25—30)% less Defences\n13% increased Quantity of Items found in this Area\n8% increased Rarity of Items found in this Area\n5% increased Pack size\n35% more Scarabs found in Area",
+    "effects": [
+      "Players have (25—30)% less Defences"
+    ],
+    "rewards": [
+      "13% increased Quantity of Items found in this Area",
+      "8% increased Rarity of Items found in this Area",
+      "5% increased Pack size",
+      "35% more Scarabs found in Area"
+    ]
+  },
+  {
+    "group": "MapUberModAmbush",
+    "name": "Hungering",
+    "level": 1,
+    "kind": "prefix",
+    "weight": 50,
+    "text": "Area contains Drowning Orbs\n16% increased Quantity of Items found in this Area\n8% increased Rarity of Items found in this Area\n20% increased Pack size",
+    "effects": [
+      "Area contains Drowning Orbs"
+    ],
+    "rewards": [
+      "16% increased Quantity of Items found in this Area",
+      "8% increased Rarity of Items found in this Area",
+      "20% increased Pack size"
+    ]
+  },
+  {
+    "group": "MapMonstersAllResistances",
+    "name": "Protected",
+    "level": 1,
+    "kind": "prefix",
+    "weight": 100,
+    "text": "+50% Monster Physical Damage Reduction\n+35% Monster Chaos Resistance\n+55% Monster Elemental Resistances\n13% increased Quantity of Items found in this Area\n8% increased Rarity of Items found in this Area\n5% increased Pack size\n35% more Maps found in Area",
+    "effects": [
+      "+50% Monster Physical Damage Reduction",
+      "+35% Monster Chaos Resistance",
+      "+55% Monster Elemental Resistances"
+    ],
+    "rewards": [
+      "13% increased Quantity of Items found in this Area",
+      "8% increased Rarity of Items found in this Area",
+      "5% increased Pack size",
+      "35% more Maps found in Area"
+    ]
+  },
+  {
+    "group": "MapUberModMonsterAilments",
+    "name": "Afflicting",
+    "level": 1,
+    "kind": "prefix",
+    "weight": 50,
+    "text": "All Monster Damage can Ignite, Freeze and Shock\nMonsters Ignite, Freeze and Shock on Hit\n13% increased Quantity of Items found in this Area\n8% increased Rarity of Items found in this Area\n5% increased Pack size\n60% more Scarabs found in Area",
+    "effects": [
+      "All Monster Damage can Ignite, Freeze and Shock",
+      "Monsters Ignite, Freeze and Shock on Hit"
+    ],
+    "rewards": [
+      "13% increased Quantity of Items found in this Area",
+      "8% increased Rarity of Items found in this Area",
+      "5% increased Pack size",
+      "60% more Scarabs found in Area"
+    ]
+  },
+  {
+    "group": "MapPlayerBuffsExpireFaster",
+    "name": "of Transience",
+    "level": 1,
+    "kind": "suffix",
+    "weight": 60,
+    "text": "Buffs on Players expire 100% faster\n10% increased Quantity of Items found in this Area\n6% increased Rarity of Items found in this Area\n4% increased Pack size\n35% more Scarabs found in Area",
+    "effects": [
+      "Buffs on Players expire 100% faster"
+    ],
+    "rewards": [
+      "10% increased Quantity of Items found in this Area",
+      "6% increased Rarity of Items found in this Area",
+      "4% increased Pack size",
+      "35% more Scarabs found in Area"
+    ]
+  },
+  {
+    "group": "MapUberModEleDamagePenetration",
+    "name": "of Penetration",
+    "level": 1,
+    "kind": "suffix",
+    "weight": 50,
+    "text": "Monster Damage Penetrates 15% Elemental Resistances\n19% increased Quantity of Items found in this Area\n72% increased Rarity of Items found in this Area\n6% increased Pack size",
+    "effects": [
+      "Monster Damage Penetrates 15% Elemental Resistances"
+    ],
+    "rewards": [
+      "19% increased Quantity of Items found in this Area",
+      "72% increased Rarity of Items found in this Area",
+      "6% increased Pack size"
+    ]
+  },
+  {
+    "group": "MapUberModElderNovas",
+    "name": "of Decaying",
+    "level": 1,
+    "kind": "suffix",
+    "weight": 50,
+    "text": "Area contains Unstable Tentacle Fiends\n16% increased Quantity of Items found in this Area\n11% increased Rarity of Items found in this Area\n20% increased Pack size\nmap monster elder nova on death % chance [100]",
+    "effects": [
+      "Area contains Unstable Tentacle Fiends"
+    ],
+    "rewards": [
+      "16% increased Quantity of Items found in this Area",
+      "11% increased Rarity of Items found in this Area",
+      "20% increased Pack size",
+      "map monster elder nova on death % chance [100]"
+    ]
+  },
+  {
+    "group": "MapUberModShaperTouched",
+    "name": "Valdo's",
+    "level": 1,
+    "kind": "prefix",
+    "weight": 50,
+    "text": "Rare monsters in area are Shaper-Touched\n13% increased Quantity of Items found in this Area\n11% increased Rarity of Items found in this Area\n20% increased Pack size",
+    "effects": [
+      "Rare monsters in area are Shaper-Touched"
+    ],
+    "rewards": [
+      "13% increased Quantity of Items found in this Area",
+      "11% increased Rarity of Items found in this Area",
+      "20% increased Pack size"
+    ]
+  },
+  {
+    "group": "MapUberModSynthMiniboss",
+    "name": "Synthetic",
+    "level": 1,
+    "kind": "prefix",
+    "weight": 50,
+    "text": "Map Boss is accompanied by a Synthesis Boss\n13% increased Quantity of Items found in this Area\n8% increased Rarity of Items found in this Area\n20% increased Pack size",
+    "effects": [
+      "Map Boss is accompanied by a Synthesis Boss"
+    ],
+    "rewards": [
+      "13% increased Quantity of Items found in this Area",
+      "8% increased Rarity of Items found in this Area",
+      "20% increased Pack size"
+    ]
+  },
+  {
+    "group": "MapUberModMonsterDebuffSpeed",
+    "name": "of Defiance",
+    "level": 1,
+    "kind": "suffix",
+    "weight": 40,
+    "text": "Debuffs on Monsters expire 100% faster\n16% increased Quantity of Items found in this Area\n12% increased Rarity of Items found in this Area\n6% increased Pack size\n64% more Currency found in Area",
+    "effects": [
+      "Debuffs on Monsters expire 100% faster"
+    ],
+    "rewards": [
+      "16% increased Quantity of Items found in this Area",
+      "12% increased Rarity of Items found in this Area",
+      "6% increased Pack size",
+      "64% more Currency found in Area"
+    ]
+  },
+  {
+    "group": "MapUberModExarch",
+    "name": "Searing",
+    "level": 1,
+    "kind": "prefix",
+    "weight": 50,
+    "text": "Area contains Runes of the Searing Exarch\n13% increased Quantity of Items found in this Area\n8% increased Rarity of Items found in this Area\n20% increased Pack size",
+    "effects": [
+      "Area contains Runes of the Searing Exarch"
+    ],
+    "rewards": [
+      "13% increased Quantity of Items found in this Area",
+      "8% increased Rarity of Items found in this Area",
+      "20% increased Pack size"
+    ]
+  },
+  {
+    "group": "MapUberModMavenFollower",
+    "name": "of Collection",
+    "level": 1,
+    "kind": "suffix",
+    "weight": 50,
+    "text": "The Maven interferes with Players\n13% increased Quantity of Items found in this Area\n8% increased Rarity of Items found in this Area\n20% increased Pack size",
+    "effects": [
+      "The Maven interferes with Players"
+    ],
+    "rewards": [
+      "13% increased Quantity of Items found in this Area",
+      "8% increased Rarity of Items found in this Area",
+      "20% increased Pack size"
+    ]
+  },
+  {
+    "group": "MapUberModRareFracture",
+    "name": "of Splinters",
+    "level": 1,
+    "kind": "suffix",
+    "weight": 30,
+    "text": "25% chance for Rare Monsters to Fracture on death\n19% increased Quantity of Items found in this Area\n8% increased Rarity of Items found in this Area\n5% increased Pack size",
+    "effects": [
+      "25% chance for Rare Monsters to Fracture on death"
+    ],
+    "rewards": [
+      "19% increased Quantity of Items found in this Area",
+      "8% increased Rarity of Items found in this Area",
+      "5% increased Pack size"
+    ]
+  },
+  {
+    "group": "MapUberModTreachery",
+    "name": "of Treachery",
+    "level": 1,
+    "kind": "suffix",
+    "weight": 50,
+    "text": "Auras from Player Skills which affect Allies also affect Enemies\n16% increased Quantity of Items found in this Area\n54% increased Rarity of Items found in this Area\n5% increased Pack size",
+    "effects": [
+      "Auras from Player Skills which affect Allies also affect Enemies"
+    ],
+    "rewards": [
+      "16% increased Quantity of Items found in this Area",
+      "54% increased Rarity of Items found in this Area",
+      "5% increased Pack size"
+    ]
+  },
+  {
+    "group": "MapUberModRaresLastGasp",
+    "name": "of Persistence",
+    "level": 1,
+    "kind": "suffix",
+    "weight": 50,
+    "text": "Rare monsters in area Temporarily Revive on death\n16% increased Quantity of Items found in this Area\n8% increased Rarity of Items found in this Area\n17% increased Pack size",
+    "effects": [
+      "Rare monsters in area Temporarily Revive on death"
+    ],
+    "rewards": [
+      "16% increased Quantity of Items found in this Area",
+      "8% increased Rarity of Items found in this Area",
+      "17% increased Pack size"
+    ]
+  },
+  {
+    "group": "MapUberModLabyrinthHazards",
+    "name": "Labyrinth's",
+    "level": 1,
+    "kind": "prefix",
+    "weight": 50,
+    "text": "Area contains Labyrinth Hazards\n19% increased Quantity of Items found in this Area\n54% increased Rarity of Items found in this Area\n5% increased Pack size",
+    "effects": [
+      "Area contains Labyrinth Hazards"
+    ],
+    "rewards": [
+      "19% increased Quantity of Items found in this Area",
+      "54% increased Rarity of Items found in this Area",
+      "5% increased Pack size"
+    ]
+  },
+  {
+    "group": "MapUberModLessFlaskEffect",
+    "name": "Diluted",
+    "level": 1,
+    "kind": "prefix",
+    "weight": 50,
+    "text": "Players have 40% less effect of Flasks applied to them\n16% increased Quantity of Items found in this Area\n8% increased Rarity of Items found in this Area\n5% increased Pack size\n47% more Currency found in Area",
+    "effects": [
+      "Players have 40% less effect of Flasks applied to them"
+    ],
+    "rewards": [
+      "16% increased Quantity of Items found in this Area",
+      "8% increased Rarity of Items found in this Area",
+      "5% increased Pack size",
+      "47% more Currency found in Area"
+    ]
+  },
+  {
+    "group": "MapUberModPlayerMarks",
+    "name": "of Marking",
+    "level": 1,
+    "kind": "suffix",
+    "weight": 50,
+    "text": "Area contains patches of moving Marked Ground, inflicting random Marks\n16% increased Quantity of Items found in this Area\n8% increased Rarity of Items found in this Area\n5% increased Pack size\n36% more Scarabs found in Area",
+    "effects": [
+      "Area contains patches of moving Marked Ground, inflicting random Marks"
+    ],
+    "rewards": [
+      "16% increased Quantity of Items found in this Area",
+      "8% increased Rarity of Items found in this Area",
+      "5% increased Pack size",
+      "36% more Scarabs found in Area"
+    ]
+  }
+]

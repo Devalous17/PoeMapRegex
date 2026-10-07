@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run MapRegex",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/server.py",
+      "cwd": "${workspaceFolder}",
+      "python": "C:\\Users\\deva\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    }
+  ]
+}
+

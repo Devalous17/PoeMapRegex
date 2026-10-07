@@ -1,0 +1,16 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run MapRegex",
+      "type": "process",
+      "command": "C:\\Users\\deva\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "args": ["server.py"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated" },
+      "group": { "kind": "build", "isDefault": true }
+    }
+  ]
+}
+
