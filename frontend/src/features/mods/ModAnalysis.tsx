@@ -5,7 +5,7 @@ import { useAppStore } from '../../store/useAppStore';
 import type { Category, ClassifiedMod, Decision, Rating } from '../../types';
 
 const ratingOrder: Rating[] = ['brick', 'dangerous', 'uncomfortable', 'review', 'free'];
-const categoryOrder: Category[] = ['Reflect', 'Recovery / Leech', 'Cooldown / Triggers', 'Resistances', 'Charges', 'Ailments / Curses', 'Monsters', 'Area', 'Other'];
+const categoryOrder: Category[] = ['Thorns', 'Recovery / Leech', 'Cooldown / Triggers', 'Defences', 'Resistances', 'Charges', 'Ailments / Curses', 'Monsters', 'Area', 'Other'];
 
 function modifierText(mod: ClassifiedMod): string {
   return (mod.effectText ?? mod.matchText ?? mod.name)
@@ -99,7 +99,7 @@ export function ModAnalysis({ mods, mode }: { mods: ClassifiedMod[]; mode: 'live
           <button type="button" className={mapPool === 'normal' ? 'is-active' : ''} aria-pressed={mapPool === 'normal'} onClick={() => setMapPool('normal')}>Normal maps <small>78</small></button>
           <button type="button" className={mapPool === 'nightmare' ? 'is-active' : ''} aria-pressed={mapPool === 'nightmare'} onClick={() => setMapPool('nightmare')}>Nightmare maps <small>47</small></button>
         </div>
-        <div className="mod-picker__actions"><Button type="button" variant="quiet" onClick={() => applySuppliedAvoid(mods)}>Apply your avoid list</Button><Button type="button" variant="quiet" onClick={() => clearDecisions(mods)}>Clear selections</Button><Button type="button" variant="quiet" onClick={resetDecisions}>Use preset</Button></div>
+        <div className="mod-picker__actions"><Button type="button" variant="quiet" onClick={() => applySuppliedAvoid(mods)}>Apply avoid list · skip safe mods</Button><Button type="button" variant="quiet" onClick={() => clearDecisions(mods)}>Clear selections</Button><Button type="button" variant="quiet" onClick={resetDecisions}>Use preset</Button></div>
       </div>
       <div className="mod-picker__modes" role="group" aria-label="Modifier selection mode">
         <button type="button" className={action === 'block' ? 'is-active' : ''} aria-pressed={action === 'block'} onClick={() => setAction('block')}>● I don't want these mods <span>{counts.block}</span></button>

@@ -6,6 +6,7 @@ import normalAffixes from '../src/data/poedbNormalAffixes.json' with { type: 'js
 import { buildRegex } from '../src/services/regexBuilder.ts';
 import { numberRangeRegex } from '../src/services/mapPreferencesRegex.ts';
 import { EMPTY_PREFERENCES } from '../src/types.ts';
+const noMinimums = { ...EMPTY_PREFERENCES, minimums: {} };
 
 function catalogue(nightmare) {
   const affixByKey = new Map((nightmare ? nightmareAffixes : normalAffixes).map(row => [`${row.group}|${row.name}`, row]));
@@ -66,7 +67,7 @@ test('wanted modifiers create a separate positive term', () => {
     '252096506': 'block', '1062763755': 'want',
   }, EMPTY_PREFERENCES);
   assert.equal(output.valid, true);
-  assert.equal(output.parts.length, 2);
+  assert.equal(output.parts.length, 3);
   assert.equal(output.wanted.length, 1);
   assert.ok(output.regex.includes(' '));
 });
@@ -75,7 +76,7 @@ test('a few Nightmare clicks keep the requested short fragments and order', () =
   const mods = catalogue(true);
   const selected = new Set(['-2064669900', '-2038489408', '-1940135977', '-1818595967', '-1621497665']);
   const overrides = Object.fromEntries([...selected].map(id => [id, 'block']));
-  const output = buildRegex(mods, 'balanced', overrides, EMPTY_PREFERENCES);
+  const output = buildRegex(mods, 'balanced', overrides, noMinimums);
   expectExactCoverage(mods, selected, output);
   assert.equal(output.regex, '"!cco|m resistances$|k damage$|re sha|mum f"');
 });
@@ -84,7 +85,7 @@ test('a few normal map clicks keep the requested short fragments and order', () 
   const mods = catalogue(false);
   const selected = new Set(['-2050206104', '-477049138', '10729340', '252096506', '1101434369']);
   const overrides = Object.fromEntries([...selected].map(id => [id, 'block']));
-  const output = buildRegex(mods, 'balanced', overrides, EMPTY_PREFERENCES);
+  const output = buildRegex(mods, 'balanced', overrides, noMinimums);
   expectExactCoverage(mods, selected, output);
   assert.equal(output.regex, '"!te o|m resistances$|ds on|from$|ills$"');
 });
@@ -120,6 +121,28 @@ test('number ranges match their inclusive bounds across map values', () => {
   }
 });
 
+test('new preferences require 40% item quantity, which can be cleared or changed', () => {
+  const initial = buildRegex([], 'balanced', {}, EMPTY_PREFERENCES);
+  assert.equal(initial.valid, true);
+  assert.equal(initial.parts.length, 1);
+  const pattern = new RegExp(initial.parts[0].text.slice(1, -1), 'i');
+  assert.equal(pattern.test('Item Quantity: +39%'), false);
+  assert.equal(pattern.test('Item Quantity: +40%'), true);
+  assert.equal(pattern.test('Item Quantity: +100%'), true);
+  assert.equal(buildRegex([], 'balanced', {}, noMinimums).regex, '');
+  assert.notEqual(buildRegex([], 'balanced', {}, { ...EMPTY_PREFERENCES, minimums: { quantity: '80' } }).regex, initial.regex);
+});
+
+test('legacy quality inputs no longer add search terms', () => {
+  const result = buildRegex([], 'balanced', {}, {
+    ...EMPTY_PREFERENCES,
+    minimums: { quantity: '40', quality_Quantity: '20', quality_Currency: '20' },
+  });
+  assert.equal(result.valid, true);
+  assert.equal(result.parts.length, 1);
+  assert.equal(result.regex, buildRegex([], 'balanced', {}, EMPTY_PREFERENCES).regex);
+});
+
 test('map value inputs change the copyable regex immediately', () => {
   const preferences = { ...EMPTY_PREFERENCES, minimums: { quantity: '100', pack: '40', currency: '50' } };
   const result = buildRegex([], 'balanced', {}, preferences);
@@ -143,10 +166,10 @@ test('every map value field emits a separate numeric condition', () => {
 
 test('maximums and state filters are included while invalid ranges block copying', () => {
   const selected = { ...EMPTY_PREFERENCES, minimums: { quantity: '100', max_quantity: '120' },
-    corrupted: true, unidentified: true, rarities: ['Rare'], chisels: ['Currency'] };
+    corrupted: true, unidentified: true, rarities: ['Rare'] };
   const result = buildRegex([], 'balanced', {}, selected);
   assert.equal(result.valid, true);
-  assert.match(result.regex, /corrupted unidentified "y: r" "\\\(Currency\\\):"/);
+  assert.match(result.regex, /corrupted unidentified "y: r"/);
   const numeric = result.parts.find(part => part.text.startsWith('"m q.'));
   assert.ok(numeric);
   const number = new RegExp(numeric.text.slice(1, -1), 'i');
@@ -158,6 +181,7 @@ test('maximums and state filters are included while invalid ranges block copying
 
 test('trade-only preferences are identified without claiming to be in the copied regex', () => {
   const result = buildRegex([], 'balanced', {}, { ...EMPTY_PREFERENCES, eightMod: true, excludeValdo: true });
-  assert.equal(result.regex, '');
+  assert.equal(result.parts.length, 1);
+  assert.match(result.regex, /^"m q\./);
   assert.match(result.warnings.join(' '), /Trade filters only/);
 });

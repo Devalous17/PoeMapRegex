@@ -5,9 +5,9 @@ import { useAppStore } from '../../store/useAppStore';
 import type { ClassifiedMod, Preset } from '../../types';
 
 const options: { id: Preset; title: string; description: string; caption: string }[] = [
-  { id: 'safe', title: 'Safe', description: 'Avoids almost everything risky.', caption: 'MAXIMUM CAUTION' },
-  { id: 'balanced', title: 'Balanced', description: 'Avoids major dangers.', caption: 'RECOMMENDED' },
-  { id: 'greedy', title: 'Greedy', description: 'Only blocks mods that can actually brick your build.', caption: 'MINIMUM FILTERING' },
+  { id: 'safe', title: 'Safe', description: 'Blocks mods rated Uncomfortable or worse. Review any unknowns.', caption: 'MAXIMUM CAUTION' },
+  { id: 'balanced', title: 'Balanced', description: 'Blocks mods rated Dangerous or Brick.', caption: 'MIDDLE GROUND' },
+  { id: 'greedy', title: 'Greedy', description: 'Blocks only mods currently rated Brick.', caption: 'MINIMUM FILTERING' },
 ];
 
 function PresetCard({ option, mods }: { option: typeof options[number]; mods: ClassifiedMod[] }) {

@@ -12,15 +12,6 @@ const valueFields: Record<string, string> = {
   divination: 'div.*',
 };
 
-const qualityFields: Record<string, string> = {
-  Quantity: 'ty \\(Quantity\\):',
-  'Pack size': '\\(Pack Size\\):',
-  'Item rarity': '\\(Rarity\\):',
-  Currency: '\\(Currency\\):',
-  Scarabs: '\\(Scarabs\\):',
-  Divination: '\\(Divination\\):',
-};
-
 function digits(from: number, to: number): string {
   if (from === to) return String(from);
   if (from === 0 && to === 9) return '.';
@@ -88,9 +79,6 @@ export function mapPreferenceTerms(preferences: Preferences): { parts: RegexPart
   if (rarityCodes.length && rarityCodes.length < 3) {
     parts.push({ kind: 'preference', text: `"y: ${rarityCodes.length === 1 ? rarityCodes[0] : `(${rarityCodes.join('|')})`}"` });
   }
-  const chiselCodes = preferences.chisels.map(value => qualityFields[value]).filter(Boolean);
-  if (chiselCodes.length) parts.push({ kind: 'preference', text: `"${chiselCodes.join('|')}"` });
-  if (preferences.chisels.includes('More maps')) warnings.push('More maps is not a Maven chisel quality type, so that selection is not in the regex.');
   const tradeOnly = [
     preferences.eightMod && '8-mod maps',
     preferences.excludeValdo && 'Valdo maps',

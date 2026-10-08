@@ -70,7 +70,7 @@ export const useAppStore = create<AppState>((set, get) => ({
   setMapPool: mapPool => set({ mapPool, ratingFilter: 'all', categories: [], search: '' }),
   applySuppliedAvoid: mods => set(state => ({ overrides: {
     ...state.overrides,
-    ...Object.fromEntries(mods.map(mod => [mod.id, mod.suppliedAvoid ? 'block' : 'allow'])),
+    ...Object.fromEntries(mods.map(mod => [mod.id, mod.suppliedAvoid && mod.rating !== 'free' ? 'block' : 'allow'])),
   } })),
   setDecision: (id, decision) => set(state => ({ overrides: { ...state.overrides, [id]: decision } })),
   clearDecisions: mods => set(state => ({ overrides: {
@@ -83,7 +83,7 @@ export const useAppStore = create<AppState>((set, get) => ({
   toggleCategory: category => set(state => ({ categories: state.categories.includes(category)
     ? state.categories.filter(item => item !== category) : [...state.categories, category] })),
   setPreferences: preferences => set({ preferences }),
-  resetPreferences: () => set({ preferences: { ...EMPTY_PREFERENCES, minimums: {}, rarities: [], chisels: [] } }),
+  resetPreferences: () => set({ preferences: { ...EMPTY_PREFERENCES, minimums: { quantity: '40' }, rarities: [] } }),
   showToast: toast => set({ toast }),
   dismissToast: () => set({ toast: '' }),
 }));

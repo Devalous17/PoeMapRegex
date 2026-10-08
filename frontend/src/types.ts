@@ -1,7 +1,7 @@
 export type Rating = 'brick' | 'dangerous' | 'uncomfortable' | 'free' | 'review';
 export type Preset = 'safe' | 'balanced' | 'greedy';
 export type Decision = 'block' | 'neutral' | 'allow' | 'want';
-export type Category = 'Reflect' | 'Recovery / Leech' | 'Cooldown / Triggers' | 'Resistances' | 'Charges' | 'Ailments / Curses' | 'Monsters' | 'Area' | 'Other';
+export type Category = 'Thorns' | 'Recovery / Leech' | 'Cooldown / Triggers' | 'Defences' | 'Resistances' | 'Charges' | 'Ailments / Curses' | 'Monsters' | 'Area' | 'Other';
 
 export interface BuildProfile {
   game: string;
@@ -11,19 +11,50 @@ export interface BuildProfile {
   main_skill: string;
   damage_type: string;
   main_skill_kind: string;
+  main_hit_types?: string[];
+  main_element?: string | null;
+  main_uses_channeling?: boolean;
+  main_action_rate?: number | null;
+  armour_scales_attack_damage?: boolean;
+  maximum_charges?: Record<string, number | null>;
+  configured_charges?: Record<string, number | null>;
+  charge_generation?: Record<string, boolean>;
+  filled_flasks?: number;
+  empty_flask_slots?: number | null;
+  nature_adrenaline?: boolean;
+  traitor_likely?: boolean;
+  flask_effect_investment?: number;
+  curse_dependent?: boolean;
+  crit_chance?: number | null;
+  crit_multiplier?: number | null;
+  area_of_effect_increased?: number | null;
+  stun_dependent?: boolean;
+  attack_archetype?: string;
+  defence_archetypes?: string[];
+  effective_attack_block?: number | null;
+  effective_spell_block?: number | null;
+  spell_suppression?: number | null;
   uses_cast_on_crit?: boolean;
   uses_mines?: boolean;
   automated_mine_detonation?: boolean;
+  wardloop_detected?: boolean;
+  minion_damage_primary?: boolean;
+  mana_unreserved?: number | null;
+  ward?: number | null;
+  signals?: { id: string; category: string; strength: number; evidence: string }[];
   life: number | null;
   energy_shield: number | null;
   mana: number | null;
   total_dps: number | null;
   chaos_resistance: number | null;
+  chaos_immune?: boolean;
   elemental_resistances: Record<string, number | null>;
   life_leech: number;
   mana_leech: number;
   energy_shield_leech: number;
   life_regen: number;
+  life_net_regen?: number | null;
+  total_build_degen?: number | null;
   mana_regen: number;
   energy_shield_regen: number;
   mana_cost_per_second: number;
@@ -74,7 +105,6 @@ export interface Preferences {
   corrupted: boolean;
   unidentified: boolean;
   rarities: string[];
-  chisels: string[];
   eightMod: boolean;
   excludeValdo: boolean;
   excludeShaper: boolean;
@@ -98,11 +128,10 @@ export interface RegexResult {
 }
 
 export const EMPTY_PREFERENCES: Preferences = {
-  minimums: {},
+  minimums: { quantity: '40' },
   corrupted: false,
   unidentified: false,
   rarities: [],
-  chisels: [],
   eightMod: false,
   excludeValdo: false,
   excludeShaper: false,
