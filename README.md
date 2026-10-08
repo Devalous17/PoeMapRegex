@@ -1,4 +1,4 @@
-MapRegex
+# MapRegex
 
 **A map search helper for Path of Exile 1.**
 
