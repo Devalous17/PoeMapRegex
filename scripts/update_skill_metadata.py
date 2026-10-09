@@ -28,6 +28,6 @@ for filename in ('act_int.lua', 'act_dex.lua', 'act_str.lua', 'other.lua'):
         skills[skill_id] = {'name': name[1], 'tags': re.findall(r'\[SkillType\.(\w+)\] = true', tags[1])}
 payload = {'source': 'PathOfBuildingCommunity/PathOfBuilding', 'revision': revision,
            'files_sha256': hashes, 'skills': skills}
-target = Path(__file__).resolve().parents[1] / 'skill_metadata.json'
+target = Path(__file__).resolve().parents[1] / 'backend' / 'skill_metadata.json'
 target.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 print(f'Bundled {len(skills)} active skills at {revision}')

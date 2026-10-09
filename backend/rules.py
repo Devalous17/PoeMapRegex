@@ -6,9 +6,9 @@ from dataclasses import dataclass
 import json
 from pathlib import Path
 
-from build_signals import counter_rating, signal_by_id
-from assessment import assessed_rule, recovery_conflicts
-from dependencies import annotate_assessment
+from .build_signals import counter_rating, signal_by_id
+from .assessment import assessed_rule, recovery_conflicts
+from .dependencies import annotate_assessment
 
 
 @dataclass(frozen=True)

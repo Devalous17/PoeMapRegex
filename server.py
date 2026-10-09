@@ -7,8 +7,8 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 import json
 from pathlib import Path
 
-from pob import BuildInputError
-from analysis_service import analyze_request
+from backend.pob import BuildInputError
+from backend.analysis_service import analyze_request
 
 
 STATIC = Path(__file__).resolve().parent / "static"

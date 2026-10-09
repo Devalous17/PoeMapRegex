@@ -1,10 +1,10 @@
 from pathlib import Path
 import unittest
 
-from analysis_service import analyze_request
-from assessment import assessed_rule
-from pob import build_profile, decode_build
-from rules import classify, make_regex
+from backend.analysis_service import analyze_request
+from backend.assessment import assessed_rule
+from backend.pob import build_profile, decode_build
+from backend.rules import classify, make_regex
 from test_core import export_code
 from test_dependencies import build
 

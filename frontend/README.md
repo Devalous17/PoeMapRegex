@@ -1,6 +1,6 @@
 # MapRegex frontend
 
-This is the React + TypeScript source for the local MapRegex screen. The Python server in the parent folder serves the compiled files in `../static`, so `python server.py` still starts the app.
+This is the React + TypeScript source for the local MapRegex screen. The root Python server (using the shared `../backend/` analyzer) serves the compiled files in `../static`, so `python server.py` still starts the app.
 
 ## Edit in VS Code
 
@@ -19,7 +19,7 @@ When changes are ready:
 npm run build
 ```
 
-The build updates `../static`, which the Python server serves. Reload `http://127.0.0.1:8765/` to see the result.
+The build replaces `../static` and removes outdated bundles, which the Python server serves. Reload `http://127.0.0.1:8765/` to see the result.
 
 ## Design
 
@@ -27,9 +27,9 @@ Warm near-black surfaces, aged gold borders, rarity colors, square beveled contr
 
 ## Data and logic
 
-- `src/services/analyzer.ts` calls the existing local Python `/api/analyze` endpoint for real builds. `exampleAnalysis()` provides delayed sample data so the UI can be explored before importing a build. Replace that sample path with a future test fixture or remove it when no longer needed.
-- `src/data/mods.ts` contains illustrative ratings for the sample profile. Both example and live PoB analysis show 78 top tier normal and 47 Nightmare affixes in `src/data/mapPool.json`. Full English affix effects, reward lines, levels, and spawn weights are in `src/data/poedbNormalAffixes.json` and `src/data/poedbNightmareAffixes.json`, retrieved from [PoEDB normal maps](https://poedb.tw/us/Maps_top_tier) and [Nightmare maps](https://poedb.tw/us/Nightmare_map) on 2026-10-08. Base short fragments came from [poe.re](https://github.com/veiset/poe.re/tree/master/poe/generated/mapmods) and are checked against the PoEDB text; the two supplied avoid lists are in `src/data/mapPoolPatterns.json`. The live analyzer has 25 rule groups; all normal entries either map to a rule or to the player's explicit Free policy. Unrated Nightmare entries remain Review.
-- `src/services/regexBuilder.ts` shortens selections with map-mod fragments and validates candidates against the other entries in the active pool. **Block** excludes a mod; **Want** requires at least one wanted mod; **Allow** accepts without requiring it. The optional supplied avoid list skips modifiers classified Free, including the 55 normal-map entries the player marked Free. `src/services/mapPreferencesRegex.ts` adds live numeric ranges, state, and rarity terms. Item Quantity defaults to at least 40%; users can clear or change it. Eight-mod, Valdo, and Shaper/Elder influence remain trade-only selections because an in-game stash regex cannot reliably check them. If a complete query exceeds 250 characters, the UI disables copying it and shows partial batches for inspection.
+- `src/services/analyzer.ts` calls the existing local Python `/api/analyze` endpoint for real builds. `exampleAnalysis()` provides delayed sample data so the UI can be explored before importing a build. The example is generated through the same backend analyzer as live imports.
+- Both example and live PoB analysis show 78 top tier normal and 47 Nightmare affixes in `src/data/mapPool.json`. Full English affix effects, reward lines, levels, and spawn weights are in `src/data/poedbNormalAffixes.json` and `src/data/poedbNightmareAffixes.json`, retrieved from [PoEDB normal maps](https://poedb.tw/us/Maps_top_tier) and [Nightmare maps](https://poedb.tw/us/Nightmare_map) on 2026-10-08. Base short fragments came from [poe.re](https://github.com/veiset/poe.re/tree/master/poe/generated/mapmods) and are checked against the PoEDB text; the two supplied avoid lists are in `src/data/mapPoolPatterns.json`. The live analyzer uses the shared rule groups and data in `../backend/`; all normal entries either map to a rule or to the player's explicit Free policy. Unrated Nightmare entries remain Review.
+- `src/services/regexBuilder.ts` shortens selections with map-mod fragments and validates candidates against the other entries in the active pool. **Block** excludes a mod; **Want** requires at least one wanted mod; **Allow** accepts without requiring it. The optional supplied avoid list skips modifiers classified Free, including the 54 normal-map entries the player marked Free. `src/services/mapPreferencesRegex.ts` adds live numeric ranges, state, and rarity terms. Item Quantity defaults to at least 40%; users can clear or change it. Eight-mod, Valdo, and Shaper/Elder influence remain trade-only selections because an in-game stash regex cannot reliably check them. If a complete query exceeds 250 characters, the UI disables copying it and shows partial batches for inspection.
 - `node --test tests/regexBuilder.mjs` checks that generated fragments match selected mod entries without catching unselected entries in the included catalogue.
 - `src/store/useAppStore.ts` holds the interface state in Zustand.
 

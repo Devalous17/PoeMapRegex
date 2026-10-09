@@ -3,8 +3,8 @@
 from http.server import BaseHTTPRequestHandler
 import json
 
-from pob import BuildInputError
-from analysis_service import analyze_request
+from backend.pob import BuildInputError
+from backend.analysis_service import analyze_request
 
 
 class handler(BaseHTTPRequestHandler):

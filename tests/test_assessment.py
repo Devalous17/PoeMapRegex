@@ -2,10 +2,10 @@ import json
 from pathlib import Path
 import unittest
 
-from assessment import assessed_rule, critical_damage_factor, recovery_conflicts, recovery_snapshot, validate_assumptions
-from analysis_service import analyze_request
-from pob import BuildInputError, build_profile, decode_build
-from rules import classify, make_regex
+from backend.assessment import assessed_rule, critical_damage_factor, recovery_conflicts, recovery_snapshot, validate_assumptions
+from backend.analysis_service import analyze_request
+from backend.pob import BuildInputError, build_profile, decode_build
+from backend.rules import classify, make_regex
 from test_core import export_code
 
 

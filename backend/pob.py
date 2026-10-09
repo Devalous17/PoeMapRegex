@@ -10,7 +10,7 @@ import urllib.request
 import xml.etree.ElementTree as ET
 import zlib
 
-from assessment import recovery_snapshot
+from .assessment import recovery_snapshot
 
 
 MAX_INPUT = 300_000
@@ -370,9 +370,9 @@ def build_profile(root: ET.Element) -> dict:
         "reflect_protection_detected": bool(re.search(r"cannot take reflected|immune to reflected", item_text)),
         "notes": ["PoB export stats are a saved snapshot. Passive tree effects and conditional protections may need manual review."],
     }
-    from build_signals import infer_build_signals
+    from .build_signals import infer_build_signals
     profile["signals"] = infer_build_signals(profile)
-    from dependencies import enrich_profile
+    from .dependencies import enrich_profile
     enrich_profile(profile, root, stats, main_group, groups, item_text, main_item_text)
     profile["signals"] = infer_build_signals(profile)
     return profile

@@ -1,6 +1,6 @@
 import rawCatalogue from './mapPool.json';
-import modifierRules from '../../../modifier_rules.json';
-import normalFreePolicy from '../../../normal_free_policy.json';
+import modifierRules from '../../../backend/modifier_rules.json';
+import normalFreePolicy from '../../../backend/normal_free_policy.json';
 import poedbNightmareAffixes from './poedbNightmareAffixes.json';
 import poedbNormalAffixes from './poedbNormalAffixes.json';
 import type { Category, ClassifiedMod, Rating } from '../types';

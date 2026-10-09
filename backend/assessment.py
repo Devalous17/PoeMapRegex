@@ -154,7 +154,7 @@ def critical_damage_factor(chance: float, multiplier: float, reduction: float) -
 
 
 def assessed_rule(profile: dict, rule: str, value: float | None = None) -> tuple[str, str] | None:
-    from dependencies import dependency_assessment
+    from .dependencies import dependency_assessment
     dependency_result = dependency_assessment(profile, rule, value)
     if dependency_result is not None:
         return dependency_result

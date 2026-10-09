@@ -1,6 +1,6 @@
 import unittest
-from assessment import assessed_rule
-from pob import build_profile, decode_build
+from backend.assessment import assessed_rule
+from backend.pob import build_profile, decode_build
 from test_core import export_code
 from test_dependencies import build
 

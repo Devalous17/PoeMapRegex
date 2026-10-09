@@ -2,8 +2,8 @@ import base64
 import unittest
 import zlib
 
-from pob import BuildInputError, build_profile, decode_build
-from rules import classify, make_regex
+from backend.pob import BuildInputError, build_profile, decode_build
+from backend.rules import classify, make_regex
 
 
 XML = """<PathOfBuilding>
@@ -124,7 +124,7 @@ class BuildAnalysisTests(unittest.TestCase):
         profile.update(life=4000, energy_shield=0, life_leech=300, life_regen=240,
                        energy_shield_leech=0, mana_cost_per_second=50, mana_regen=10,
                        mana_leech=60, mana_unreserved=70)
-        from build_signals import signal_by_id
+        from backend.build_signals import signal_by_id
         signals = signal_by_id(profile)
         self.assertEqual(signals["mana_leech"]["strength"], 3)
         self.assertEqual(signals["life_leech"]["strength"], 1)

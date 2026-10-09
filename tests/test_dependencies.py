@@ -2,10 +2,10 @@ import json
 from pathlib import Path
 import unittest
 
-from analysis_service import analyze_request
-from dependencies import skill_metadata
-from pob import build_profile, decode_build
-from rules import classify
+from backend.analysis_service import analyze_request
+from backend.dependencies import skill_metadata
+from backend.pob import build_profile, decode_build
+from backend.rules import classify
 from test_core import export_code
 
 def build(skill, supports=(), stats=None, utility=()):
@@ -108,7 +108,7 @@ class DependencyTests(unittest.TestCase):
 
     def test_offline_normal_snapshot_matches_frontend_catalogue(self):
         root = Path(__file__).resolve().parents[1]
-        backend = json.loads((root / 'normal_catalogue.json').read_text(encoding='utf-8'))
+        backend = json.loads((root / 'backend/normal_catalogue.json').read_text(encoding='utf-8'))
         frontend = json.loads((root / 'frontend/src/data/mapPool.json').read_text(encoding='utf-8'))
         self.assertEqual(backend, [row for row in frontend if not row['nightmare']])
 
