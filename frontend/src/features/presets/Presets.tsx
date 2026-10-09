@@ -5,8 +5,8 @@ import { useAppStore } from '../../store/useAppStore';
 import type { ClassifiedMod, Preset } from '../../types';
 
 const options: { id: Preset; title: string; description: string; caption: string }[] = [
-  { id: 'safe', title: 'Safe', description: 'Blocks mods rated Uncomfortable or worse. Review any unknowns.', caption: 'MAXIMUM CAUTION' },
-  { id: 'balanced', title: 'Balanced', description: 'Blocks mods rated Dangerous or Brick.', caption: 'MIDDLE GROUND' },
+  { id: 'safe', title: 'Safe', description: 'Blocks troublesome mods, measured recovery conflicts, and unknowns. Most cautious filtering.', caption: 'MAXIMUM CAUTION' },
+  { id: 'balanced', title: 'Balanced', description: 'Blocks serious risks and measured recovery conflicts. Unknowns need review.', caption: 'MIDDLE GROUND' },
   { id: 'greedy', title: 'Greedy', description: 'Blocks only mods currently rated Brick.', caption: 'MINIMUM FILTERING' },
 ];
 

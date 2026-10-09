@@ -5,10 +5,10 @@ import { useAppStore } from '../store/useAppStore';
 
 export function Sigil({ className = '' }: { className?: string }) {
   return <svg className={className} viewBox="0 0 42 42" fill="none" aria-hidden="true">
-    <path d="M21 2 31 11 40 21 31 31 21 40 11 31 2 21 11 11Z" stroke="currentColor" strokeWidth="1.3" />
-    <path d="M21 7 27 15 35 21 27 27 21 35 15 27 7 21 15 15Z" stroke="currentColor" strokeWidth=".8" opacity=".65" />
-    <path d="M21 11 24 18 31 21 24 24 21 31 18 24 11 21 18 18Z" fill="currentColor" opacity=".75" />
-    <circle cx="21" cy="21" r="2.4" fill="#0b0a08" />
+    <path d="M5 10 15 5l12 5 10-5v27l-10 5-12-5-10 5V10Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
+    <path d="M15 5v8m12-3v3M15 29v3m12-3v8" stroke="currentColor" strokeWidth="1.5" />
+    <circle cx="15" cy="23" r="2" fill="currentColor" />
+    <path d="M27 16v12m-5-9 10 6m-10 0 10-6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
   </svg>;
 }
 

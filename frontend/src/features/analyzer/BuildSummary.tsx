@@ -1,68 +1,50 @@
-import { OrnamentDivider, Panel, PoeTooltip, SectionHeading, Sigil } from '../../components/UI';
+import { Panel, SectionHeading } from '../../components/UI';
 import type { AnalysisResult, BuildProfile } from '../../types';
+import { BuildConfirmations } from './BuildConfirmations';
 
-function value(number: number | null | undefined): string {
-  return typeof number === 'number' && Number.isFinite(number) ? Math.round(number).toLocaleString() : 'Not saved';
-}
+const number = (value: number) => Math.round(value).toLocaleString();
+const present = (value: number | null | undefined): value is number => typeof value === 'number' && Number.isFinite(value) && value > 0;
 
-function percent(number: number | null | undefined): string {
-  return typeof number === 'number' && Number.isFinite(number) ? `${Number(number.toFixed(1))}%` : '—';
-}
-
-function statRows(profile: BuildProfile): [string, string, string][] {
-  const pools = profile.energy_shield && profile.life && profile.energy_shield > profile.life * 2 ? 'Energy Shield' : profile.life && profile.energy_shield && profile.energy_shield > profile.life / 2 ? 'Hybrid' : 'Life';
-  const leech = [profile.life_leech > 0 && 'Life', profile.mana_leech > 0 && 'Mana', profile.energy_shield_leech > 0 && 'ES'].filter(Boolean).join(' + ') || 'None saved';
-  const regen = profile.life_regen + profile.mana_regen + profile.energy_shield_regen > 0 ? 'Regeneration' : 'None saved';
-  const res = ['Fire', 'Cold', 'Lightning'].map(key => profile.elemental_resistances?.[key] == null ? '—' : String(profile.elemental_resistances[key])).join(' / ');
-  const block = profile.effective_attack_block != null || profile.effective_spell_block != null
-    ? `${percent(profile.effective_attack_block)} atk / ${percent(profile.effective_spell_block)} spell`
-    : profile.block == null ? 'Not saved' : `${profile.block}%`;
-  return [
-    ['Primary pool', pools, `Life ${value(profile.life)} · Energy Shield ${value(profile.energy_shield)}. These are saved PoB snapshot values.`],
-    ['Attack style', profile.main_uses_channeling ? `${profile.attack_archetype || 'Hit skill'} · Channelling` : profile.attack_archetype || 'Not classified', 'Based on the saved main skill and enabled support gems. A channelled skill that hits can still trigger Thorns.'],
-    ['Defence layers', profile.defence_archetypes?.join(' + ') || 'Not classified', 'Read from saved PoB effective block, Armour, Evasion and spell suppression values. A class name alone does not establish reliance.'],
-    ['Cooldown loop', profile.wardloop_detected ? 'Wardloop' : profile.uses_cast_on_crit ? 'Cast on Crit' : profile.automated_mine_detonation ? 'Automated mines' : profile.uses_mines ? 'Mines' : 'Not detected', 'Read from enabled gems and equipped items in the active PoB setup. Reduced cooldown recovery can interrupt repeated triggers or mine detonation.'],
-    ['Elemental res', res, 'Fire / Cold / Lightning Resistance from the saved PoB snapshot. Maximum resistance is not available here.'],
-    ['Armour / Evasion', `${value(profile.armour)} / ${value(profile.evasion)}`, 'These layers are only shown when the imported data contains them.'],
-    ['Block', block, 'Attack / spell effective block from the saved PoB snapshot. Lucky or conditional effects may be included; the site does not recalculate block after a map penalty.'],
-    ['Leech', leech, 'Leech is a key signal when judging Cannot Leech map mods.'],
-    ['Recovery', regen, 'Regeneration and leech may be weakened by recovery modifiers.'],
-    ['Ailments', profile.ailment_avoidance || 'Needs review', 'Ailment avoidance is not derived by the first live importer.'],
-    ['Minions', profile.minion_damage_primary ? 'Main damage' : profile.has_minion_skills ? 'Utility' : 'None detected', 'Main damage minions receive a stronger warning for affixes that harm minions.'],
-    ['Charges', profile.charges || 'Needs review', 'Charge reliance is not derived by the first live importer.'],
-  ];
-}
-
-function Signal({ title, value, width, tone }: { title: string; value: string; width: number; tone: string }) {
-  return <div className="signal-row"><div className="signal-row__top"><span>{title}</span><strong>{value}</strong></div><div className="signal-track"><span className={`signal-fill signal-fill--${tone}`} style={{ width: `${Math.max(4, Math.min(width, 100))}%` }} /></div></div>;
+function defenceRows(profile: BuildProfile): [string, string][] {
+  const rows: [string, string][] = [];
+  const layers = profile.defence_archetypes ?? [];
+  const signals = new Set((profile.signals ?? []).map(signal => signal.id));
+  if ((signals.has('armour') || layers.includes('Armour')) && present(profile.armour)) rows.push(['Armour', number(profile.armour)]);
+  if ((signals.has('evasion') || layers.includes('Evasion')) && present(profile.evasion)) rows.push(['Evasion', number(profile.evasion)]);
+  if (signals.has('block') || layers.some(layer => /block/i.test(layer))) {
+    if (present(profile.effective_attack_block)) rows.push(['Attack block', `${profile.effective_attack_block.toFixed(1)}%`]);
+    if (present(profile.effective_spell_block)) rows.push(['Spell block', `${profile.effective_spell_block.toFixed(1)}%`]);
+  }
+  if ((signals.has('suppression') || layers.includes('Spell suppression')) && present(profile.spell_suppression)) rows.push(['Spell suppression', `${profile.spell_suppression.toFixed(1)}%`]);
+  if (profile.mana_defence_detected && present(profile.mana)) rows.push(['Mind over Matter · Mana', number(profile.mana)]);
+  if (present(profile.ward)) rows.push(['Ward', number(profile.ward)]);
+  for (const element of ['Fire', 'Cold', 'Lightning']) {
+    const resistance = profile.elemental_resistances?.[element];
+    if (resistance != null && Number.isFinite(resistance)) rows.push([`${element} resistance`, `${resistance}%`]);
+  }
+  if (profile.chaos_immune) rows.push(['Chaos damage', 'Immune']);
+  else if (profile.chaos_resistance != null) rows.push(['Chaos resistance', `${profile.chaos_resistance}%`]);
+  const pool = (profile.life ?? 0) <= 1 && (profile.energy_shield ?? 0) > 0 ? 'EnergyShield' : 'Life';
+  for (const row of profile.recovery_channels ?? []) {
+    if (row.pool === pool && ['regeneration', 'leech', 'recharge'].includes(row.channel) && present(row.value)) rows.push([`${pool === 'Life' ? 'Life' : 'ES'} ${row.channel}`, `${number(row.value)} /s`]);
+  }
+  if (present(profile.mana_regen)) rows.push(['Mana regeneration', `${number(profile.mana_regen)} /s`]);
+  return rows;
 }
 
 export function BuildSummary({ analysis }: { analysis: AnalysisResult }) {
   const profile = analysis.profile;
-  const defenceTotal = (profile.life || 0) + (profile.energy_shield || 0);
-  const esShare = defenceTotal ? Math.round((profile.energy_shield || 0) / defenceTotal * 100) : 0;
-  const reliance = profile.signals?.filter(signal => signal.category === 'recovery' || signal.category === 'resource').sort((a, b) => b.strength - a.strength)[0];
-  const leechValue = profile.life_leech + profile.mana_leech + profile.energy_shield_leech;
+  const known = (value: string) => value && !/unknown|unclear|not classified/i.test(value);
+  const hits = Object.entries(profile.maximum_hit_taken ?? {}).filter(([kind, amount]) => present(amount) && !(kind === 'Chaos' && profile.chaos_immune));
   return <section id="build-profile" className="content-section">
-    <SectionHeading number="05" title="The exile behind the regex" subtitle="The saved build snapshot tells us what is dangerous for this character." aside={<span className="edition-tag">{analysis.mode === 'example' ? 'EXAMPLE PROFILE' : 'LIVE POB PROFILE'}</span>} />
-    <Panel className="build-panel">
-      <div className="character-plate">
-        <div className="character-plate__top"><span className="panel-kicker">CHARACTER PROFILE</span><span className="level-badge">LVL {profile.level}</span></div>
-        <div className="character-identity"><div className="character-seal"><Sigil /></div><div><p className="character-class">{profile.class} / {profile.ascendancy}</p><h3>{profile.main_skill}</h3><span className="gem-line">MAIN SKILL · {profile.damage_type.toUpperCase()}</span></div></div>
-        <OrnamentDivider />
-        <div className="character-pools"><div><span>ENERGY SHIELD</span><strong className="energy-value">{value(profile.energy_shield)}</strong></div><div><span>LIFE</span><strong>{value(profile.life)}</strong></div><div><span>CHAOS RES</span><strong className={!profile.chaos_immune && (profile.chaos_resistance ?? 0) < 0 ? 'danger-value' : ''}>{profile.chaos_immune ? 'Immune' : profile.chaos_resistance == null ? '—' : `${profile.chaos_resistance}%`}</strong></div></div>
-        <div className="stat-chip-grid">{statRows(profile).map(([label, detail, explanation]) => <PoeTooltip key={label} title={label} body={explanation} className="stat-chip"><span>{label}</span><strong>{detail}</strong></PoeTooltip>)}</div>
-      </div>
-      <div className="build-signals">
-        <div className="build-signals__heading"><span className="panel-kicker">BUILD PROFILE</span><h3>Combat signals</h3><p>A quick reading of the saved PoB values, not a full simulation.</p></div>
-        <Signal title="Damage focus" value={profile.damage_type === 'unknown' ? 'Needs review' : profile.damage_type} width={profile.damage_type === 'unknown' ? 24 : 86} tone={profile.damage_type.includes('chaos') ? 'chaos' : profile.damage_type.includes('physical') ? 'physical' : 'cold'} />
-        <Signal title="Defence pool" value={esShare > 70 ? 'Energy Shield' : esShare > 30 ? 'Hybrid' : 'Life'} width={Math.max(esShare, 18)} tone="energy" />
-        <Signal title="Defence layers" value={profile.defence_archetypes?.join(' + ') || 'Needs review'} width={profile.defence_archetypes?.includes('High block') ? 92 : 54} tone="green" />
-        <Signal title="Recovery reliance" value={reliance ? `${reliance.id.replaceAll('_', ' ')} · ${reliance.strength === 3 ? 'central' : reliance.strength === 2 ? 'substantial' : 'present'}` : leechValue > 0 ? 'Leech present' : 'No recovery saved'} width={reliance ? reliance.strength * 30 : 18} tone="green" />
-        <Signal title="Thorns exposure" value={profile.main_hit_types?.length ? profile.main_uses_channeling ? 'Channelled hits' : 'Main skill hits' : 'Needs review'} width={profile.main_hit_types?.length ? 78 : 24} tone="break" />
-        <div className="build-flags"><span>{profile.uses_auras ? 'AURAS ACTIVE' : 'NO AURAS DETECTED'}</span><span>{profile.uses_hexes ? 'HEXES ACTIVE' : 'NO HEXES DETECTED'}</span><span>{profile.has_minion_skills ? 'MINIONS PRESENT' : 'NO MINIONS DETECTED'}</span></div>
-        <details className="why-details"><summary>Why these mods are flagged <span aria-hidden="true">+</span></summary><p>The site checks which measured layers each affix weakens. Central layers receive the strongest warning. These are saved PoB values, not a simulation after applying a map modifier.</p><ul>{profile.signals?.map(signal => <li key={signal.id}><strong>{signal.id.replaceAll('_', ' ')}:</strong> {signal.evidence}</li>)}</ul></details>
-      </div>
+    <SectionHeading number="05" title="The exile behind the regex" subtitle="The defensive layers found in your saved build." aside={<span className="edition-tag">{analysis.mode === 'example' ? 'EXAMPLE PROFILE' : 'SAVED POB PROFILE'}</span>} />
+    <Panel className="defence-profile">
+      <div className="defence-profile__identity"><div><p className="character-class">{[profile.class, profile.ascendancy].filter(known).join(' / ')} · Level {profile.level}</p>{known(profile.main_skill) && <h3>{profile.main_skill}</h3>}{known(profile.damage_type) && <p className="gem-line">{profile.damage_type === 'fire dot' ? 'Fire damage over time' : profile.damage_type}</p>}{profile.uses_totems && <p className="gem-line">{profile.attack_archetype}{profile.active_totem_limit ? ` · ${profile.active_totem_limit} totems` : ''}{profile.ancestral_bond ? ' · Ancestral Bond' : ''}</p>}</div><div className="defence-profile__pools">{present(profile.life) && profile.life > 1 && <div><span>Life</span><strong>{number(profile.life)}</strong></div>}{present(profile.energy_shield) && <div><span>Energy Shield</span><strong className="energy-value">{number(profile.energy_shield)}</strong></div>}</div></div>
+      <div className="defence-profile__columns"><div><h4>Defensive layers</h4><dl className="defence-stats">{defenceRows(profile).map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl><p className="profile-note">Recovery depends on its source: leech needs a target; recharge needs uptime.</p></div>{hits.length > 0 && <div><h4>Maximum hit taken</h4><p className="profile-note">Saved PoB estimates. Configuration, flasks and conditional effects may affect these values.</p><dl className="defence-stats">{hits.map(([kind, amount]) => <div key={kind}><dt>{kind}</dt><dd>{number(amount!)}</dd></div>)}{profile.chaos_immune && <div><dt>Chaos</dt><dd>Immune</dd></div>}</dl></div>}</div>
+      {!!profile.dependencies?.length && <details className="why-details"><summary>What makes this build work <span aria-hidden="true">+</span></summary><ul>{profile.dependencies.filter(row => ['delivery', 'scaling', 'activation'].includes(row.axis)).map(row => <li key={row.id}><strong>{row.label}</strong> · {row.evidence}</li>)}</ul></details>}
+      {!!profile.coverage?.issues.length && <div className="dependency-notice" role="status"><strong>Some interactions need review</strong><ul>{profile.coverage.issues.map(issue => <li key={issue}>{issue}</li>)}</ul></div>}
+      {!!profile.signals?.length && <details className="why-details"><summary>Evidence behind recommendations <span aria-hidden="true">+</span></summary><ul>{profile.signals.map(signal => <li key={signal.id}>{signal.evidence}</li>)}</ul></details>}
     </Panel>
+    <BuildConfirmations analysis={analysis} />
   </section>;
 }

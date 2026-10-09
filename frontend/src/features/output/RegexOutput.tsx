@@ -15,7 +15,8 @@ function downloadPreset(data: object) {
   window.setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
-export function RegexOutput({ mods, limit, mode }: { mods: ClassifiedMod[]; limit: number; mode: 'live' | 'example' }) {
+export function RegexOutput({ mods, limit, mode }: { mods: ClassifiedMod[]; limit: number; mode: 'live' | 'example' | 'manual' }) {
+  const coverage = useAppStore(state => state.analysis?.profile.coverage);
   const preset = useAppStore(state => state.preset);
   const overrides = useAppStore(state => state.overrides);
   const preferences = useAppStore(state => state.preferences);
@@ -47,9 +48,9 @@ export function RegexOutput({ mods, limit, mode }: { mods: ClassifiedMod[]; limi
       </Button>
     </div>
     <div className="regex-dock__details"><div className="regex-dock__summary"><span><strong>Blocks:</strong> {output.blocked.length}</span><span><strong>Wants:</strong> {output.wanted.length}</span>{preferenceCount > 0 && <span><strong>Applied filters:</strong> {preferenceCount}</span>}</div>
-      <div className="regex-dock__actions"><button type="button" onClick={() => void copy(output.parts.map(part => `${part.kind === 'exclude' ? 'Avoid' : part.kind === 'include' ? 'Want' : 'Filter'}: ${part.text}`).join('\n'), 'Search parts copied')} disabled={!output.regex || !output.valid}>Copy search parts</button><button type="button" onClick={() => showToast('Share links are planned for the next pass.')}>Share link</button><button type="button" onClick={() => { downloadPreset({ preset, overrides, preferences }); showToast('Preset exported'); }}>Export preset</button></div>
+      <details className="regex-options"><summary>Options</summary><button type="button" onClick={() => { downloadPreset({ preset, overrides, preferences }); showToast('Preset exported'); }}>Export preset</button></details>
     </div>
-    {(output.warnings.length > 0 || mode === 'example') && <div className="regex-dock__warnings" role="status">{mode === 'example' && <span>Example profile: ratings are illustrative.</span>}{output.warnings.map(warning => <span key={warning}>{warning}</span>)}{tooLong && output.split.length > 0 && <button type="button" onClick={() => setShowSplit(value => !value)}>{showSplit ? 'Hide' : 'View'} partial search batches</button>}</div>}
+    {(output.warnings.length > 0 || !!coverage?.issues.length || mode !== 'live') && <div className="regex-dock__warnings" role="status">{mode === 'manual' && <span>Manual selection · import a build for recommendations.</span>}{mode === 'example' && <span>Example profile: ratings are illustrative.</span>}{mode === 'live' && !!coverage?.issues.length && <span>Build coverage incomplete · {coverage.issues.length} checks need review. <a href="#build-profile">Review build dependencies</a>. This search is a baseline, not a guarantee.</span>}{output.warnings.map(warning => <span key={warning}>{warning}</span>)}{tooLong && output.split.length > 0 && <button type="button" onClick={() => setShowSplit(value => !value)}>{showSplit ? 'Hide' : 'View'} partial search batches</button>}</div>}
     {showSplit && tooLong && <div className="regex-split"><p>Each batch covers only part of the selection. The full set cannot be used in one in-game search.</p>{output.split.map((piece, index) => <div key={`${index}-${piece.length}`}><span>BATCH {index + 1} / {output.split.length}</span><code>{piece}</code><button type="button" onClick={() => void copy(piece, `Batch ${index + 1} copied`)}>Copy</button></div>)}</div>}
   </section>;
 }

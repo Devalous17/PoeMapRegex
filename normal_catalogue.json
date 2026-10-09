@@ -1,0 +1,704 @@
+[
+  {
+    "id": "-2050206104",
+    "text": "Players have 60% less Recovery Rate of Life and Energy Shield",
+    "pattern": "te o",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapPlayerReducedRegen",
+    "poedbName": "of Smothering"
+  },
+  {
+    "id": "-1934587276",
+    "text": "Area is inhabited by Cultists of Kitava",
+    "pattern": "va$",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonsterPacks",
+    "poedbName": "Feasting"
+  },
+  {
+    "id": "-1772662453",
+    "text": "Monsters have 70% chance to Avoid Elemental Ailments",
+    "pattern": "id e",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonsterStatusAilmentImmunity",
+    "poedbName": "of Insulation"
+  },
+  {
+    "id": "-1616686189",
+    "text": "Monsters gain (40\u201449)% of Maximum Life as Extra Maximum Energy Shield",
+    "pattern": "m energy shield$",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonstersMaximumLifeAddedEnergyShield",
+    "poedbName": "Buffered"
+  },
+  {
+    "id": "-1473394034",
+    "text": "Players have 40% less Cooldown Recovery Rate",
+    "pattern": "rate$",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapPlayerCooldownRecovery",
+    "poedbName": "of Fatigue"
+  },
+  {
+    "id": "-1358177810",
+    "text": "Monsters steal Power, Frenzy and Endurance charges on Hit",
+    "pattern": "r, f",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonstersStealChargesOnHit",
+    "poedbName": "of Enervation"
+  },
+  {
+    "id": "-1344829253",
+    "text": "Monsters have (360\u2014400)% increased Critical Strike Chance|+(41\u201445)% to Monster Critical Strike Multiplier",
+    "pattern": "lier$",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonsterCriticalStrikesAndDamage",
+    "poedbName": "of Deadliness"
+  },
+  {
+    "id": "-1204380788",
+    "text": "Monsters' Attacks have 60% chance to Impale on Hit",
+    "pattern": "' at",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonstersImpaleOnHit",
+    "poedbName": "Impaling"
+  },
+  {
+    "id": "-1139261923",
+    "text": "Area has patches of Consecrated Ground",
+    "pattern": "s of co",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapGroundEffect",
+    "poedbName": "of Consecration"
+  },
+  {
+    "id": "-1099682289",
+    "text": "Area contains many Totems",
+    "pattern": "ms$",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapTotems",
+    "poedbName": "Ceremonial"
+  },
+  {
+    "id": "-1094717370",
+    "text": "Monsters gain a Frenzy Charge on Hit",
+    "pattern": "n a f",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonstersFrenzyChargeOnHit",
+    "poedbName": "of Frenzy"
+  },
+  {
+    "id": "-1088873049",
+    "text": "Unique Boss deals 25% increased Damage|Unique Boss has 30% increased Attack and Cast Speed",
+    "pattern": "oss d",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapDangerousBoss",
+    "poedbName": "Overlord's"
+  },
+  {
+    "id": "-1047451686",
+    "text": "Area is inhabited by ranged monsters",
+    "pattern": "by r",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonsterPacks",
+    "poedbName": "Emanant"
+  },
+  {
+    "id": "-999805715",
+    "text": "Players have 30% less Armour|Players have 40% reduced Chance to Block",
+    "pattern": "ur$",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapPlayersBlockAndArmour",
+    "poedbName": "of Rust"
+  },
+  {
+    "id": "-946283701",
+    "text": "Buffs on Players expire 70% faster",
+    "pattern": "^buffs",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapPlayerBuffsExpireFaster",
+    "poedbName": "of Transience"
+  },
+  {
+    "id": "-763914456",
+    "text": "Players gain 50% reduced Flask Charges",
+    "pattern": "ced f",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapPlayersGainReducedFlaskCharges",
+    "poedbName": "of Drought"
+  },
+  {
+    "id": "-737013402",
+    "text": "Area is inhabited by Lunaris fanatics",
+    "pattern": "unari",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonsterPacks",
+    "poedbName": "Lunar"
+  },
+  {
+    "id": "-694214737",
+    "text": "+25% Monster Chaos Resistance|+40% Monster Elemental Resistances",
+    "pattern": "ter e",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonstersAllResistances",
+    "poedbName": "Resistant"
+  },
+  {
+    "id": "-688435205",
+    "text": "Area is inhabited by Undead",
+    "pattern": "y un",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonsterPacks",
+    "poedbName": "Undead"
+  },
+  {
+    "id": "-683043845",
+    "text": "(20\u201430)% increased number of Rare Monsters",
+    "pattern": "d nu",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapNemesisModOnRares",
+    "poedbName": "Antagonist's"
+  },
+  {
+    "id": "-627831782",
+    "text": "Monsters have a 50% chance to avoid Poison, Impale, and Bleeding",
+    "pattern": "son,",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonstersAvoidPoisonBleedBlind",
+    "poedbName": "Impervious"
+  },
+  {
+    "id": "-617888797",
+    "text": "Area is inhabited by Humanoids",
+    "pattern": "hum",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonsterPacks",
+    "poedbName": "Bipedal"
+  },
+  {
+    "id": "-580302769",
+    "text": "(22\u201425)% increased Monster Damage",
+    "pattern": "r damage$",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonsterDamage",
+    "poedbName": "Savage"
+  },
+  {
+    "id": "-539026720",
+    "text": "60% less effect of Curses on Monsters",
+    "pattern": "es on m",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapHexproof",
+    "poedbName": "Hexwarded"
+  },
+  {
+    "id": "-481946502",
+    "text": "Monsters' skills Chain 2 additional times",
+    "pattern": "' s",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonsterChain",
+    "poedbName": "Chaining"
+  },
+  {
+    "id": "-477049138",
+    "text": "Players have (-12\u2014-9)% to all maximum Resistances",
+    "pattern": "m resistances$",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapPlayerMaxResists",
+    "poedbName": "of Exposure"
+  },
+  {
+    "id": "-268547495",
+    "text": "Monsters have +60% chance to Suppress Spell Damage",
+    "pattern": "ll damage$",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonstersChanceToSuppressSpells",
+    "poedbName": "Oppressive"
+  },
+  {
+    "id": "-235013251",
+    "text": "Rare Monsters have Physical Thorns reflecting 800 Physical Damage",
+    "pattern": "ve phy",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonsterPhysicalReflection",
+    "poedbName": "Punishing"
+  },
+  {
+    "id": "-225071089",
+    "text": "Monsters gain an Endurance Charge on Hit",
+    "pattern": "e charge on hit$",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonstersEnduranceChargeOnHit",
+    "poedbName": "of Endurance"
+  },
+  {
+    "id": "-210607554",
+    "text": "Area is inhabited by Goatmen",
+    "pattern": "goa",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonsterPacks",
+    "poedbName": "Capricious"
+  },
+  {
+    "id": "-172005981",
+    "text": "(40\u201449)% more Monster Life",
+    "pattern": "4\\d% more monster life$",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonsterLife",
+    "poedbName": "Fecund"
+  },
+  {
+    "id": "-166549521",
+    "text": "Monsters have a 20% chance to Ignite, Freeze and Shock on Hit",
+    "pattern": "o ignite,",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonstersChanceToInflictStatusAilments",
+    "poedbName": "Empowered"
+  },
+  {
+    "id": "-128171261",
+    "text": "Area has patches of desecrated ground",
+    "pattern": "es of d",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapGroundEffect",
+    "poedbName": "of Desecration"
+  },
+  {
+    "id": "-114660370",
+    "text": "Players have 25% less Accuracy Rating",
+    "pattern": "e \\d+% less ac",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapPlayerAccuracyRating",
+    "poedbName": "of Imprecision"
+  },
+  {
+    "id": "-106750911",
+    "text": "Unique Boss has 35% increased Life|Unique Boss has 70% increased Area of Effect",
+    "pattern": "d life$",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMassiveBoss",
+    "poedbName": "Titan's"
+  },
+  {
+    "id": "-106071007",
+    "text": "Unique Bosses are Possessed",
+    "pattern": "sed$",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapBossPossessed",
+    "poedbName": "Enthralled"
+  },
+  {
+    "id": "-80588106",
+    "text": "Monsters Maim on Hit with Attacks",
+    "pattern": "cks$",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonstersMaimOnHit",
+    "poedbName": "of Carnage"
+  },
+  {
+    "id": "-54649013",
+    "text": "Monsters take (36\u201440)% reduced Extra Damage from Critical Strikes",
+    "pattern": "kes$",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonstersBaseSelfCriticalMultiplier",
+    "poedbName": "of Toughness"
+  },
+  {
+    "id": "-26777606",
+    "text": "Monsters deal (90\u2014110)% extra Physical Damage as Fire",
+    "pattern": "fire$",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonsterFireDamage",
+    "poedbName": "Burning"
+  },
+  {
+    "id": "10729340",
+    "text": "Monsters gain (31\u201435)% of their Physical Damage as Extra Chaos Damage|Monsters Inflict Withered for 2 seconds on Hit",
+    "pattern": "ds on",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonsterChaosDamage",
+    "poedbName": "Profane"
+  },
+  {
+    "id": "17483843",
+    "text": "(25\u201430)% increased Monster Movement Speed|(35\u201445)% increased Monster Attack Speed|(35\u201445)% increased Monster Cast Speed",
+    "pattern": "er at",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonsterFast",
+    "poedbName": "Fleet"
+  },
+  {
+    "id": "58884108",
+    "text": "Area is inhabited by Skeletons",
+    "pattern": "tons$",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonsterPacks",
+    "poedbName": "Skeletal"
+  },
+  {
+    "id": "151806012",
+    "text": "Monsters have 50% increased Accuracy Rating|Players have -20% to amount of Suppressed Spell Damage Prevented",
+    "pattern": "o am",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonsterAccuracyPlayersUnlockyDodge",
+    "poedbName": "of Miring"
+  },
+  {
+    "id": "156744008",
+    "text": "Area has increased monster variety",
+    "pattern": "ety",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonsterPacks",
+    "poedbName": "Multifarious"
+  },
+  {
+    "id": "194321329",
+    "text": "Area is inhabited by Solaris fanatics",
+    "pattern": "laris",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonsterPacks",
+    "poedbName": "Solar"
+  },
+  {
+    "id": "252096506",
+    "text": "Monsters cannot be Leeched from",
+    "pattern": "from$",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonsterLifeLeechImmunity",
+    "poedbName": "of Congealment"
+  },
+  {
+    "id": "339937661",
+    "text": "Players are Cursed with Enfeeble",
+    "pattern": "eble$",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapPlayerEnfeeblement",
+    "poedbName": "of Enfeeblement"
+  },
+  {
+    "id": "472035128",
+    "text": "Area has patches of Shocked Ground which increase Damage taken by 50%",
+    "pattern": "und w",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapGroundEffect",
+    "poedbName": "of Lightning"
+  },
+  {
+    "id": "583869527",
+    "text": "(20\u201430)% increased Magic Monsters",
+    "pattern": "d mag",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapBloodlinesModOnMagics",
+    "poedbName": "of Bloodlines"
+  },
+  {
+    "id": "775962019",
+    "text": "Area is inhabited by Sea Witches and their Spawn",
+    "pattern": "wn$",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonsterPacks",
+    "poedbName": "Slithering"
+  },
+  {
+    "id": "823410479",
+    "text": "+40% Monster Physical Damage Reduction",
+    "pattern": "er ph",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonsterPhysicalResistance",
+    "poedbName": "Armoured"
+  },
+  {
+    "id": "829751875",
+    "text": "Players have 25% less Area of Effect",
+    "pattern": "ss are",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapPlayersAoERadius",
+    "poedbName": "of Impotence"
+  },
+  {
+    "id": "955801458",
+    "text": "Area contains two Unique Bosses",
+    "pattern": "wo u",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapTwoBosses",
+    "poedbName": "Twinned"
+  },
+  {
+    "id": "980061401",
+    "text": "Area is inhabited by Demons",
+    "pattern": "mons$",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonsterPacks",
+    "poedbName": "Demonic"
+  },
+  {
+    "id": "1062763755",
+    "text": "Area has patches of Chilled Ground",
+    "pattern": "s of ch",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapGroundEffect",
+    "poedbName": "of Ice"
+  },
+  {
+    "id": "1078205993",
+    "text": "Rare Monsters have Elemental Thorns reflecting 1500 Elemental Damage",
+    "pattern": "\\d+ e",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonsterElementalReflection",
+    "poedbName": "Mirrored"
+  },
+  {
+    "id": "1082020744",
+    "text": "Area is inhabited by Abominations",
+    "pattern": "ions$",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonsterPacks",
+    "poedbName": "Abhorrent"
+  },
+  {
+    "id": "1101434369",
+    "text": "Players have 60% reduced effect of Non-Curse Auras from Skills",
+    "pattern": "ills$",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapPlayerAuraEffect",
+    "poedbName": "of Doubt"
+  },
+  {
+    "id": "1202132179",
+    "text": "Players are Cursed with Vulnerability",
+    "pattern": "h vu",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapPlayerVulnerability",
+    "poedbName": "of Vulnerability"
+  },
+  {
+    "id": "1211148661",
+    "text": "Area has patches of Burning Ground",
+    "pattern": "f bur",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapGroundEffect",
+    "poedbName": "of Flames"
+  },
+  {
+    "id": "1283094925",
+    "text": "Monsters gain a Power Charge on Hit",
+    "pattern": "n a po",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonstersPowerChargeOnHit",
+    "poedbName": "of Power"
+  },
+  {
+    "id": "1305115176",
+    "text": "Players cannot Regenerate Life, Mana or Energy Shield",
+    "pattern": "t reg",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapPlayerReducedRegen",
+    "poedbName": "of Stasis"
+  },
+  {
+    "id": "1424047266",
+    "text": "Area is inhabited by Animals",
+    "pattern": "mals$",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonsterPacks",
+    "poedbName": "Feral"
+  },
+  {
+    "id": "1428847539",
+    "text": "Players cannot inflict Exposure",
+    "pattern": "rs cannot i",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapPlayerElementalEquilibrium",
+    "poedbName": "of Balance"
+  },
+  {
+    "id": "1541760497",
+    "text": "(25\u201430)% more Monster Life|Monsters cannot be Stunned",
+    "pattern": "unned$",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonsterCannotBeStunned",
+    "poedbName": "Unwavering"
+  },
+  {
+    "id": "1551446200",
+    "text": "Monsters are Hexproof",
+    "pattern": "re he",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapHexproof",
+    "poedbName": "Hexproof"
+  },
+  {
+    "id": "1578069823",
+    "text": "Monsters Poison on Hit",
+    "pattern": "rs po",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapPoisoning",
+    "poedbName": "of Venom"
+  },
+  {
+    "id": "1598599541",
+    "text": "Players are Cursed with Temporal Chains",
+    "pattern": "th tem",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapPlayerTemporalChains",
+    "poedbName": "of Temporal Chains"
+  },
+  {
+    "id": "1634487773",
+    "text": "Monsters fire 2 additional Projectiles",
+    "pattern": "tiles$",
+    "nightmare": false,
+    "suppliedAvoid": false,
+    "poedbGroup": "MapMonsterMultipleProjectiles",
+    "poedbName": "Splitting"
+  },
+  {
+    "id": "1723792253",
+    "text": "Area is inhabited by Ghosts",
+    "pattern": "sts$",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonsterPacks",
+    "poedbName": "Haunting"
+  },
+  {
+    "id": "1743546402",
+    "text": "Monsters Hinder on Hit with Spells",
+    "pattern": "ells$",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonstersHinderOnHit",
+    "poedbName": "of Impedance"
+  },
+  {
+    "id": "1799781772",
+    "text": "Monsters deal (90\u2014110)% extra Physical Damage as Cold",
+    "pattern": "old$",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonsterColdDamage",
+    "poedbName": "Freezing"
+  },
+  {
+    "id": "1882321261",
+    "text": "Players are Cursed with Elemental Weakness",
+    "pattern": "th el",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapPlayerElementalWeakness",
+    "poedbName": "of Elemental Weakness"
+  },
+  {
+    "id": "1899039946",
+    "text": "Monsters have 100% increased Area of Effect",
+    "pattern": "e \\d+% increased ar",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonsterAreaOfEffect",
+    "poedbName": "of Giants"
+  },
+  {
+    "id": "2080363489",
+    "text": "All Monster Damage from Hits always Ignites",
+    "pattern": "tes$",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonstersAllDamageAlwaysIgnites",
+    "poedbName": "Conflagrating"
+  },
+  {
+    "id": "2105788016",
+    "text": "Monsters cannot be Taunted|Monsters' Action Speed cannot be modified to below Base Value|Monsters' Movement Speed cannot be modified to below Base Value",
+    "pattern": "taunte",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonstersCantBeSlowedOrTaunted",
+    "poedbName": "Unstoppable"
+  },
+  {
+    "id": "2122294281",
+    "text": "Monsters Blind on Hit",
+    "pattern": "rs b",
+    "nightmare": false,
+    "suppliedAvoid": true,
+    "poedbGroup": "MapMonstersBlindOnHit",
+    "poedbName": "of Blinding"
+  },
+  {
+    "id": "2132856290",
+    "text": "Monsters deal (90\u2014110)% extra Physical Damage as Lightning",
+    "pattern": "as li",
+    "nightmare": false,
+    "suppliedAvoid": false,
+    "poedbGroup": "MapMonsterLightningDamage",
+    "poedbName": "Shocking"
+  }
+]

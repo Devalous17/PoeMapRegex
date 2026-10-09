@@ -10,6 +10,8 @@ import urllib.request
 import xml.etree.ElementTree as ET
 import zlib
 
+from assessment import recovery_snapshot
+
 
 MAX_INPUT = 300_000
 MAX_XML = 2_000_000
@@ -90,13 +92,13 @@ def _active_skill(root: ET.Element, build: ET.Element) -> tuple[str, list[str]]:
     groups = skill_set.findall("Skill") if skill_set is not None else skills.findall("Skill")
     if not groups:
         return "Unknown", []
-    all_gems = [g.get("nameSpec", "") for group in groups for g in group.findall("Gem") if g.get("enabled") != "false"]
+    all_gems = [g.get("nameSpec", "") for group in groups if group.get("enabled") != "false" for g in group.findall("Gem") if g.get("enabled") != "false"]
     try:
         main_index = int(build.get("mainSocketGroup", "1")) - 1
         main_group = groups[main_index]
     except (ValueError, IndexError):
         return "Unknown", all_gems
-    active_gems = [g for g in main_group.findall("Gem") if g.get("enabled") != "false"]
+    active_gems = [g for g in main_group.findall("Gem") if main_group.get("enabled") != "false" and g.get("enabled") != "false"]
     try:
         gem_index = int(main_group.get("mainActiveSkill", "1")) - 1
         chosen = active_gems[gem_index]
@@ -126,26 +128,40 @@ def _equipped_item_text(root: ET.Element) -> str:
 # assigned a damage type from their name or ascendancy.
 SKILL_DAMAGE = {
     "winter orb": "elemental",
+    "storm burst": "elemental",
+    "storm burst of repulsion": "elemental",
     "arc": "elemental",
     "lightning arrow": "elemental",
     "ice shot": "elemental",
     "frost blades": "elemental",
     "fireball": "elemental",
     "righteous fire": "fire dot",
+    "vaal righteous fire": "fire dot",
     "cyclone": "physical",
     "boneshatter": "physical",
     "earthquake": "physical",
     "toxic rain": "chaos dot",
     "essence drain": "chaos dot",
+    "death aura": "chaos dot",
     "lacerate of haemorrhage": "physical",
     "smite": "elemental",
 }
 
 ATTACK_SKILLS = {"lightning arrow", "ice shot", "frost blades", "cyclone", "boneshatter", "earthquake", "toxic rain", "lacerate of haemorrhage", "smite"}
-NON_ATTACK_SKILLS = {"winter orb", "arc", "fireball", "righteous fire", "essence drain"}
-SKILL_ELEMENT = {"winter orb": "Cold", "lightning arrow": "Lightning", "ice shot": "Cold", "frost blades": "Cold", "arc": "Lightning", "fireball": "Fire", "smite": "Lightning"}
-CHANNELLED_SKILLS = {"winter orb", "cyclone", "blade flurry", "divine ire", "storm burst", "scorching ray", "incinerate", "flameblast"}
+NON_ATTACK_SKILLS = {"storm burst", "storm burst of repulsion", "winter orb", "arc", "fireball", "righteous fire", "vaal righteous fire", "essence drain", "death aura"}
+SKILL_ELEMENT = {"storm burst": "Lightning", "storm burst of repulsion": "Lightning", "winter orb": "Cold", "lightning arrow": "Lightning", "ice shot": "Cold", "frost blades": "Cold", "arc": "Lightning", "fireball": "Fire", "smite": "Lightning"}
+CHANNELLED_SKILLS = {"storm burst of repulsion", "winter orb", "cyclone", "blade flurry", "divine ire", "storm burst", "scorching ray", "incinerate", "flameblast"}
 
+
+# Aura metadata is explicit: Heralds, RF and Blasphemy curses are not treated
+# as non-curse auras simply because they reserve a resource or deal area damage.
+NON_CURSE_AURAS = {
+    "discipline", "vaal discipline", "grace", "vaal grace", "determination",
+    "haste", "vaal haste", "zealotry", "wrath", "anger", "hatred",
+    "malevolence", "clarity", "vaal clarity", "vitality", "precision",
+    "purity of elements", "purity of fire", "purity of ice", "purity of lightning",
+    "death aura", "pride", "flesh and stone",
+}
 
 def build_profile(root: ET.Element) -> dict:
     build = root.find("Build")
@@ -188,6 +204,15 @@ def build_profile(root: ET.Element) -> dict:
     flask_ids = {slot.get("itemId") for slot in equipped_set.findall("Slot") if re.fullmatch(r"Flask [1-5]", slot.get("name", "")) and slot.get("itemId")} if equipped_set is not None else set()
     flask_item_texts = [(item.text or "").lower() for item in item_set.findall("Item") if item.get("id") in flask_ids and "tincture" not in (item.text or "").lower().split("unique id:", 1)[0]] if item_set is not None else []
     filled_flasks = len(flask_item_texts)
+    # Item-provided supports apply only to the item socketing the main skill.
+    main_slot = main_group.get("slot") if main_group is not None else None
+    main_item_id = next((slot.get("itemId") for slot in equipped_set.findall("Slot") if slot.get("name") == main_slot), None) if equipped_set is not None else None
+    main_item_text = next(((item.text or "").lower() for item in item_set.findall("Item") if item.get("id") == main_item_id), "") if item_set is not None else ""
+    totem_support = any("SupportGemSpellTotem" in gem_id or "SupportGemBallistaTotem" in gem_id or "SupportGemRangedAttackTotem" in gem_id for gem_id in main_ids)
+    item_totem_support = bool(re.search(r"socketed gems are supported by level \d+ (?:spell|ballista) totem", main_item_text))
+    native_totem = "totem" in skill.lower() or "ballista" in skill.lower()
+    uses_totems = totem_support or item_totem_support or native_totem
+    ancestral_bond = "41970" in allocated_nodes or "allocates ancestral bond" in item_text
     main_skill_lower = skill.lower()
     damage_type = SKILL_DAMAGE.get(main_skill_lower, "unknown")
     main_uses_channeling = main_skill_lower in CHANNELLED_SKILLS or any("channelling" in g.get("nameSpec", "").lower() for g in main_gems)
@@ -235,8 +260,9 @@ def build_profile(root: ET.Element) -> dict:
     evasion = stats.get("Evasion")
     spell_suppression = stats.get("EffectiveSpellSuppressionChance")
     strongest_block = max(effective_attack_block or 0, effective_spell_block or 0)
+    combined_block = (effective_attack_block or 0) + (effective_spell_block or 0)
     defence_archetypes = []
-    if strongest_block >= 85:
+    if strongest_block >= 85 or combined_block >= 75:
         defence_archetypes.append("High block")
     elif strongest_block >= 50:
         defence_archetypes.append("Block")
@@ -249,6 +275,9 @@ def build_profile(root: ET.Element) -> dict:
     if not defence_archetypes:
         defence_archetypes.append("Unclear from saved stats")
     attack_archetype = (
+        "Spell Totems" if uses_totems and skill.lower() in NON_ATTACK_SKILLS else
+        "Attack Totems" if uses_totems and skill.lower() in ATTACK_SKILLS else
+        "Totems" if uses_totems else
         "Cast on Critical Strike" if uses_cast_on_crit else
         "Wardloop" if wardloop_detected else
         "Mines" if uses_mines else
@@ -264,8 +293,15 @@ def build_profile(root: ET.Element) -> dict:
         "ascendancy": build.get("ascendClassName", "Unknown"),
         "level": build.get("level", "?"),
         "main_skill": skill,
+        "uses_totems": uses_totems,
+        "ailment_damage_primary": ((stats.get("IgniteDPS") or 0) >= max(1, (stats.get("TotalDPS") or 0) * .25) or any("deadly ailments" in g.get("nameSpec", "").lower() or "unbound ailments" in g.get("nameSpec", "").lower() for g in main_gems)),
+        "ancestral_bond": ancestral_bond,
+        "totem_source": "socketed item grants Totem support" if item_totem_support else "linked Totem support" if totem_support else "native Totem skill" if native_totem else None,
+        "active_totem_limit": stats.get("ActiveTotemLimit"),
+        "main_skill_has_cooldown": bool((stats.get("Cooldown") or 0) > 0),
+        "maximum_hit_taken": {kind: stats.get(f"{kind}MaximumHitTaken") for kind in ("Physical", "Fire", "Cold", "Lightning", "Chaos")},
         "damage_type": damage_type,
-        "main_skill_kind": "attack" if skill.lower() in ATTACK_SKILLS else "non_attack" if skill.lower() in NON_ATTACK_SKILLS else "unknown",
+        "main_skill_kind": "non_attack" if item_totem_support or any("SupportGemSpellTotem" in gem_id for gem_id in main_ids) else "attack" if skill.lower() in ATTACK_SKILLS else "non_attack" if skill.lower() in NON_ATTACK_SKILLS else "unknown",
         "main_hit_types": main_hit_types,
         "main_element": SKILL_ELEMENT.get(main_skill_lower),
         "main_uses_channeling": main_uses_channeling,
@@ -314,12 +350,29 @@ def build_profile(root: ET.Element) -> dict:
         "mana_regen": stats.get("ManaRegenRecovery") or 0,
         "energy_shield_regen": stats.get("EnergyShieldRegenRecovery") or 0,
         "mana_cost_per_second": stats.get("ManaPerSecondCost") or 0,
-        "uses_auras": any(g.lower() in {"discipline", "grace", "determination", "haste", "zealotry", "wrath", "anger", "hatred", "purity of elements"} for g in gems),
+        "saved_mana_cost_per_second": stats.get("ManaPerSecondCost"),
+        "recovery_channels": recovery_snapshot(stats, item_text, flask_item_texts),
+        "energy_shield_net_regen": stats.get("NetEnergyShieldRegen"),
+        "instant_leech_detected": "leech is instant" in item_text,
+        "mana_defence_detected": "34098" in allocated_nodes or "mind over matter" in item_text or "damage is taken from mana before life" in item_text,
+        "uses_marks": bool(gem_names & {"sniper's mark", "assassin's mark", "poacher's mark", "warlord's mark", "alchemist's mark"}),
+        "hexproof_bypass_detected": "your hexes can affect hexproof enemies" in item_text,
+        "maximum_resistances": {element: stats.get(element + "ResistMax") if stats.get(element + "ResistMax") is not None else
+            stats.get(element + "Resist") if (stats.get(element + "ResistOverCap") or 0) > 0 else None
+            for element in ("Fire", "Cold", "Lightning")},
+        "maximum_resistance_sources": {element: "saved maximum" if stats.get(element + "ResistMax") is not None else
+            "inferred from resistance plus positive over-cap" if (stats.get(element + "ResistOverCap") or 0) > 0 else "unknown"
+            for element in ("Fire", "Cold", "Lightning")},
+        "uses_auras": any(g.lower() in NON_CURSE_AURAS for g in gems),
+        "primary_damage_aura": main_skill_lower == "death aura",
         "uses_hexes": any(g.lower() in {"frostbite", "flammability", "conductivity", "despair", "elemental weakness", "enfeeble", "temporal chains", "vulnerability", "punishment"} for g in gems),
         "has_minion_skills": has_minion_skills,
         "reflect_protection_detected": bool(re.search(r"cannot take reflected|immune to reflected", item_text)),
         "notes": ["PoB export stats are a saved snapshot. Passive tree effects and conditional protections may need manual review."],
     }
     from build_signals import infer_build_signals
+    profile["signals"] = infer_build_signals(profile)
+    from dependencies import enrich_profile
+    enrich_profile(profile, root, stats, main_group, groups, item_text, main_item_text)
     profile["signals"] = infer_build_signals(profile)
     return profile

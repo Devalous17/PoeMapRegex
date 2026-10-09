@@ -3,8 +3,8 @@
 from http.server import BaseHTTPRequestHandler
 import json
 
-from pob import BuildInputError, build_profile, decode_build
-from rules import REGEX_LIMIT, classify, make_regex
+from pob import BuildInputError
+from analysis_service import analyze_request
 
 
 class handler(BaseHTTPRequestHandler):
@@ -23,17 +23,7 @@ class handler(BaseHTTPRequestHandler):
             if not 0 < length <= 350_000:
                 raise BuildInputError("Input is empty or too large.")
             data = json.loads(self.rfile.read(length))
-            source = data.get("source", "")
-            if not isinstance(source, str):
-                raise BuildInputError("Paste a pobb.in link or a PoB export code.")
-            profile = build_profile(decode_build(source))
-            mods = classify(profile)
-            self._json(200, {
-                "profile": profile,
-                "mods": mods,
-                "presets": {preset: make_regex(mods, preset) for preset in ("safe", "balanced", "greedy")},
-                "regex_limit": REGEX_LIMIT,
-            })
+            self._json(200, analyze_request(data))
         except (BuildInputError, json.JSONDecodeError) as exc:
             self._json(400, {"error": str(exc)})
         except Exception as exc:

@@ -1,14 +1,37 @@
 export type Rating = 'brick' | 'dangerous' | 'uncomfortable' | 'free' | 'review';
 export type Preset = 'safe' | 'balanced' | 'greedy';
 export type Decision = 'block' | 'neutral' | 'allow' | 'want';
+export interface BuildAssumptions {
+  mana_alternative_per_second?: number;
+  map_effect_increased?: number;
+  recharge_sustainable?: boolean;
+  hexproof_bypass?: boolean;
+  flask_essential?: boolean;
+  curse_role?: 'unknown' | 'utility' | 'damage' | 'mechanic';
+  aura_role?: 'unknown' | 'utility' | 'damage' | 'defence' | 'mechanic';
+  charge_sustain?: 'unknown' | 'reliable' | 'required';
+}
 export type Category = 'Thorns' | 'Recovery / Leech' | 'Cooldown / Triggers' | 'Defences' | 'Resistances' | 'Charges' | 'Ailments / Curses' | 'Monsters' | 'Area' | 'Other';
 
 export interface BuildProfile {
+  dependencies?: { id: string; axis: string; label: string; status: 'detected' | 'uncertain'; evidence: string }[];
+  coverage?: { issues: string[]; main_skill_recognized: boolean; metadata_revision: string; normal_modifiers?: Record<string, number> };
   game: string;
   class: string;
   ascendancy: string;
   level: string;
   main_skill: string;
+  uses_totems?: boolean;
+  ancestral_bond?: boolean;
+  active_totem_limit?: number | null;
+  totem_source?: string | null;
+  mana_defence_detected?: boolean;
+  maximum_hit_taken?: Record<string, number | null>;
+  assumptions?: BuildAssumptions;
+  recovery_channels?: { pool: string; channel: string; value: number | null; unit: string; condition: string; source: string }[];
+  recovery_conflicts?: { mods: string[]; avoid: string; reason: string }[];
+  maximum_resistances?: Record<string, number | null>;
+  maximum_resistance_sources?: Record<string, string>;
   damage_type: string;
   main_skill_kind: string;
   main_hit_types?: string[];
@@ -89,8 +112,16 @@ export interface ModDefinition {
 }
 
 export interface ClassifiedMod extends ModDefinition {
+  assessment_status?: 'counter' | 'unaffected' | 'uncertain' | 'policy';
+  dependency_axes?: string[];
+  dependency_evidence?: string[];
+  manual?: boolean;
   rating: Rating;
   reason: string;
+  confidence?: 'low' | 'medium' | 'high';
+  combination_avoid?: boolean;
+  combination_reason?: string;
+  combination_partners?: string[][];
 }
 
 export interface AnalysisResult {

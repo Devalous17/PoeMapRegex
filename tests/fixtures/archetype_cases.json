@@ -1,0 +1,703 @@
+[
+  {
+    "name": "RF loses ongoing self-drain sustain",
+    "kind": "synthetic scenario; not a full character PoB",
+    "mod": "no_regen",
+    "expected": "brick",
+    "profile": {
+      "life": 5000,
+      "energy_shield": 0,
+      "life_regen": 2000,
+      "life_leech": 0,
+      "mana_regen": 0,
+      "mana_leech": 0,
+      "energy_shield_regen": 0,
+      "energy_shield_leech": 0,
+      "mana_cost_per_second": 0,
+      "damage_type": "elemental",
+      "uses_hexes": false,
+      "uses_marks": false,
+      "main_skill": "Righteous Fire",
+      "life_net_regen": 500
+    }
+  },
+  {
+    "name": "RF less recovery crosses the self-drain requirement",
+    "kind": "synthetic scenario; not a full character PoB",
+    "mod": "reduced_recovery",
+    "expected": "brick",
+    "profile": {
+      "life": 5000,
+      "energy_shield": 0,
+      "life_regen": 2000,
+      "life_leech": 0,
+      "mana_regen": 0,
+      "mana_leech": 0,
+      "energy_shield_regen": 0,
+      "energy_shield_leech": 0,
+      "mana_cost_per_second": 0,
+      "damage_type": "elemental",
+      "uses_hexes": false,
+      "uses_marks": false,
+      "life_net_regen": 500
+    }
+  },
+  {
+    "name": "Life leech is the main combat recovery",
+    "kind": "synthetic scenario; not a full character PoB",
+    "mod": "no_leech",
+    "expected": "brick",
+    "profile": {
+      "life": 5000,
+      "energy_shield": 0,
+      "life_regen": 0,
+      "life_leech": 1500,
+      "mana_regen": 0,
+      "mana_leech": 0,
+      "energy_shield_regen": 0,
+      "energy_shield_leech": 0,
+      "mana_cost_per_second": 0,
+      "damage_type": "elemental",
+      "uses_hexes": false,
+      "uses_marks": false
+    }
+  },
+  {
+    "name": "CI spell relies on ES leech",
+    "kind": "synthetic scenario; not a full character PoB",
+    "mod": "no_leech",
+    "expected": "brick",
+    "profile": {
+      "life": 1,
+      "energy_shield": 5000,
+      "life_regen": 0,
+      "life_leech": 0,
+      "mana_regen": 0,
+      "mana_leech": 0,
+      "energy_shield_regen": 0,
+      "energy_shield_leech": 1200,
+      "mana_cost_per_second": 0,
+      "damage_type": "elemental",
+      "uses_hexes": false,
+      "uses_marks": false
+    }
+  },
+  {
+    "name": "CI recharge is unaffected by no regeneration",
+    "kind": "synthetic scenario; not a full character PoB",
+    "mod": "no_regen",
+    "expected": "free",
+    "profile": {
+      "life": 1,
+      "energy_shield": 5000,
+      "life_regen": 0,
+      "life_leech": 0,
+      "mana_regen": 0,
+      "mana_leech": 0,
+      "energy_shield_regen": 0,
+      "energy_shield_leech": 0,
+      "mana_cost_per_second": 0,
+      "damage_type": "elemental",
+      "uses_hexes": false,
+      "uses_marks": false,
+      "energy_shield_recharge": 2000
+    }
+  },
+  {
+    "name": "Recharge is a conditional fallback to ES leech",
+    "kind": "synthetic scenario; not a full character PoB",
+    "mod": "no_leech",
+    "expected": "dangerous",
+    "profile": {
+      "life": 1,
+      "energy_shield": 5000,
+      "life_regen": 0,
+      "life_leech": 0,
+      "mana_regen": 0,
+      "mana_leech": 0,
+      "energy_shield_regen": 0,
+      "energy_shield_leech": 1200,
+      "mana_cost_per_second": 0,
+      "damage_type": "elemental",
+      "uses_hexes": false,
+      "uses_marks": false,
+      "energy_shield_recharge": 2000
+    }
+  },
+  {
+    "name": "Confirmed sustained recharge backs up ES leech",
+    "kind": "synthetic scenario; not a full character PoB",
+    "mod": "no_leech",
+    "expected": "uncomfortable",
+    "profile": {
+      "life": 1,
+      "energy_shield": 5000,
+      "life_regen": 0,
+      "life_leech": 0,
+      "mana_regen": 0,
+      "mana_leech": 0,
+      "energy_shield_regen": 0,
+      "energy_shield_leech": 1200,
+      "mana_cost_per_second": 0,
+      "damage_type": "elemental",
+      "uses_hexes": false,
+      "uses_marks": false,
+      "energy_shield_recharge": 2000,
+      "assumptions": {
+        "recharge_sustainable": true
+      }
+    }
+  },
+  {
+    "name": "High crit loss slows damage without an automatic Brick",
+    "kind": "synthetic scenario; not a full character PoB",
+    "mod": "monster_crit_reduction",
+    "expected": "uncomfortable",
+    "profile": {
+      "life": 5000,
+      "energy_shield": 0,
+      "life_regen": 0,
+      "life_leech": 0,
+      "mana_regen": 0,
+      "mana_leech": 0,
+      "energy_shield_regen": 0,
+      "energy_shield_leech": 0,
+      "mana_cost_per_second": 0,
+      "damage_type": "elemental",
+      "uses_hexes": false,
+      "uses_marks": false,
+      "crit_chance": 100,
+      "crit_multiplier": 670
+    }
+  },
+  {
+    "name": "Low crit investment barely affected",
+    "kind": "synthetic scenario; not a full character PoB",
+    "mod": "monster_crit_reduction",
+    "expected": "free",
+    "profile": {
+      "life": 5000,
+      "energy_shield": 0,
+      "life_regen": 0,
+      "life_leech": 0,
+      "mana_regen": 0,
+      "mana_leech": 0,
+      "energy_shield_regen": 0,
+      "energy_shield_leech": 0,
+      "mana_cost_per_second": 0,
+      "damage_type": "elemental",
+      "uses_hexes": false,
+      "uses_marks": false,
+      "crit_chance": 5,
+      "crit_multiplier": 150
+    }
+  },
+  {
+    "name": "Missing critical stats are unknown",
+    "kind": "synthetic scenario; not a full character PoB",
+    "mod": "monster_crit_reduction",
+    "expected": "review",
+    "profile": {
+      "life": 5000,
+      "energy_shield": 0,
+      "life_regen": 0,
+      "life_leech": 0,
+      "mana_regen": 0,
+      "mana_leech": 0,
+      "energy_shield_regen": 0,
+      "energy_shield_leech": 0,
+      "mana_cost_per_second": 0,
+      "damage_type": "elemental",
+      "uses_hexes": false,
+      "uses_marks": false
+    }
+  },
+  {
+    "name": "Channel cost depends on Mana regeneration",
+    "kind": "synthetic scenario; not a full character PoB",
+    "mod": "no_regen",
+    "expected": "brick",
+    "profile": {
+      "life": 5000,
+      "energy_shield": 0,
+      "life_regen": 0,
+      "life_leech": 0,
+      "mana_regen": 150,
+      "mana_leech": 0,
+      "energy_shield_regen": 0,
+      "energy_shield_leech": 0,
+      "mana_cost_per_second": 100,
+      "damage_type": "elemental",
+      "uses_hexes": false,
+      "uses_marks": false
+    }
+  },
+  {
+    "name": "Leech independently covers channel cost",
+    "kind": "synthetic scenario; not a full character PoB",
+    "mod": "no_regen",
+    "expected": "free",
+    "profile": {
+      "life": 5000,
+      "energy_shield": 0,
+      "life_regen": 0,
+      "life_leech": 0,
+      "mana_regen": 150,
+      "mana_leech": 150,
+      "energy_shield_regen": 0,
+      "energy_shield_leech": 0,
+      "mana_cost_per_second": 100,
+      "damage_type": "elemental",
+      "uses_hexes": false,
+      "uses_marks": false
+    }
+  },
+  {
+    "name": "Free channel has no Mana regeneration dependency",
+    "kind": "synthetic scenario; not a full character PoB",
+    "mod": "no_regen",
+    "expected": "free",
+    "profile": {
+      "life": 5000,
+      "energy_shield": 0,
+      "life_regen": 0,
+      "life_leech": 0,
+      "mana_regen": 0,
+      "mana_leech": 0,
+      "energy_shield_regen": 0,
+      "energy_shield_leech": 0,
+      "mana_cost_per_second": 0,
+      "damage_type": "elemental",
+      "uses_hexes": false,
+      "uses_marks": false
+    }
+  },
+  {
+    "name": "Already unexplained Mana deficit must be reviewed",
+    "kind": "synthetic scenario; not a full character PoB",
+    "mod": "no_regen",
+    "expected": "review",
+    "profile": {
+      "life": 5000,
+      "energy_shield": 0,
+      "life_regen": 0,
+      "life_leech": 0,
+      "mana_regen": 50,
+      "mana_leech": 0,
+      "energy_shield_regen": 0,
+      "energy_shield_leech": 0,
+      "mana_cost_per_second": 100,
+      "damage_type": "elemental",
+      "uses_hexes": false,
+      "uses_marks": false
+    }
+  },
+  {
+    "name": "Confirmed other Mana recovery covers the channel",
+    "kind": "synthetic scenario; not a full character PoB",
+    "mod": "no_regen",
+    "expected": "free",
+    "profile": {
+      "life": 5000,
+      "energy_shield": 0,
+      "life_regen": 0,
+      "life_leech": 0,
+      "mana_regen": 150,
+      "mana_leech": 0,
+      "energy_shield_regen": 0,
+      "energy_shield_leech": 0,
+      "mana_cost_per_second": 100,
+      "damage_type": "elemental",
+      "uses_hexes": false,
+      "uses_marks": false,
+      "assumptions": {
+        "mana_alternative_per_second": 150
+      }
+    }
+  },
+  {
+    "name": "Marks are not affected by Hexproof",
+    "kind": "synthetic scenario; not a full character PoB",
+    "mod": "hexproof",
+    "expected": "free",
+    "profile": {
+      "life": 5000,
+      "energy_shield": 0,
+      "life_regen": 0,
+      "life_leech": 0,
+      "mana_regen": 0,
+      "mana_leech": 0,
+      "energy_shield_regen": 0,
+      "energy_shield_leech": 0,
+      "mana_cost_per_second": 0,
+      "damage_type": "elemental",
+      "uses_hexes": false,
+      "uses_marks": true
+    }
+  },
+  {
+    "name": "Utility Hex is a comfort loss",
+    "kind": "synthetic scenario; not a full character PoB",
+    "mod": "hexproof",
+    "expected": "uncomfortable",
+    "profile": {
+      "life": 5000,
+      "energy_shield": 0,
+      "life_regen": 0,
+      "life_leech": 0,
+      "mana_regen": 0,
+      "mana_leech": 0,
+      "energy_shield_regen": 0,
+      "energy_shield_leech": 0,
+      "mana_cost_per_second": 0,
+      "damage_type": "elemental",
+      "uses_hexes": true,
+      "uses_marks": false,
+      "assumptions": {
+        "curse_role": "utility"
+      }
+    }
+  },
+  {
+    "name": "Damage Hex has unmeasured damage impact",
+    "kind": "synthetic scenario; not a full character PoB",
+    "mod": "hexproof",
+    "expected": "dangerous",
+    "profile": {
+      "life": 5000,
+      "energy_shield": 0,
+      "life_regen": 0,
+      "life_leech": 0,
+      "mana_regen": 0,
+      "mana_leech": 0,
+      "energy_shield_regen": 0,
+      "energy_shield_leech": 0,
+      "mana_cost_per_second": 0,
+      "damage_type": "elemental",
+      "uses_hexes": true,
+      "uses_marks": false,
+      "assumptions": {
+        "curse_role": "damage"
+      }
+    }
+  },
+  {
+    "name": "Required Hex mechanic fails to Hexproof",
+    "kind": "synthetic scenario; not a full character PoB",
+    "mod": "hexproof",
+    "expected": "brick",
+    "profile": {
+      "life": 5000,
+      "energy_shield": 0,
+      "life_regen": 0,
+      "life_leech": 0,
+      "mana_regen": 0,
+      "mana_leech": 0,
+      "energy_shield_regen": 0,
+      "energy_shield_leech": 0,
+      "mana_cost_per_second": 0,
+      "damage_type": "elemental",
+      "uses_hexes": true,
+      "uses_marks": false,
+      "assumptions": {
+        "curse_role": "mechanic"
+      }
+    }
+  },
+  {
+    "name": "Bypass protects a required Hex mechanic",
+    "kind": "synthetic scenario; not a full character PoB",
+    "mod": "hexproof",
+    "expected": "free",
+    "profile": {
+      "life": 5000,
+      "energy_shield": 0,
+      "life_regen": 0,
+      "life_leech": 0,
+      "mana_regen": 0,
+      "mana_leech": 0,
+      "energy_shield_regen": 0,
+      "energy_shield_leech": 0,
+      "mana_cost_per_second": 0,
+      "damage_type": "elemental",
+      "uses_hexes": true,
+      "uses_marks": false,
+      "assumptions": {
+        "curse_role": "mechanic",
+        "hexproof_bypass": true
+      }
+    }
+  },
+  {
+    "name": "Impending Doom presence does not prove less effect disables triggers",
+    "kind": "synthetic scenario; not a full character PoB",
+    "mod": "reduced_monster_curse_effect",
+    "expected": "dangerous",
+    "profile": {
+      "life": 5000,
+      "energy_shield": 0,
+      "life_regen": 0,
+      "life_leech": 0,
+      "mana_regen": 0,
+      "mana_leech": 0,
+      "energy_shield_regen": 0,
+      "energy_shield_leech": 0,
+      "mana_cost_per_second": 0,
+      "damage_type": "elemental",
+      "uses_hexes": true,
+      "uses_marks": false,
+      "curse_dependent": true
+    }
+  },
+  {
+    "name": "Unmeasured curse contribution stays unknown",
+    "kind": "synthetic scenario; not a full character PoB",
+    "mod": "reduced_monster_curse_effect",
+    "expected": "review",
+    "profile": {
+      "life": 5000,
+      "energy_shield": 0,
+      "life_regen": 0,
+      "life_leech": 0,
+      "mana_regen": 0,
+      "mana_leech": 0,
+      "energy_shield_regen": 0,
+      "energy_shield_leech": 0,
+      "mana_cost_per_second": 0,
+      "damage_type": "elemental",
+      "uses_hexes": true,
+      "uses_marks": false
+    }
+  },
+  {
+    "name": "High maximum resistance loses substantial mitigation",
+    "kind": "synthetic scenario; not a full character PoB",
+    "mod": "minus_max_res",
+    "expected": "dangerous",
+    "profile": {
+      "life": 5000,
+      "energy_shield": 0,
+      "life_regen": 0,
+      "life_leech": 0,
+      "mana_regen": 0,
+      "mana_leech": 0,
+      "energy_shield_regen": 0,
+      "energy_shield_leech": 0,
+      "mana_cost_per_second": 0,
+      "damage_type": "elemental",
+      "uses_hexes": false,
+      "uses_marks": false,
+      "maximum_resistances": {
+        "Fire": 90
+      },
+      "elemental_resistances": {
+        "Fire": 90
+      }
+    }
+  },
+  {
+    "name": "Uncapped resistance below the new cap is unchanged",
+    "kind": "synthetic scenario; not a full character PoB",
+    "mod": "minus_max_res",
+    "expected": "free",
+    "profile": {
+      "life": 5000,
+      "energy_shield": 0,
+      "life_regen": 0,
+      "life_leech": 0,
+      "mana_regen": 0,
+      "mana_leech": 0,
+      "energy_shield_regen": 0,
+      "energy_shield_leech": 0,
+      "mana_cost_per_second": 0,
+      "damage_type": "elemental",
+      "uses_hexes": false,
+      "uses_marks": false,
+      "maximum_resistances": {
+        "Fire": 75
+      },
+      "elemental_resistances": {
+        "Fire": 50
+      }
+    }
+  },
+  {
+    "name": "Rapid charge recovery still has temporary theft exposure",
+    "kind": "synthetic scenario; not a full character PoB",
+    "mod": "charge_theft",
+    "expected": "uncomfortable",
+    "profile": {
+      "life": 5000,
+      "energy_shield": 0,
+      "life_regen": 0,
+      "life_leech": 0,
+      "mana_regen": 0,
+      "mana_leech": 0,
+      "energy_shield_regen": 0,
+      "energy_shield_leech": 0,
+      "mana_cost_per_second": 0,
+      "damage_type": "elemental",
+      "uses_hexes": false,
+      "uses_marks": false,
+      "assumptions": {
+        "charge_sustain": "reliable"
+      }
+    }
+  },
+  {
+    "name": "Required charge uptime is a significant risk",
+    "kind": "synthetic scenario; not a full character PoB",
+    "mod": "charge_theft",
+    "expected": "dangerous",
+    "profile": {
+      "life": 5000,
+      "energy_shield": 0,
+      "life_regen": 0,
+      "life_leech": 0,
+      "mana_regen": 0,
+      "mana_leech": 0,
+      "energy_shield_regen": 0,
+      "energy_shield_leech": 0,
+      "mana_cost_per_second": 0,
+      "damage_type": "elemental",
+      "uses_hexes": false,
+      "uses_marks": false,
+      "assumptions": {
+        "charge_sustain": "required"
+      }
+    }
+  },
+  {
+    "name": "Confirmed essential flask uptime is required",
+    "kind": "synthetic scenario; not a full character PoB",
+    "mod": "reduced_flask_charges",
+    "expected": "brick",
+    "profile": {
+      "life": 5000,
+      "energy_shield": 0,
+      "life_regen": 0,
+      "life_leech": 0,
+      "mana_regen": 0,
+      "mana_leech": 0,
+      "energy_shield_regen": 0,
+      "energy_shield_leech": 0,
+      "mana_cost_per_second": 0,
+      "damage_type": "elemental",
+      "uses_hexes": false,
+      "uses_marks": false,
+      "assumptions": {
+        "flask_essential": true
+      }
+    }
+  },
+  {
+    "name": "Optional flask uptime affects comfort",
+    "kind": "synthetic scenario; not a full character PoB",
+    "mod": "reduced_flask_charges",
+    "expected": "uncomfortable",
+    "profile": {
+      "life": 5000,
+      "energy_shield": 0,
+      "life_regen": 0,
+      "life_leech": 0,
+      "mana_regen": 0,
+      "mana_leech": 0,
+      "energy_shield_regen": 0,
+      "energy_shield_leech": 0,
+      "mana_cost_per_second": 0,
+      "damage_type": "elemental",
+      "uses_hexes": false,
+      "uses_marks": false,
+      "assumptions": {
+        "flask_essential": false
+      }
+    }
+  },
+  {
+    "name": "Minion crit is not inferred from player crit",
+    "kind": "synthetic scenario; not a full character PoB",
+    "mod": "monster_crit_reduction",
+    "expected": "review",
+    "profile": {
+      "life": 5000,
+      "energy_shield": 0,
+      "life_regen": 0,
+      "life_leech": 0,
+      "mana_regen": 0,
+      "mana_leech": 0,
+      "energy_shield_regen": 0,
+      "energy_shield_leech": 0,
+      "mana_cost_per_second": 0,
+      "damage_type": "elemental",
+      "uses_hexes": false,
+      "uses_marks": false,
+      "minion_damage_primary": true,
+      "crit_chance": 100,
+      "crit_multiplier": 670
+    }
+  },
+  {
+    "name": "RF damage does not critically strike",
+    "kind": "synthetic scenario; not a full character PoB",
+    "mod": "monster_crit_reduction",
+    "expected": "free",
+    "profile": {
+      "life": 5000,
+      "energy_shield": 0,
+      "life_regen": 0,
+      "life_leech": 0,
+      "mana_regen": 0,
+      "mana_leech": 0,
+      "energy_shield_regen": 0,
+      "energy_shield_leech": 0,
+      "mana_cost_per_second": 0,
+      "damage_type": "fire dot",
+      "uses_hexes": false,
+      "uses_marks": false,
+      "main_skill": "Righteous Fire"
+    }
+  },
+  {
+    "name": "Poison total loss needs an ailment model",
+    "kind": "synthetic scenario; not a full character PoB",
+    "mod": "monster_crit_reduction",
+    "expected": "review",
+    "profile": {
+      "life": 5000,
+      "energy_shield": 0,
+      "life_regen": 0,
+      "life_leech": 0,
+      "mana_regen": 0,
+      "mana_leech": 0,
+      "energy_shield_regen": 0,
+      "energy_shield_leech": 0,
+      "mana_cost_per_second": 0,
+      "damage_type": "chaos dot",
+      "uses_hexes": false,
+      "uses_marks": false,
+      "crit_chance": 100,
+      "crit_multiplier": 670
+    }
+  },
+  {
+    "name": "Instant leech is not a timed leech cap",
+    "kind": "synthetic scenario; not a full character PoB",
+    "mod": "reduced_leech",
+    "expected": "review",
+    "profile": {
+      "life": 5000,
+      "energy_shield": 0,
+      "life_regen": 0,
+      "life_leech": 200,
+      "mana_regen": 0,
+      "mana_leech": 0,
+      "energy_shield_regen": 0,
+      "energy_shield_leech": 0,
+      "mana_cost_per_second": 0,
+      "damage_type": "elemental",
+      "uses_hexes": false,
+      "uses_marks": false,
+      "instant_leech_detected": true
+    }
+  }
+]

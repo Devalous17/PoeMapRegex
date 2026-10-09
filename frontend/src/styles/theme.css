@@ -30,7 +30,7 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 96px; }
+html { scroll-behavior: smooth; scroll-padding-top: var(--regex-scroll-offset, 96px); }
 body { margin: 0; min-width: 320px; background: #020407 url('/images/627187.jpg') left top / cover no-repeat fixed; color: var(--text-main); font: 16px/1.48 var(--font-body); }
 button, input, textarea { font: inherit; }
 button { cursor: pointer; }
@@ -327,3 +327,52 @@ h1, h2, h3, p { margin-top: 0; }
   .mod-pick__meta { display: none; }
   .mod-pick__rating { font-size: 0; }
 }
+
+/* Player-confirmed dependencies and measured recovery. */
+.build-confirmations { margin-top: 18px; padding: 18px 22px; border: 1px solid var(--border-gold); background: var(--bg-1); }
+.build-confirmations summary { cursor: pointer; color: var(--gold-bright); }
+.build-confirmations p { color: var(--text-dim); font-size: 14px; }
+.build-confirmations__fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.build-confirmations__fields label { display: flex; flex-direction: column; gap: 6px; color: var(--gold-text); font-size: 14px; }
+.build-confirmations__fields small { color: var(--text-dim); }
+.build-confirmations input, .build-confirmations select { width: 100%; min-height: 40px; padding: 7px 10px; border: 1px solid var(--border-gold); background: var(--bg-0); color: var(--text-main); font: inherit; }
+.build-confirmations__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+.build-confirmations__actions button { padding: 9px 15px; border: 1px solid var(--border-gold); color: var(--gold-bright); background: var(--bg-2); }
+.recovery-table-wrap { overflow-x: auto; }
+.recovery-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.recovery-table th, .recovery-table td { padding: 8px; text-align: left; border-bottom: 1px solid var(--border-dark); }
+.recovery-table th { color: var(--gold-text); }
+@media (max-width: 620px) { .build-confirmations__fields { grid-template-columns: 1fr; } .build-confirmations { padding: 14px; } }
+.mod-pick__reason { display: block; margin-top: 7px; font-size: 12px; line-height: 1.5; opacity: .88; }
+
+/* MapRegex identity and compact defence profile */
+.defence-profile { padding: 24px; }
+.defence-profile__identity { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-bottom: 20px; border-bottom: 1px solid #56422b; }
+.defence-profile h3 { margin: 5px 0; color: #ead3a7; font: 28px var(--font-heading); }
+.defence-profile h4 { margin: 0 0 12px; color: #d8b77c; font: 18px var(--font-heading); }
+.defence-profile__pools { display: flex; gap: 30px; }
+.defence-profile__pools span { display: block; color: #a99c85; font-size: 13px; }
+.defence-profile__pools strong { display: block; font: 27px var(--font-heading); color: #e3cda4; }
+.defence-profile__columns { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding: 24px 0; }
+.defence-stats { margin: 0; }
+.defence-stats > div { display: flex; justify-content: space-between; gap: 18px; padding: 8px 0; border-bottom: 1px solid #48372270; }
+.defence-stats dt { color: #b9ad98; }
+.defence-stats dd { margin: 0; color: #e4d3b2; font-variant-numeric: tabular-nums; }
+.profile-note { color: #aa9d87; font-size: 13px; line-height: 1.5; }
+.regex-options { text-align: right; color: #cbb180; font-size: 13px; }
+.regex-options summary { cursor: pointer; }
+.regex-options button { margin-top: 8px; border: 1px solid #705633; color: #e1c48e; background: #21190f; padding: 7px 12px; }
+.footer-links a { color: #bdad90; font-size: 14px; text-underline-offset: 2px; }
+html { scroll-padding-top: var(--regex-scroll-offset, 96px); }
+@media (max-width: 820px) {
+  .site-header__inner { flex-wrap: wrap; gap: 8px; padding-top: 14px; }
+  .main-nav { width: 100%; flex-wrap: wrap; justify-content: center; }
+  .main-nav a:nth-child(n) { display: flex; min-height: 44px; }
+  .defence-profile { padding: 18px; }
+  .defence-profile__identity { align-items: flex-start; flex-direction: column; }
+  .defence-profile__columns { grid-template-columns: 1fr; gap: 24px; }
+}
+
+.dependency-notice { margin-top: 1.25rem; padding: 1rem; border: 1px solid #927443; background: #191710; color: #dfc99d; font-size: .85rem; }
+.dependency-notice ul { padding-left: 1.2rem; margin-bottom: 0; }
+.regex-dock__warnings a { color: inherit; text-decoration: underline; }

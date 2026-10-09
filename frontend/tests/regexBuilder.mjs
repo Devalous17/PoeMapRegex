@@ -3,10 +3,21 @@ import test from 'node:test';
 import rows from '../src/data/mapPool.json' with { type: 'json' };
 import nightmareAffixes from '../src/data/poedbNightmareAffixes.json' with { type: 'json' };
 import normalAffixes from '../src/data/poedbNormalAffixes.json' with { type: 'json' };
-import { buildRegex } from '../src/services/regexBuilder.ts';
+import { buildRegex, rollSamples, recommendedDecision } from '../src/services/regexBuilder.ts';
 import { numberRangeRegex } from '../src/services/mapPreferencesRegex.ts';
 import { EMPTY_PREFERENCES } from '../src/types.ts';
 const noMinimums = { ...EMPTY_PREFERENCES, minimums: {} };
+
+test('manual catalogue never invents preset exclusions or build warnings', () => {
+  const mods = catalogue(false).map(mod => ({ ...mod, manual: true }));
+  assert.ok(mods.every(mod => recommendedDecision(mod, 'safe') === 'neutral'));
+  const initial = buildRegex(mods, 'safe', {}, noMinimums, 250);
+  assert.equal(initial.blocked.length, 0);
+  assert.equal(initial.warnings.length, 0);
+  const selected = buildRegex(mods, 'safe', { [mods[0].id]: 'block' }, noMinimums, 250);
+  assert.equal(selected.blocked.length, 1);
+  assert.ok(selected.regex.startsWith('"!'));
+});
 
 function catalogue(nightmare) {
   const affixByKey = new Map((nightmare ? nightmareAffixes : normalAffixes).map(row => [`${row.group}|${row.name}`, row]));
@@ -29,8 +40,8 @@ function expectExactCoverage(mods, selected, output) {
   assert.ok(block);
   const pattern = new RegExp(block.text.slice(2, -1), 'im');
   for (const mod of mods) {
-    for (const upper of [false, true]) {
-      assert.equal(pattern.test(textSample(mod.matchText, upper)), selected.has(mod.id), `${mod.name} (${upper ? 'upper' : 'lower'} roll)`);
+    for (const sample of rollSamples(mod.matchText)) {
+      assert.equal(pattern.test(sample), selected.has(mod.id), `${mod.name}: ${sample}`);
     }
   }
 }
@@ -42,6 +53,48 @@ test('shortens selected normal modifiers without catching unselected ones', () =
   const output = buildRegex(mods, 'balanced', overrides, EMPTY_PREFERENCES);
   expectExactCoverage(mods, selected, output);
   assert.ok(output.length < 70, `Expected a short query, got ${output.length}`);
+});
+
+test('signed rolls and mixed intermediate rolls are all expanded', () => {
+  const samples = rollSamples('A (-3—-1)% B (1—3)%');
+  assert.equal(samples.length, 9);
+  assert.ok(samples.includes('A -2% B 2%'));
+  assert.ok(samples.includes('A -3% B 3%'));
+});
+
+test('a recovery substring cannot silently exclude cooldown recovery', () => {
+  const mods = [
+    { id: 'recovery', name: 'Life recovery', matchText: 'Players have 60% less Recovery Rate of Life and Energy Shield', pattern: 'recovery rate', rating: 'brick', mapPool: 'normal' },
+    { id: 'cooldown', name: 'Cooldown recovery', matchText: 'Players have 40% less Cooldown Recovery Rate', pattern: 'cooldown recovery rate', rating: 'free', mapPool: 'normal' },
+  ];
+  const output = buildRegex(mods, 'greedy', {}, noMinimums);
+  expectExactCoverage(mods, new Set(['recovery']), output);
+});
+
+test('a pattern matching only range endpoints cannot miss the middle rolls', () => {
+  const mods = [
+    { id: 'a', name: 'A', matchText: 'Players have (1—3)% alpha recovery', pattern: '[13]% alpha', rating: 'brick', mapPool: 'normal' },
+    { id: 'b', name: 'B', matchText: 'Players have (1—3)% beta recovery', pattern: 'beta', rating: 'free', mapPool: 'normal' },
+  ];
+  expectExactCoverage(mods, new Set(['a']), buildRegex(mods, 'greedy', {}, noMinimums));
+});
+
+test('Safe blocks unknowns and Balanced respects measured recovery conflicts', () => {
+  const unknown = { id: 'unknown', rating: 'review' };
+  const conflict = { id: 'pair', rating: 'free', combination_avoid: true };
+  assert.equal(recommendedDecision(unknown, 'safe'), 'block');
+  assert.equal(recommendedDecision(unknown, 'balanced'), 'neutral');
+  assert.equal(recommendedDecision(conflict, 'balanced'), 'block');
+  assert.equal(recommendedDecision(conflict, 'greedy'), 'allow');
+});
+
+test('overflow never silently drops required exclusions', () => {
+  const mods = catalogue(false).map(mod => ({ ...mod, rating: 'brick' }));
+  const output = buildRegex(mods, 'greedy', {}, noMinimums, 20);
+  assert.equal(output.blocked.length, mods.length);
+  assert.ok(output.length > 20);
+  assert.ok(output.warnings.some(warning => warning.includes('game limit')));
+  expectExactCoverage(mods, new Set(mods.map(mod => mod.id)), output);
 });
 
 test('the supplied Nightmare avoid pool covers its selected modifiers only', () => {
@@ -184,4 +237,13 @@ test('trade-only preferences are identified without claiming to be in the copied
   assert.equal(result.parts.length, 1);
   assert.match(result.regex, /^"m q\./);
   assert.match(result.warnings.join(' '), /Trade filters only/);
+});
+
+test('Free policy is distinguished from verified safety and manual choice still wins', () => {
+  const mods = catalogue(false).slice(0, 1).map(mod => ({ ...mod, rating: 'free', assessment_status: 'policy' }));
+  const allowed = buildRegex(mods, 'greedy', {}, noMinimums);
+  assert.ok(allowed.warnings.some(warning => warning.includes('Free policy')));
+  const blocked = buildRegex(mods, 'greedy', { [mods[0].id]: 'block' }, noMinimums);
+  assert.equal(blocked.blocked.length, 1);
+  assert.ok(!blocked.warnings.some(warning => warning.includes('Free policy')));
 });

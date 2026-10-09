@@ -18,10 +18,14 @@ def infer_build_signals(profile: dict) -> list[dict]:
         if strength:
             signals.append({"id": key, "category": category, "strength": strength, "evidence": evidence})
 
+    if profile.get("primary_damage_aura"):
+        add("primary_damage_aura", "offence", 3,
+            f"{profile.get('main_skill')} is the selected main skill: a non-curse aura dealing chaos damage over time; reduced aura effect directly counters the primary damage source")
+
     attack_block = _num(profile, "effective_attack_block")
     spell_block = _num(profile, "effective_spell_block")
     block = max(attack_block, spell_block)
-    add("block", "avoidance", 3 if block >= 85 else 2 if block >= 50 else 1 if block >= 20 else 0,
+    add("block", "avoidance", 3 if attack_block + spell_block >= 75 or block >= 85 else 2 if block >= 50 else 1 if block >= 20 else 0,
         f"{attack_block:g}% effective attack block / {spell_block:g}% effective spell block")
 
     for key, label, category in (("armour", "Armour", "mitigation"), ("evasion", "Evasion", "avoidance")):
@@ -35,7 +39,7 @@ def infer_build_signals(profile: dict) -> list[dict]:
     if profile.get("armour_scales_attack_damage"):
         add("armour_damage", "offence", 3 if _num(profile, "armour") >= 15_000 else 2,
             f"equipped modifier grants Attack Damage per Armour; {_num(profile, 'armour'):,.0f} Armour currently contributes to damage")
-    if profile.get("main_uses_channeling") and profile.get("main_hit_types"):
+    if not profile.get("uses_totems") and profile.get("main_uses_channeling") and profile.get("main_hit_types"):
         add("channelled_hits", "offence", 2,
             f"{profile.get('main_skill', 'Main skill')} channels and produces player-owned hits")
 
@@ -62,10 +66,11 @@ def infer_build_signals(profile: dict) -> list[dict]:
 
     mana_cost = _num(profile, "mana_cost_per_second")
     mana_regen, mana_leech = _num(profile, "mana_regen"), _num(profile, "mana_leech")
+    confirmed_mana = (profile.get("assumptions") or {}).get("mana_alternative_per_second", 0)
     mana_free = _num(profile, "mana_unreserved")
     mana_free_text = f"{mana_free:g}" if profile.get("mana_unreserved") is not None else "not saved"
-    deficit_without_leech = max(0, mana_cost - mana_regen)
-    deficit_without_regen = max(0, mana_cost - mana_leech)
+    deficit_without_leech = max(0, mana_cost - mana_regen - confirmed_mana)
+    deficit_without_regen = max(0, mana_cost - mana_leech - confirmed_mana)
     if mana_leech > 0:
         strength = 3 if deficit_without_leech >= 5 and mana_leech >= deficit_without_leech * .5 else 2 if deficit_without_leech > 0 else 1
         add("mana_leech", "resource", strength,

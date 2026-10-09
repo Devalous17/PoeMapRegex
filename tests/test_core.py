@@ -38,7 +38,7 @@ class BuildAnalysisTests(unittest.TestCase):
         self.assertEqual(mods["extra_chaos"]["rating"], "review")
         self.assertEqual(mods["physical_thorns"]["rating"], "free")
         self.assertEqual(mods["less_accuracy"]["rating"], "free")
-        self.assertEqual(mods["hexproof"]["rating"], "dangerous")
+        self.assertEqual(mods["hexproof"]["rating"], "review")
 
     def test_presets_and_override(self):
         mods = classify(build_profile(decode_build(export_code())))
@@ -119,6 +119,8 @@ class BuildAnalysisTests(unittest.TestCase):
 
     def test_mana_leech_is_central_when_cost_exceeds_regeneration(self):
         profile = build_profile(decode_build(export_code()))
+        profile.pop("recovery_channels")
+        profile.pop("saved_mana_cost_per_second")
         profile.update(life=4000, energy_shield=0, life_leech=300, life_regen=240,
                        energy_shield_leech=0, mana_cost_per_second=50, mana_regen=10,
                        mana_leech=60, mana_unreserved=70)
@@ -128,7 +130,7 @@ class BuildAnalysisTests(unittest.TestCase):
         self.assertEqual(signals["life_leech"]["strength"], 1)
         self.assertEqual({row["id"]: row for row in classify(profile)}["no_leech"]["rating"], "brick")
         profile["mana_leech"] = 0
-        self.assertEqual({row["id"]: row for row in classify(profile)}["no_leech"]["rating"], "uncomfortable")
+        self.assertEqual({row["id"]: row for row in classify(profile)}["no_leech"]["rating"], "review")
 
     def test_stacked_evasion_and_suppression_counter(self):
         profile = build_profile(decode_build(export_code()))
@@ -189,11 +191,12 @@ class BuildAnalysisTests(unittest.TestCase):
         self.assertEqual(signals["sustained_life_drain"]["strength"], 3)
         stasis = {row["id"]: row for row in classify(profile)}["no_regen"]
         self.assertEqual(stasis["rating"], "brick")
-        self.assertIn("1,400 ongoing Life loss/s", stasis["reason"])
+        self.assertIn("1400/s of saved ongoing Life loss", stasis["reason"])
         self.assertIn("cannot regen", make_regex(classify(profile), "greedy")["query"])
 
     def test_high_regeneration_without_self_drain_is_not_automatically_brick(self):
         profile = build_profile(decode_build(export_code()))
+        profile.pop("recovery_channels")
         profile.update(life=10000, energy_shield=0, life_regen=2000,
                        life_net_regen=2000, energy_shield_regen=0, mana_regen=0)
         stasis = {row["id"]: row for row in classify(profile)}["no_regen"]
@@ -265,7 +268,7 @@ class BuildAnalysisTests(unittest.TestCase):
         self.assertEqual(profile["filled_flasks"], 2)
         self.assertEqual({row["id"]: row for row in classify(profile)}["reduced_flask_charges"]["rating"], "brick")
         profile.update(ascendancy="Raider", nature_adrenaline=False, flask_effect_investment=0)
-        self.assertEqual({row["id"]: row for row in classify(profile)}["reduced_flask_charges"]["rating"], "free")
+        self.assertEqual({row["id"]: row for row in classify(profile)}["reduced_flask_charges"]["rating"], "review")
         profile.update(ascendancy="Pathfinder", flask_effect_investment=100)
         self.assertEqual({row["id"]: row for row in classify(profile)}["reduced_flask_charges"]["rating"], "brick")
         profile.update(traitor_likely=True, empty_flask_slots=3)
@@ -295,20 +298,22 @@ class BuildAnalysisTests(unittest.TestCase):
         full = build(with_fifth_flask=True)
         self.assertEqual(full["empty_flask_slots"], 0)
         self.assertFalse(full["traitor_likely"])
-        self.assertEqual({row["id"]: row for row in classify(full)}["reduced_flask_charges"]["rating"], "free")
+        self.assertEqual({row["id"]: row for row in classify(full)}["reduced_flask_charges"]["rating"], "review")
 
     def test_curse_crit_area_and_stun_require_build_evidence(self):
         profile = build_profile(decode_build(export_code()))
         profile.update(curse_dependent=False, crit_chance=49, crit_multiplier=400,
                        area_of_effect_increased=74, stun_dependent=False)
         ratings = {row["id"]: row["rating"] for row in classify(profile)}
-        for key in ("reduced_monster_curse_effect", "monster_crit_reduction", "less_player_aoe", "unstunnable_monsters"):
+        self.assertEqual(ratings["reduced_monster_curse_effect"], "review")
+        self.assertEqual(ratings["monster_crit_reduction"], "uncomfortable")
+        for key in ("less_player_aoe", "unstunnable_monsters"):
             self.assertEqual(ratings[key], "free")
         profile.update(curse_dependent=True, crit_chance=50, crit_multiplier=300,
                        area_of_effect_increased=75, stun_dependent=True)
         ratings = {row["id"]: row["rating"] for row in classify(profile)}
-        self.assertEqual(ratings["reduced_monster_curse_effect"], "brick")
-        self.assertEqual(ratings["monster_crit_reduction"], "brick")
+        self.assertEqual(ratings["reduced_monster_curse_effect"], "dangerous")
+        self.assertEqual(ratings["monster_crit_reduction"], "uncomfortable")
         self.assertEqual(ratings["less_player_aoe"], "uncomfortable")
         self.assertEqual(ratings["unstunnable_monsters"], "brick")
 

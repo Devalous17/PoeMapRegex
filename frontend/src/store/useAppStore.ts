@@ -1,12 +1,13 @@
 import { create } from 'zustand';
 import { analyzeBuild, exampleAnalysis } from '../services/analyzer';
 import { EMPTY_PREFERENCES } from '../types';
-import type { AnalysisResult, Category, Decision, Preferences, Preset, Rating } from '../types';
+import type { AnalysisResult, BuildAssumptions, Category, Decision, Preferences, Preset, Rating } from '../types';
 
 type RatingFilter = Rating | 'all';
 
 interface AppState {
   source: string;
+  analysisSource: string;
   analysis: AnalysisResult | null;
   loading: boolean;
   error: string;
@@ -20,6 +21,7 @@ interface AppState {
   toast: string;
   setSource: (value: string) => void;
   analyze: () => Promise<void>;
+  refineBuild: (assumptions: BuildAssumptions) => Promise<void>;
   loadExample: () => Promise<void>;
   setPreset: (preset: Preset) => void;
   setMapPool: (pool: 'normal' | 'nightmare') => void;
@@ -38,6 +40,7 @@ interface AppState {
 
 export const useAppStore = create<AppState>((set, get) => ({
   source: '',
+  analysisSource: '',
   analysis: null,
   loading: false,
   error: '',
@@ -56,15 +59,26 @@ export const useAppStore = create<AppState>((set, get) => ({
     set({ loading: true, error: '' });
     try {
       const analysis = await analyzeBuild(source);
-      set({ analysis, loading: false, overrides: {}, ratingFilter: 'all', categories: [], search: '' });
+      set({ analysis, analysisSource: source, loading: false, overrides: {}, ratingFilter: 'all', categories: [], search: '' });
     } catch (error) {
       set({ loading: false, error: error instanceof Error ? error.message : 'Could not analyze this build.' });
+    }
+  },
+  refineBuild: async assumptions => {
+    const source = get().analysisSource;
+    if (!source || get().analysis?.mode !== 'live') return;
+    set({ loading: true, error: '' });
+    try {
+      const analysis = await analyzeBuild(source, assumptions);
+      set({ analysis, loading: false, toast: 'Build confirmations applied. Manual mod choices are still active.' });
+    } catch (error) {
+      set({ loading: false, error: error instanceof Error ? error.message : 'Could not update the build ratings.' });
     }
   },
   loadExample: async () => {
     set({ loading: true, error: '', source: 'https://pobb.in/cLFx01vDz_iz' });
     const analysis = await exampleAnalysis();
-    set({ analysis, loading: false, overrides: {}, ratingFilter: 'all', categories: [], search: '' });
+    set({ analysis, analysisSource: 'example', loading: false, overrides: {}, ratingFilter: 'all', categories: [], search: '' });
   },
   setPreset: preset => set({ preset }),
   setMapPool: mapPool => set({ mapPool, ratingFilter: 'all', categories: [], search: '' }),

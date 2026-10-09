@@ -1,0 +1,1552 @@
+[
+  {
+    "id": "elemental_thorns",
+    "name": "Elemental Thorns",
+    "pattern": "elemental thorns",
+    "rating": "dangerous",
+    "reason": "Winter Orb can trigger Elemental Thorns: up to 1,500 flat damage before mitigation, roughly 375 after 75% Cold Resistance per trigger. Channelling does not prevent the skill's hits from triggering Thorns. Evasion, block, conditional effects, and actual hit rate are not simulated.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "delivery",
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "Selected main skill: Winter Orb; player delivery. A utility minion/totem does not determine this.",
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "counter"
+  },
+  {
+    "id": "physical_thorns",
+    "name": "Physical Thorns",
+    "pattern": "physical thorns",
+    "rating": "free",
+    "reason": "Winter Orb is not classified as dealing physical hits. Check secondary skills.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "delivery",
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "Selected main skill: Winter Orb; player delivery. A utility minion/totem does not determine this.",
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected"
+  },
+  {
+    "id": "combined_thorns",
+    "name": "Physical and Elemental Thorns",
+    "pattern": "thorns reflecting",
+    "rating": "dangerous",
+    "reason": "Winter Orb is not classified as dealing physical hits. Check secondary skills. Winter Orb can trigger Elemental Thorns: up to 2,500 flat damage before mitigation, roughly 625 after 75% Cold Resistance per trigger. Channelling does not prevent the skill's hits from triggering Thorns. Evasion, block, conditional effects, and actual hit rate are not simulated.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "delivery",
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "Selected main skill: Winter Orb; player delivery. A utility minion/totem does not determine this.",
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "counter"
+  },
+  {
+    "id": "no_leech",
+    "name": "Cannot Leech",
+    "pattern": "cannot leech",
+    "rating": "brick",
+    "reason": "Mana: 117.48/s cost, 51.1/s measured income, 51.1/s after this modifier. EnergyShield: 2594.81/s measured continuous recovery becomes 100/s. Saved Mana income already falls below the cost before the modifier; confirm the missing sustain source. This removes the main measured EnergyShield recovery during combat.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target"
+    ],
+    "assessment_status": "counter"
+  },
+  {
+    "id": "no_regen",
+    "name": "Cannot Regenerate",
+    "pattern": "cannot regen",
+    "rating": "review",
+    "reason": "Mana: 117.48/s cost, 51.1/s measured income, 0/s after this modifier. EnergyShield: 2594.81/s measured continuous recovery becomes 2494.81/s. Saved Mana income already falls below the cost before the modifier; confirm the missing sustain source. Recovery is weakened; this alone does not demonstrate that the build stops functioning. Cannot Regenerate leaves recharge, leech, recoup, flasks and gain on hit/kill available where the build can use them.",
+    "confidence": "low",
+    "dependency_axes": [
+      "activation",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target"
+    ],
+    "assessment_status": "uncertain"
+  },
+  {
+    "id": "reduced_recovery",
+    "name": "Reduced Recovery",
+    "pattern": "recovery rate of life",
+    "rating": "uncomfortable",
+    "reason": "EnergyShield: 2594.81/s measured continuous recovery becomes 1037.92/s. Recovery is weakened; this alone does not demonstrate that the build stops functioning. Assumes 60% less Life/ES recovery rate; Mana recovery and instant gains are not reduced by this affix.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target"
+    ],
+    "assessment_status": "counter"
+  },
+  {
+    "id": "minus_max_res",
+    "name": "Reduced Maximum Resistances",
+    "pattern": "maximum.*resistan",
+    "rating": "dangerous",
+    "reason": "Fire: 80% to 68% (1.60x damage taken); Cold: 75% to 63% (1.48x damage taken); Lightning: 80% to 68% (1.60x damage taken). Resistance-only estimate, before conversion, penetration and other mitigation. No encounter-specific lethal threshold is assumed.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "defence"
+    ],
+    "dependency_evidence": [
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "counter"
+  },
+  {
+    "id": "extra_chaos",
+    "name": "Extra Chaos Damage",
+    "pattern": "extra chaos",
+    "rating": "free",
+    "reason": "The saved PoB reports an infinite Chaos maximum hit taken (Chaos immunity); negative Chaos Resistance does not imply vulnerability.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "defence"
+    ],
+    "dependency_evidence": [
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected"
+  },
+  {
+    "id": "hexproof",
+    "name": "Hexproof Monsters",
+    "pattern": "hexproof",
+    "rating": "review",
+    "reason": "Hexes are enabled, but their contribution and any tree-based Hexproof bypass are not calculated. Confirm their role below.",
+    "confidence": "low",
+    "dependency_axes": [
+      "activation",
+      "scaling"
+    ],
+    "dependency_evidence": [
+      "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
+    ],
+    "assessment_status": "uncertain"
+  },
+  {
+    "id": "reduced_auras",
+    "name": "Reduced Aura Effect",
+    "pattern": "reduced effect.*auras",
+    "rating": "review",
+    "reason": "Auras are enabled, but their contribution is not recalculated. Confirm their role; presence alone does not establish a Brick.",
+    "confidence": "low",
+    "dependency_axes": [
+      "scaling",
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated.",
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "uncertain"
+  },
+  {
+    "id": "avoid_poison_bleed_impale",
+    "name": "Monsters Avoid Poison, Impale and Bleeding",
+    "pattern": "avoid poison, impale",
+    "rating": "review",
+    "reason": "Poison, Bleeding or Impale contribution is missing or secondary. Do not assume this avoidance modifier is Free from damage type or class alone.",
+    "confidence": "low",
+    "dependency_axes": [
+      "activation",
+      "scaling"
+    ],
+    "dependency_evidence": [
+      "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
+    ],
+    "assessment_status": "uncertain"
+  },
+  {
+    "id": "avoid_ailments",
+    "name": "Monsters Avoid Elemental Ailments",
+    "pattern": "avoid elemental ailments",
+    "rating": "dangerous",
+    "reason": "70% elemental ailment avoidance can interrupt conditional main-skill damage: {fractured}49% increased damage with hits against chilled enemies. The bonus contribution and alternate ailment sources are unmeasured. This is not proof that the main skill stops functioning; review before allowing it.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "activation",
+      "scaling"
+    ],
+    "dependency_evidence": [
+      "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
+    ],
+    "assessment_status": "counter"
+  },
+  {
+    "id": "extra_projectiles",
+    "name": "Additional Monster Projectiles",
+    "pattern": "additional projectiles",
+    "rating": "uncomfortable",
+    "reason": "More monster projectiles can make dodging and dense encounters harder.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "defence"
+    ],
+    "dependency_evidence": [
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "counter"
+  },
+  {
+    "id": "monster_crit",
+    "name": "Increased Monster Critical Strikes",
+    "pattern": "critical strike chance",
+    "rating": "uncomfortable",
+    "reason": "Monster critical strikes can create damage spikes.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "defence"
+    ],
+    "dependency_evidence": [
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "counter"
+  },
+  {
+    "id": "monster_life",
+    "name": "Increased Monster Life",
+    "pattern": "increased maximum life",
+    "rating": "uncomfortable",
+    "reason": "More monster life slows clears; how much it matters depends on the encounter and PoB configuration.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "scaling"
+    ],
+    "dependency_evidence": [
+      "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
+    ],
+    "assessment_status": "counter"
+  },
+  {
+    "id": "less_accuracy",
+    "name": "Reduced Player Accuracy",
+    "pattern": "less accuracy rating",
+    "rating": "free",
+    "reason": "Winter Orb does not use Accuracy Rating to hit. Check secondary attacks.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "delivery",
+      "activation"
+    ],
+    "dependency_evidence": [
+      "Selected main skill: Winter Orb; player delivery. A utility minion/totem does not determine this."
+    ],
+    "assessment_status": "unaffected"
+  },
+  {
+    "id": "reduced_cooldown",
+    "name": "Reduced Cooldown Recovery",
+    "pattern": "cooldown recovery rate",
+    "rating": "free",
+    "reason": "The recognized main skill (Winter Orb) has no established cooldown, core trigger loop or mine-detonation dependency. Cooldown recovery does not gate its normal damage delivery. Utility movement/guard cooldowns may be slower; their uptime is not simulated.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "activation"
+    ],
+    "dependency_evidence": [],
+    "assessment_status": "unaffected"
+  },
+  {
+    "id": "reduced_block_and_armour",
+    "name": "Reduced Chance to Block and Armour",
+    "pattern": "reduced chance to block",
+    "rating": "brick",
+    "reason": "40% reduced chance to block and 30% less Armour. Your block-investment policy applies: attack plus spell block totals 133 percentage points (threshold 75). These are separate chances, not a combined hit-block probability. This affix counters measured build layers: 58% effective attack block / 75% effective spell block. Exact post-map values are not simulated.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "defence",
+      "scaling"
+    ],
+    "dependency_evidence": [
+      "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated.",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "counter"
+  },
+  {
+    "id": "reduced_suppression_and_evasion",
+    "name": "Reduced Suppression and Evasion",
+    "pattern": "suppressed spell damage prevented",
+    "rating": "free",
+    "reason": "20 percentage points less suppressed spell damage prevented and higher monster Accuracy. Saved suppression and evasion show no substantial investment. Higher monster Accuracy and reduced suppression prevention are not an automatic avoid choice.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "defence"
+    ],
+    "dependency_evidence": [
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected"
+  },
+  {
+    "id": "reduced_leech",
+    "name": "Reduced Maximum Leech Recovery",
+    "pattern": "recovery per second from leech",
+    "rating": "review",
+    "reason": "Mana: 117.48/s cost, 51.1/s measured income, 51.1/s after this modifier. EnergyShield: 2594.81/s measured continuous recovery becomes 1097.92/s. Saved Mana income already falls below the cost before the modifier; confirm the missing sustain source. Recovery is weakened; this alone does not demonstrate that the build stops functioning.",
+    "confidence": "low",
+    "dependency_axes": [
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target"
+    ],
+    "assessment_status": "uncertain"
+  },
+  {
+    "id": "charge_theft",
+    "name": "Monsters Steal Charges",
+    "pattern": "steal.*charges",
+    "rating": "uncomfortable",
+    "reason": "This build has at least 5 maximum Power, Frenzy charges and either detected generation or 5+ configured active charges. Charge theft is a Safe-preset avoid choice; configured charges do not prove real uptime.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "activation",
+      "scaling",
+      "defence"
+    ],
+    "dependency_evidence": [
+      "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated.",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "counter"
+  },
+  {
+    "id": "reduced_flask_charges",
+    "name": "Reduced Flask Charges Gained",
+    "pattern": "reduced flask charges",
+    "rating": "review",
+    "reason": "Flasks are equipped but their contribution and uptime are unmeasured. Being outside Pathfinder/Traitor does not establish optional flasks; confirm their role.",
+    "confidence": "low",
+    "dependency_axes": [
+      "sustain",
+      "defence"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "uncertain"
+  },
+  {
+    "id": "reduced_monster_curse_effect",
+    "name": "Less Curse Effect on Monsters",
+    "pattern": "less effect of curses on monsters",
+    "rating": "dangerous",
+    "reason": "Less curse effect weakens curse benefits; Anathema or Impending Doom presence alone does not prove that reduced effect disables the build.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "scaling",
+      "defence"
+    ],
+    "dependency_evidence": [
+      "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated.",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "counter"
+  },
+  {
+    "id": "monster_crit_reduction",
+    "name": "Monsters Take Reduced Critical Damage",
+    "pattern": "reduced extra damage from critical strikes",
+    "rating": "uncomfortable",
+    "reason": "At 40% reduced extra critical damage, estimated main hit damage is 65.3% of baseline (34.7% lower). This estimates hit damage only; ailments, secondary skills and target-specific effects need review. Damage loss alone does not prove a Brick.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "scaling"
+    ],
+    "dependency_evidence": [
+      "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
+    ],
+    "assessment_status": "counter"
+  },
+  {
+    "id": "less_player_aoe",
+    "name": "Less Player Area of Effect",
+    "pattern": "less area of effect",
+    "rating": "free",
+    "reason": "The export does not show at least 75% increased Area of Effect; no automatic exclusion.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "scaling"
+    ],
+    "dependency_evidence": [
+      "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
+    ],
+    "assessment_status": "unaffected"
+  },
+  {
+    "id": "unstunnable_monsters",
+    "name": "Monsters Cannot Be Stunned",
+    "pattern": "monsters cannot be stunned",
+    "rating": "free",
+    "reason": "No stun-triggered main damage or clear mechanic was detected.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "activation"
+    ],
+    "dependency_evidence": [],
+    "assessment_status": "unaffected"
+  },
+  {
+    "id": "map--2050206104",
+    "name": "of Smothering",
+    "pattern": "te o",
+    "rating": "uncomfortable",
+    "reason": "Normal pool, worst catalogue roll; 1x map modifier effect. EnergyShield: 2594.81/s measured continuous recovery becomes 1037.92/s. Recovery is weakened; this alone does not demonstrate that the build stops functioning. Assumes 60% less Life/ES recovery rate; Mana recovery and instant gains are not reduced by this affix.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target"
+    ],
+    "assessment_status": "counter"
+  },
+  {
+    "id": "map--2038489408",
+    "name": "of Exposure",
+    "pattern": "m resistances$",
+    "rating": "dangerous",
+    "reason": "Nightmare pool, worst catalogue roll; 1x map modifier effect. Fire: 80% to 60% (2.00x damage taken); Cold: 75% to 55% (1.80x damage taken); Lightning: 80% to 60% (2.00x damage taken). Resistance-only estimate, before conversion, penetration and other mitigation. No encounter-specific lethal threshold is assumed.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "defence"
+    ],
+    "dependency_evidence": [
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "counter"
+  },
+  {
+    "id": "map--477049138",
+    "name": "of Exposure",
+    "pattern": "m resistances$",
+    "rating": "dangerous",
+    "reason": "Normal pool, worst catalogue roll; 1x map modifier effect. Fire: 80% to 68% (1.60x damage taken); Cold: 75% to 63% (1.48x damage taken); Lightning: 80% to 68% (1.60x damage taken). Resistance-only estimate, before conversion, penetration and other mitigation. No encounter-specific lethal threshold is assumed.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "defence"
+    ],
+    "dependency_evidence": [
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "counter"
+  },
+  {
+    "id": "map--54649013",
+    "name": "of Toughness",
+    "pattern": "kes$",
+    "rating": "uncomfortable",
+    "reason": "Normal pool, worst catalogue roll; 1x map modifier effect. At 40% reduced extra critical damage, estimated main hit damage is 65.3% of baseline (34.7% lower). This estimates hit damage only; ailments, secondary skills and target-specific effects need review. Damage loss alone does not prove a Brick.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "scaling"
+    ],
+    "dependency_evidence": [
+      "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
+    ],
+    "assessment_status": "counter"
+  },
+  {
+    "id": "map-1205583947",
+    "name": "of Congealment",
+    "pattern": "ech$",
+    "rating": "review",
+    "reason": "Nightmare pool, worst catalogue roll; 1x map modifier effect. Mana: 117.48/s cost, 51.1/s measured income, 51.1/s after this modifier. EnergyShield: 2594.81/s measured continuous recovery becomes 1097.92/s. Saved Mana income already falls below the cost before the modifier; confirm the missing sustain source. Recovery is weakened; this alone does not demonstrate that the build stops functioning.",
+    "confidence": "low",
+    "dependency_axes": [
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target"
+    ],
+    "assessment_status": "uncertain"
+  },
+  {
+    "id": "map-poedb-MapMonstersBaseSelfCriticalMultiplier",
+    "name": "of Toughness",
+    "pattern": "extra damage from critical strikes$",
+    "rating": "uncomfortable",
+    "reason": "Nightmare pool, worst catalogue roll; 1x map modifier effect. At 45% reduced extra critical damage, estimated main hit damage is 61.0% of baseline (39.0% lower). This estimates hit damage only; ailments, secondary skills and target-specific effects need review. Damage loss alone does not prove a Brick.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "scaling"
+    ],
+    "dependency_evidence": [
+      "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
+    ],
+    "assessment_status": "counter"
+  },
+  {
+    "id": "map--627831782",
+    "name": "Impervious",
+    "pattern": "son,",
+    "rating": "review",
+    "reason": "Normal pool, worst catalogue roll; 1x map modifier effect. Poison, Bleeding or Impale contribution is missing or secondary. Do not assume this avoidance modifier is Free from damage type or class alone.",
+    "confidence": "low",
+    "dependency_axes": [
+      "activation",
+      "scaling"
+    ],
+    "dependency_evidence": [
+      "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
+    ],
+    "assessment_status": "uncertain"
+  },
+  {
+    "id": "map--1772662453",
+    "name": "of Insulation",
+    "pattern": "id e",
+    "rating": "dangerous",
+    "reason": "Normal pool, worst catalogue roll; 1x map modifier effect. 70% elemental ailment avoidance can interrupt conditional main-skill damage: {fractured}49% increased damage with hits against chilled enemies. The bonus contribution and alternate ailment sources are unmeasured. This is not proof that the main skill stops functioning; review before allowing it.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "activation",
+      "scaling"
+    ],
+    "dependency_evidence": [
+      "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
+    ],
+    "assessment_status": "counter"
+  },
+  {
+    "id": "map--2050206104",
+    "name": "Players have 60% less Recovery Rate of Life and Energy Shield",
+    "pattern": "te o",
+    "rating": "uncomfortable",
+    "reason": "Normal pool, worst catalogue roll; 1x map modifier effect. EnergyShield: 2594.81/s measured continuous recovery becomes 1037.92/s. Recovery is weakened; this alone does not demonstrate that the build stops functioning. Assumes 60% less Life/ES recovery rate; Mana recovery and instant gains are not reduced by this affix.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target"
+    ],
+    "assessment_status": "counter"
+  },
+  {
+    "id": "map--1934587276",
+    "name": "Area is inhabited by Cultists of Kitava",
+    "pattern": "va$",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map--1772662453",
+    "name": "Monsters have 70% chance to Avoid Elemental Ailments",
+    "pattern": "id e",
+    "rating": "dangerous",
+    "reason": "Normal pool, worst catalogue roll; 1x map modifier effect. 70% elemental ailment avoidance can interrupt conditional main-skill damage: {fractured}49% increased damage with hits against chilled enemies. The bonus contribution and alternate ailment sources are unmeasured. This is not proof that the main skill stops functioning; review before allowing it.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "activation",
+      "scaling"
+    ],
+    "dependency_evidence": [
+      "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
+    ],
+    "assessment_status": "counter"
+  },
+  {
+    "id": "map--1616686189",
+    "name": "Monsters gain (40—49)% of Maximum Life as Extra Maximum Energy Shield",
+    "pattern": "m energy shield$",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map--1473394034",
+    "name": "Players have 40% less Cooldown Recovery Rate",
+    "pattern": "rate$",
+    "rating": "free",
+    "reason": "The recognized main skill (Winter Orb) has no established cooldown, core trigger loop or mine-detonation dependency. Cooldown recovery does not gate its normal damage delivery. Utility movement/guard cooldowns may be slower; their uptime is not simulated.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "activation"
+    ],
+    "dependency_evidence": [],
+    "assessment_status": "unaffected"
+  },
+  {
+    "id": "map--1358177810",
+    "name": "Monsters steal Power, Frenzy and Endurance charges on Hit",
+    "pattern": "r, f",
+    "rating": "uncomfortable",
+    "reason": "This build has at least 5 maximum Power, Frenzy charges and either detected generation or 5+ configured active charges. Charge theft is a Safe-preset avoid choice; configured charges do not prove real uptime.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "activation",
+      "scaling",
+      "defence"
+    ],
+    "dependency_evidence": [
+      "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated.",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "counter"
+  },
+  {
+    "id": "map--1344829253",
+    "name": "Monsters have (360—400)% increased Critical Strike Chance|+(41—45)% to Monster Critical Strike Multiplier",
+    "pattern": "lier$",
+    "rating": "uncomfortable",
+    "reason": "Monster critical strikes can create damage spikes.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "defence"
+    ],
+    "dependency_evidence": [
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "counter"
+  },
+  {
+    "id": "map--1204380788",
+    "name": "Monsters' Attacks have 60% chance to Impale on Hit",
+    "pattern": "' at",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map--1139261923",
+    "name": "Area has patches of Consecrated Ground",
+    "pattern": "s of co",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map--1099682289",
+    "name": "Area contains many Totems",
+    "pattern": "ms$",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map--1094717370",
+    "name": "Monsters gain a Frenzy Charge on Hit",
+    "pattern": "n a f",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map--1088873049",
+    "name": "Unique Boss deals 25% increased Damage|Unique Boss has 30% increased Attack and Cast Speed",
+    "pattern": "oss d",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map--1047451686",
+    "name": "Area is inhabited by ranged monsters",
+    "pattern": "by r",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map--999805715",
+    "name": "Players have 30% less Armour|Players have 40% reduced Chance to Block",
+    "pattern": "ur$",
+    "rating": "brick",
+    "reason": "40% reduced chance to block and 30% less Armour. Your block-investment policy applies: attack plus spell block totals 133 percentage points (threshold 75). These are separate chances, not a combined hit-block probability. This affix counters measured build layers: 58% effective attack block / 75% effective spell block. Exact post-map values are not simulated.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "defence",
+      "scaling"
+    ],
+    "dependency_evidence": [
+      "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated.",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "counter"
+  },
+  {
+    "id": "map--946283701",
+    "name": "Buffs on Players expire 70% faster",
+    "pattern": "^buffs",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map--763914456",
+    "name": "Players gain 50% reduced Flask Charges",
+    "pattern": "ced f",
+    "rating": "review",
+    "reason": "Flasks are equipped but their contribution and uptime are unmeasured. Being outside Pathfinder/Traitor does not establish optional flasks; confirm their role.",
+    "confidence": "low",
+    "dependency_axes": [
+      "sustain",
+      "defence"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "uncertain"
+  },
+  {
+    "id": "map--737013402",
+    "name": "Area is inhabited by Lunaris fanatics",
+    "pattern": "unari",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map--694214737",
+    "name": "+25% Monster Chaos Resistance|+40% Monster Elemental Resistances",
+    "pattern": "ter e",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map--688435205",
+    "name": "Area is inhabited by Undead",
+    "pattern": "y un",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map--683043845",
+    "name": "(20—30)% increased number of Rare Monsters",
+    "pattern": "d nu",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map--627831782",
+    "name": "Monsters have a 50% chance to avoid Poison, Impale, and Bleeding",
+    "pattern": "son,",
+    "rating": "review",
+    "reason": "Normal pool, worst catalogue roll; 1x map modifier effect. Poison, Bleeding or Impale contribution is missing or secondary. Do not assume this avoidance modifier is Free from damage type or class alone.",
+    "confidence": "low",
+    "dependency_axes": [
+      "activation",
+      "scaling"
+    ],
+    "dependency_evidence": [
+      "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
+    ],
+    "assessment_status": "uncertain"
+  },
+  {
+    "id": "map--617888797",
+    "name": "Area is inhabited by Humanoids",
+    "pattern": "hum",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map--580302769",
+    "name": "(22—25)% increased Monster Damage",
+    "pattern": "r damage$",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map--539026720",
+    "name": "60% less effect of Curses on Monsters",
+    "pattern": "es on m",
+    "rating": "dangerous",
+    "reason": "Less curse effect weakens curse benefits; Anathema or Impending Doom presence alone does not prove that reduced effect disables the build.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "scaling",
+      "defence"
+    ],
+    "dependency_evidence": [
+      "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated.",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "counter"
+  },
+  {
+    "id": "map--481946502",
+    "name": "Monsters' skills Chain 2 additional times",
+    "pattern": "' s",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map--477049138",
+    "name": "Players have (-12—-9)% to all maximum Resistances",
+    "pattern": "m resistances$",
+    "rating": "dangerous",
+    "reason": "Normal pool, worst catalogue roll; 1x map modifier effect. Fire: 80% to 68% (1.60x damage taken); Cold: 75% to 63% (1.48x damage taken); Lightning: 80% to 68% (1.60x damage taken). Resistance-only estimate, before conversion, penetration and other mitigation. No encounter-specific lethal threshold is assumed.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "defence"
+    ],
+    "dependency_evidence": [
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "counter"
+  },
+  {
+    "id": "map--268547495",
+    "name": "Monsters have +60% chance to Suppress Spell Damage",
+    "pattern": "ll damage$",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map--235013251",
+    "name": "Rare Monsters have Physical Thorns reflecting 800 Physical Damage",
+    "pattern": "ve phy",
+    "rating": "free",
+    "reason": "Winter Orb is not classified as dealing physical hits. Check secondary skills.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "delivery",
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "Selected main skill: Winter Orb; player delivery. A utility minion/totem does not determine this.",
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected"
+  },
+  {
+    "id": "map--225071089",
+    "name": "Monsters gain an Endurance Charge on Hit",
+    "pattern": "e charge on hit$",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map--210607554",
+    "name": "Area is inhabited by Goatmen",
+    "pattern": "goa",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map--172005981",
+    "name": "(40—49)% more Monster Life",
+    "pattern": "4\\d% more monster life$",
+    "rating": "uncomfortable",
+    "reason": "More monster life slows clears; how much it matters depends on the encounter and PoB configuration.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "scaling"
+    ],
+    "dependency_evidence": [
+      "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
+    ],
+    "assessment_status": "counter"
+  },
+  {
+    "id": "map--166549521",
+    "name": "Monsters have a 20% chance to Ignite, Freeze and Shock on Hit",
+    "pattern": "o ignite,",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map--128171261",
+    "name": "Area has patches of desecrated ground",
+    "pattern": "es of d",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map--114660370",
+    "name": "Players have 25% less Accuracy Rating",
+    "pattern": "e \\d+% less ac",
+    "rating": "free",
+    "reason": "Winter Orb does not use Accuracy Rating to hit. Check secondary attacks.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "delivery",
+      "activation"
+    ],
+    "dependency_evidence": [
+      "Selected main skill: Winter Orb; player delivery. A utility minion/totem does not determine this."
+    ],
+    "assessment_status": "unaffected"
+  },
+  {
+    "id": "map--106750911",
+    "name": "Unique Boss has 35% increased Life|Unique Boss has 70% increased Area of Effect",
+    "pattern": "d life$",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map--106071007",
+    "name": "Unique Bosses are Possessed",
+    "pattern": "sed$",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map--80588106",
+    "name": "Monsters Maim on Hit with Attacks",
+    "pattern": "cks$",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map--54649013",
+    "name": "Monsters take (36—40)% reduced Extra Damage from Critical Strikes",
+    "pattern": "kes$",
+    "rating": "uncomfortable",
+    "reason": "Normal pool, worst catalogue roll; 1x map modifier effect. At 40% reduced extra critical damage, estimated main hit damage is 65.3% of baseline (34.7% lower). This estimates hit damage only; ailments, secondary skills and target-specific effects need review. Damage loss alone does not prove a Brick.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "scaling"
+    ],
+    "dependency_evidence": [
+      "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
+    ],
+    "assessment_status": "counter"
+  },
+  {
+    "id": "map--26777606",
+    "name": "Monsters deal (90—110)% extra Physical Damage as Fire",
+    "pattern": "fire$",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map-10729340",
+    "name": "Monsters gain (31—35)% of their Physical Damage as Extra Chaos Damage|Monsters Inflict Withered for 2 seconds on Hit",
+    "pattern": "ds on",
+    "rating": "free",
+    "reason": "The saved PoB reports an infinite Chaos maximum hit taken (Chaos immunity); negative Chaos Resistance does not imply vulnerability.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "defence"
+    ],
+    "dependency_evidence": [
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected"
+  },
+  {
+    "id": "map-17483843",
+    "name": "(25—30)% increased Monster Movement Speed|(35—45)% increased Monster Attack Speed|(35—45)% increased Monster Cast Speed",
+    "pattern": "er at",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map-58884108",
+    "name": "Area is inhabited by Skeletons",
+    "pattern": "tons$",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map-151806012",
+    "name": "Monsters have 50% increased Accuracy Rating|Players have -20% to amount of Suppressed Spell Damage Prevented",
+    "pattern": "o am",
+    "rating": "free",
+    "reason": "20 percentage points less suppressed spell damage prevented and higher monster Accuracy. Saved suppression and evasion show no substantial investment. Higher monster Accuracy and reduced suppression prevention are not an automatic avoid choice.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "defence"
+    ],
+    "dependency_evidence": [
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected"
+  },
+  {
+    "id": "map-156744008",
+    "name": "Area has increased monster variety",
+    "pattern": "ety",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map-194321329",
+    "name": "Area is inhabited by Solaris fanatics",
+    "pattern": "laris",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map-252096506",
+    "name": "Monsters cannot be Leeched from",
+    "pattern": "from$",
+    "rating": "brick",
+    "reason": "Mana: 117.48/s cost, 51.1/s measured income, 51.1/s after this modifier. EnergyShield: 2594.81/s measured continuous recovery becomes 100/s. Saved Mana income already falls below the cost before the modifier; confirm the missing sustain source. This removes the main measured EnergyShield recovery during combat.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target"
+    ],
+    "assessment_status": "counter"
+  },
+  {
+    "id": "map-339937661",
+    "name": "Players are Cursed with Enfeeble",
+    "pattern": "eble$",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map-472035128",
+    "name": "Area has patches of Shocked Ground which increase Damage taken by 50%",
+    "pattern": "und w",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map-583869527",
+    "name": "(20—30)% increased Magic Monsters",
+    "pattern": "d mag",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map-775962019",
+    "name": "Area is inhabited by Sea Witches and their Spawn",
+    "pattern": "wn$",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map-823410479",
+    "name": "+40% Monster Physical Damage Reduction",
+    "pattern": "er ph",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map-829751875",
+    "name": "Players have 25% less Area of Effect",
+    "pattern": "ss are",
+    "rating": "free",
+    "reason": "The export does not show at least 75% increased Area of Effect; no automatic exclusion.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "scaling"
+    ],
+    "dependency_evidence": [
+      "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
+    ],
+    "assessment_status": "unaffected"
+  },
+  {
+    "id": "map-955801458",
+    "name": "Area contains two Unique Bosses",
+    "pattern": "wo u",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map-980061401",
+    "name": "Area is inhabited by Demons",
+    "pattern": "mons$",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map-1062763755",
+    "name": "Area has patches of Chilled Ground",
+    "pattern": "s of ch",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map-1078205993",
+    "name": "Rare Monsters have Elemental Thorns reflecting 1500 Elemental Damage",
+    "pattern": "\\d+ e",
+    "rating": "dangerous",
+    "reason": "Winter Orb can trigger Elemental Thorns: up to 1,500 flat damage before mitigation, roughly 375 after 75% Cold Resistance per trigger. Channelling does not prevent the skill's hits from triggering Thorns. Evasion, block, conditional effects, and actual hit rate are not simulated.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "delivery",
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "Selected main skill: Winter Orb; player delivery. A utility minion/totem does not determine this.",
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "counter"
+  },
+  {
+    "id": "map-1082020744",
+    "name": "Area is inhabited by Abominations",
+    "pattern": "ions$",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map-1101434369",
+    "name": "Players have 60% reduced effect of Non-Curse Auras from Skills",
+    "pattern": "ills$",
+    "rating": "review",
+    "reason": "Auras are enabled, but their contribution is not recalculated. Confirm their role; presence alone does not establish a Brick.",
+    "confidence": "low",
+    "dependency_axes": [
+      "scaling",
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated.",
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "uncertain"
+  },
+  {
+    "id": "map-1202132179",
+    "name": "Players are Cursed with Vulnerability",
+    "pattern": "h vu",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map-1211148661",
+    "name": "Area has patches of Burning Ground",
+    "pattern": "f bur",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map-1283094925",
+    "name": "Monsters gain a Power Charge on Hit",
+    "pattern": "n a po",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map-1305115176",
+    "name": "Players cannot Regenerate Life, Mana or Energy Shield",
+    "pattern": "t reg",
+    "rating": "review",
+    "reason": "Mana: 117.48/s cost, 51.1/s measured income, 0/s after this modifier. EnergyShield: 2594.81/s measured continuous recovery becomes 2494.81/s. Saved Mana income already falls below the cost before the modifier; confirm the missing sustain source. Recovery is weakened; this alone does not demonstrate that the build stops functioning. Cannot Regenerate leaves recharge, leech, recoup, flasks and gain on hit/kill available where the build can use them.",
+    "confidence": "low",
+    "dependency_axes": [
+      "activation",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target"
+    ],
+    "assessment_status": "uncertain"
+  },
+  {
+    "id": "map-1424047266",
+    "name": "Area is inhabited by Animals",
+    "pattern": "mals$",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map-1428847539",
+    "name": "Players cannot inflict Exposure",
+    "pattern": "rs cannot i",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map-1541760497",
+    "name": "(25—30)% more Monster Life|Monsters cannot be Stunned",
+    "pattern": "unned$",
+    "rating": "free",
+    "reason": "No stun-triggered main damage or clear mechanic was detected.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "activation"
+    ],
+    "dependency_evidence": [],
+    "assessment_status": "unaffected"
+  },
+  {
+    "id": "map-1551446200",
+    "name": "Monsters are Hexproof",
+    "pattern": "re he",
+    "rating": "review",
+    "reason": "Hexes are enabled, but their contribution and any tree-based Hexproof bypass are not calculated. Confirm their role below.",
+    "confidence": "low",
+    "dependency_axes": [
+      "activation",
+      "scaling"
+    ],
+    "dependency_evidence": [
+      "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
+    ],
+    "assessment_status": "uncertain"
+  },
+  {
+    "id": "map-1578069823",
+    "name": "Monsters Poison on Hit",
+    "pattern": "rs po",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map-1598599541",
+    "name": "Players are Cursed with Temporal Chains",
+    "pattern": "th tem",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map-1634487773",
+    "name": "Monsters fire 2 additional Projectiles",
+    "pattern": "tiles$",
+    "rating": "uncomfortable",
+    "reason": "More monster projectiles can make dodging and dense encounters harder.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "defence"
+    ],
+    "dependency_evidence": [
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "counter"
+  },
+  {
+    "id": "map-1723792253",
+    "name": "Area is inhabited by Ghosts",
+    "pattern": "sts$",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map-1743546402",
+    "name": "Monsters Hinder on Hit with Spells",
+    "pattern": "ells$",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map-1799781772",
+    "name": "Monsters deal (90—110)% extra Physical Damage as Cold",
+    "pattern": "old$",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map-1882321261",
+    "name": "Players are Cursed with Elemental Weakness",
+    "pattern": "th el",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map-1899039946",
+    "name": "Monsters have 100% increased Area of Effect",
+    "pattern": "e \\d+% increased ar",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map-2080363489",
+    "name": "All Monster Damage from Hits always Ignites",
+    "pattern": "tes$",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map-2105788016",
+    "name": "Monsters cannot be Taunted|Monsters' Action Speed cannot be modified to below Base Value|Monsters' Movement Speed cannot be modified to below Base Value",
+    "pattern": "taunte",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map-2122294281",
+    "name": "Monsters Blind on Hit",
+    "pattern": "rs b",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  },
+  {
+    "id": "map-2132856290",
+    "name": "Monsters deal (90—110)% extra Physical Damage as Lightning",
+    "pattern": "as li",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": []
+  }
+]

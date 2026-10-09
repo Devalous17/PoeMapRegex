@@ -1,0 +1,74 @@
+[
+  {
+    "id": "-2050206104",
+    "pool": "normal",
+    "rule": "reduced_recovery",
+    "name": "of Smothering",
+    "pattern": "te o",
+    "worst_roll": 60,
+    "effect_text": "Players have 60% less Recovery Rate of Life and Energy Shield"
+  },
+  {
+    "id": "-2038489408",
+    "pool": "nightmare",
+    "rule": "minus_max_res",
+    "name": "of Exposure",
+    "pattern": "m resistances$",
+    "worst_roll": 20,
+    "effect_text": "Players have -20% to all maximum Resistances"
+  },
+  {
+    "id": "-477049138",
+    "pool": "normal",
+    "rule": "minus_max_res",
+    "name": "of Exposure",
+    "pattern": "m resistances$",
+    "worst_roll": 12,
+    "effect_text": "Players have (-12\u2014-9)% to all maximum Resistances"
+  },
+  {
+    "id": "-54649013",
+    "pool": "normal",
+    "rule": "monster_crit_reduction",
+    "name": "of Toughness",
+    "pattern": "kes$",
+    "worst_roll": 40,
+    "effect_text": "Monsters take (36\u201440)% reduced Extra Damage from Critical Strikes"
+  },
+  {
+    "id": "1205583947",
+    "pool": "nightmare",
+    "rule": "reduced_leech",
+    "name": "of Congealment",
+    "pattern": "ech$",
+    "worst_roll": 60,
+    "effect_text": "Players have (50\u201460)% reduced Maximum total Life, Mana and Energy Shield Recovery per second from Leech"
+  },
+  {
+    "id": "poedb-MapMonstersBaseSelfCriticalMultiplier",
+    "pool": "nightmare",
+    "rule": "monster_crit_reduction",
+    "name": "of Toughness",
+    "pattern": "extra damage from critical strikes$",
+    "worst_roll": 45,
+    "effect_text": "Monsters take (35\u201445)% reduced Extra Damage from Critical Strikes"
+  },
+  {
+    "id": "-627831782",
+    "pool": "normal",
+    "rule": "avoid_poison_bleed_impale",
+    "name": "Impervious",
+    "pattern": "son,",
+    "worst_roll": 50,
+    "effect_text": "Monsters have a 50% chance to avoid Poison, Impale, and Bleeding"
+  },
+  {
+    "id": "-1772662453",
+    "pool": "normal",
+    "rule": "avoid_ailments",
+    "name": "of Insulation",
+    "pattern": "id e",
+    "worst_roll": 70,
+    "effect_text": "Monsters have 70% chance to Avoid Elemental Ailments"
+  }
+]

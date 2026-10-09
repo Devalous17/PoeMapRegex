@@ -3,24 +3,35 @@ import suppliedPatterns from '../data/mapPoolPatterns.json' with { type: 'json' 
 import { mapPreferenceTerms } from './mapPreferencesRegex.ts';
 
 const blockedByPreset: Record<Preset, Rating[]> = {
-  safe: ['brick', 'dangerous', 'uncomfortable'],
+  safe: ['brick', 'dangerous', 'uncomfortable', 'review'],
   balanced: ['brick', 'dangerous'],
   greedy: ['brick'],
 };
 
 export function recommendedDecision(mod: ClassifiedMod, preset: Preset): Decision {
+  if (mod.manual) return 'neutral';
+  if (preset !== 'greedy' && mod.combination_avoid) return 'block';
   if (blockedByPreset[preset].includes(mod.rating)) return 'block';
   return mod.rating === 'free' ? 'allow' : 'neutral';
 }
 
-function sampleText(text: string, upper = false): string {
-  return text.replaceAll(/\[([^|\]]+)\|([^\]]+)\]/g, '$2')
-    .replaceAll(/\((\d+)[—-](\d+)\)/g, (_, low: string, high: string) => upper ? high : low)
-    .replaceAll('|', '\n');
-}
-
-function matches(pattern: string, text: string): boolean {
-  try { return new RegExp(pattern, 'im').test(text); } catch { return false; }
+const rollCache = new Map<string, string[]>();
+export function rollSamples(text: string): string[] {
+  const cached = rollCache.get(text);
+  if (cached) return cached;
+  let samples = [text.replaceAll(/\[([^|\]]+)\|([^\]]+)\]/g, '$2').replaceAll('|', '\n')];
+  const range = /\((-?\d+)[—–-](-?\d+)\)/;
+  while (samples.some(sample => range.test(sample))) {
+    samples = samples.flatMap(sample => {
+      const match = range.exec(sample);
+      if (!match) return [sample];
+      const low = Math.min(Number(match[1]), Number(match[2]));
+      const high = Math.max(Number(match[1]), Number(match[2]));
+      return Array.from({ length: high - low + 1 }, (_, offset) => sample.slice(0, match.index) + String(low + offset) + sample.slice(match.index + match[0].length));
+    });
+  }
+  rollCache.set(text, samples);
+  return samples;
 }
 
 function escapeRegex(value: string): string {
@@ -31,14 +42,16 @@ type Candidate = { pattern: string; ids: Set<string> };
 
 function optimizedPatterns(all: ClassifiedMod[], blocked: ClassifiedMod[]): { patterns: string[]; uncovered: string[] } {
   const selected = new Set(blocked.map(mod => mod.id));
-  const samples = new Map(all.map(mod => [mod.id, [sampleText(mod.matchText ?? mod.name), sampleText(mod.matchText ?? mod.name, true)]] as const));
+  const samples = new Map(all.map(mod => [mod.id, rollSamples(mod.matchText ?? mod.name)] as const));
   const candidates: Candidate[] = [];
   const seen = new Set<string>();
   function add(pattern: string) {
     if (!pattern || seen.has(pattern)) return;
     seen.add(pattern);
-    if (all.some(mod => !selected.has(mod.id) && (samples.get(mod.id) ?? []).some(sample => matches(pattern, sample)))) return;
-    const ids = new Set(all.filter(mod => selected.has(mod.id) && (samples.get(mod.id) ?? []).every(sample => matches(pattern, sample))).map(mod => mod.id));
+    let regex: RegExp;
+    try { regex = new RegExp(pattern, 'im'); } catch { return; }
+    if (all.some(mod => !selected.has(mod.id) && (samples.get(mod.id) ?? []).some(sample => regex.test(sample)))) return;
+    const ids = new Set(all.filter(mod => selected.has(mod.id) && (samples.get(mod.id) ?? []).every(sample => regex.test(sample))).map(mod => mod.id));
     if (ids.size) candidates.push({ pattern, ids });
   }
   blocked.forEach(mod => add(mod.pattern));
@@ -128,6 +141,19 @@ export function buildRegex(
   const preferenceTerms = mapPreferenceTerms(preferences);
   const regex = [exclude, include, ...preferenceTerms.parts.map(part => part.text)].filter(Boolean).join(' ');
   const warnings: string[] = [...preferenceTerms.warnings];
+  const unknown = mods.filter(mod => !mod.manual && mod.rating === 'review' && (overrides[mod.id] ?? recommendedDecision(mod, preset)) !== 'block');
+  const policies = mods.filter(mod => !mod.manual && mod.assessment_status === 'policy' && (overrides[mod.id] ?? recommendedDecision(mod, preset)) !== 'block');
+  if (policies.length) warnings.push(`${policies.length} modifier(s) are allowed by your Free policy, not verified against every build interaction.`);
+  if (unknown.length) warnings.push(`${unknown.length} modifier(s) still need review and are allowed by this search.`);
+  for (const mod of mods) {
+    const unbrokenPair = mod.combination_partners?.some(partners => partners.length > 0 && partners.every(id => {
+      const partner = mods.find(candidate => candidate.id === id);
+      return partner && (overrides[id] ?? recommendedDecision(partner, preset)) !== 'block';
+    }));
+    if (mod.combination_avoid && unbrokenPair && (overrides[mod.id] ?? recommendedDecision(mod, preset)) !== 'block' && mod.combination_reason) {
+      warnings.push(mod.combination_reason);
+    }
+  }
   if (result.uncovered.length) warnings.push(`Could not safely match ${result.uncovered.length} blocked modifier(s): ${result.uncovered.slice(0, 3).join(', ')}.`);
   if (wantedResult.uncovered.length) warnings.push(`Could not safely match ${wantedResult.uncovered.length} wanted modifier(s): ${wantedResult.uncovered.slice(0, 3).join(', ')}.`);
   if (blocked.length && wanted.length) warnings.push('The Want search looks for at least one wanted modifier while excluding every blocked modifier.');
