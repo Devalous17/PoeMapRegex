@@ -1,0 +1,25 @@
+@font-face { font-family: 'Cormorant SC'; src: url('/fonts/CormorantSC-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Cormorant SC'; src: url('/fonts/CormorantSC-SemiBold.woff2') format('woff2'); font-weight: 600 700; font-display: swap; }
+@font-face { font-family: 'Crimson Pro'; src: url('/fonts/CrimsonPro-Variable.woff2') format('woff2'); font-weight: 200 900; font-display: swap; }
+
+:root {
+  --bg-0: #050607; --bg-1: #101214; --bg-2: #1b1c1c;
+  --fog: #142338; --stone: #17191a; --bronze: #8e884e;
+  --border-dark: #38362e; --border-gold: #6d6040; --border-gold-bright: #bdb781;
+  --gold-text: #bdb781; --gold-bright: #e7df9a; --text-main: #d1ccbf; --text-dim: #ada99d;
+  --crimson: #601b23; --crimson-light: #943c38; --parchment: #d5c591;
+  --rarity-magic: #a8b9e4; --rarity-rare: #e7df9a; --rarity-unique: #d19768; --gem: #8fc6b3;
+  --sev-break: #ec9189; --sev-danger: #e2b273; --sev-annoy: #d5c48b; --sev-safe: #a6c9a0; --sev-review: #a8b9e4;
+  --font-body: 'Crimson Pro', Georgia, serif;
+  --font-heading: 'Cormorant SC', 'Palatino Linotype', Georgia, serif;
+  --font-code: Consolas, 'Courier New', monospace;
+  --font-poe: var(--font-body); --font-poe-small: var(--font-heading);
+  --space-1: 8px; --space-2: 16px; --space-3: 24px; --space-4: 40px; --space-5: 64px; --space-6: 104px;
+  --frame-width: 1px; --frame-inset: 5px; --corner-size: 40px;
+  --shadow-panel: 0 18px 46px #0009, inset 0 0 45px #0008;
+  --glow-gold: 0 0 24px #bdb78122; --glow-red: 0 0 28px #943c3835;
+  --motion-fast: 180ms; --motion-normal: 450ms; --motion-slow: 900ms;
+  --ease-out: cubic-bezier(.2,.7,.2,1);
+  /* Optional licensed image slot: set url('/images/your-licensed-image.webp'). */
+  --licensed-background: none;
+}

@@ -1,0 +1,902 @@
+{
+  "safe": {
+    "regex": "\"!elemental thorns|thorns reflecting|cannot leech|recovery rate of life|maximum.*resistan|avoid elemental ailments|reduced chance to block|steal.*charges|reduced extra damage from critical strikes\" \"m q.*([4-9].|[1-9]..)%\"",
+    "length": 222,
+    "blocked": [
+      {
+        "assessment_basis": "dependency_rule",
+        "assessment_status": "counter",
+        "conclusion": "risk",
+        "confidence": "medium",
+        "dependency_axes": [
+          "delivery",
+          "defence",
+          "sustain"
+        ],
+        "dependency_evidence": [
+          "Selected main skill: Winter Orb; player delivery. A utility minion/totem does not determine this.",
+          "51.1 /s; continuous",
+          "100 /s; continuous",
+          "2494.81 /s; requires damage to a leechable target",
+          "58% effective attack block / 75% effective spell block"
+        ],
+        "id": "elemental_thorns",
+        "measurement": {
+          "engine": "saved_snapshot",
+          "limitations": [
+            "The complete build is not recalculated under this modifier."
+          ],
+          "quantities": [],
+          "status": "unsupported"
+        },
+        "name": "Elemental Thorns",
+        "pattern": "elemental thorns",
+        "rating": "dangerous",
+        "reason": "Winter Orb can trigger Elemental Thorns: up to 1,500 flat damage before mitigation, roughly 375 after 75% Cold Resistance per trigger. Channelling does not prevent the skill's hits from triggering Thorns. Evasion, block, conditional effects, and actual hit rate are not simulated.",
+        "rule_id": "elemental_thorns",
+        "strict_avoid": false,
+        "category": "Other",
+        "tags": []
+      },
+      {
+        "assessment_basis": "dependency_rule",
+        "assessment_status": "counter",
+        "conclusion": "risk",
+        "confidence": "medium",
+        "dependency_axes": [
+          "delivery",
+          "defence",
+          "sustain"
+        ],
+        "dependency_evidence": [
+          "Selected main skill: Winter Orb; player delivery. A utility minion/totem does not determine this.",
+          "51.1 /s; continuous",
+          "100 /s; continuous",
+          "2494.81 /s; requires damage to a leechable target",
+          "58% effective attack block / 75% effective spell block"
+        ],
+        "id": "combined_thorns",
+        "measurement": {
+          "engine": "saved_snapshot",
+          "limitations": [
+            "The complete build is not recalculated under this modifier."
+          ],
+          "quantities": [],
+          "status": "unsupported"
+        },
+        "name": "Physical and Elemental Thorns",
+        "pattern": "thorns reflecting",
+        "rating": "dangerous",
+        "reason": "Winter Orb is not classified as dealing physical hits. Check secondary skills. Winter Orb can trigger Elemental Thorns: up to 2,500 flat damage before mitigation, roughly 625 after 75% Cold Resistance per trigger. Channelling does not prevent the skill's hits from triggering Thorns. Evasion, block, conditional effects, and actual hit rate are not simulated.",
+        "rule_id": "combined_thorns",
+        "strict_avoid": false,
+        "category": "Other",
+        "tags": []
+      },
+      {
+        "assessment_basis": "snapshot_model",
+        "assessment_status": "counter",
+        "conclusion": "risk",
+        "confidence": "medium",
+        "dependency_axes": [
+          "sustain"
+        ],
+        "dependency_evidence": [
+          "51.1 /s; continuous",
+          "100 /s; continuous",
+          "2494.81 /s; requires damage to a leechable target"
+        ],
+        "id": "no_leech",
+        "measurement": {
+          "engine": "saved_snapshot",
+          "limitations": [
+            "The complete build is not recalculated under this modifier.",
+            "Leech requires targets; unconfirmed recharge, flasks, recoup and gains are not guaranteed continuous income. Missing channels are not treated as zero."
+          ],
+          "quantities": [
+            {
+              "after": 0,
+              "before": 0,
+              "name": "Life measured recovery",
+              "unit": "/s"
+            },
+            {
+              "after": 51.1,
+              "before": 51.1,
+              "name": "Mana measured recovery",
+              "unit": "/s"
+            },
+            {
+              "after": -66.38,
+              "before": -66.38,
+              "name": "Mana surplus after main skill cost",
+              "unit": "/s"
+            },
+            {
+              "after": 100,
+              "before": 2594.80635,
+              "name": "EnergyShield measured recovery",
+              "unit": "/s"
+            }
+          ],
+          "status": "estimated"
+        },
+        "name": "Cannot Leech",
+        "pattern": "cannot leech",
+        "rating": "brick",
+        "reason": "Mana: 117.48/s cost, 51.1/s measured income, 51.1/s after this modifier. EnergyShield: 2594.81/s measured continuous recovery becomes 100/s. Saved Mana income already falls below the cost before the modifier; confirm the missing sustain source. This removes the main measured EnergyShield recovery during combat.",
+        "rule_id": "no_leech",
+        "strict_avoid": false,
+        "category": "Other",
+        "tags": []
+      },
+      {
+        "assessment_basis": "snapshot_model",
+        "assessment_status": "counter",
+        "conclusion": "risk",
+        "confidence": "medium",
+        "dependency_axes": [
+          "sustain"
+        ],
+        "dependency_evidence": [
+          "51.1 /s; continuous",
+          "100 /s; continuous",
+          "2494.81 /s; requires damage to a leechable target"
+        ],
+        "id": "reduced_recovery",
+        "measurement": {
+          "engine": "saved_snapshot",
+          "limitations": [
+            "The complete build is not recalculated under this modifier.",
+            "Leech requires targets; unconfirmed recharge, flasks, recoup and gains are not guaranteed continuous income. Missing channels are not treated as zero."
+          ],
+          "quantities": [
+            {
+              "after": 0,
+              "before": 0,
+              "name": "Life measured recovery",
+              "unit": "/s"
+            },
+            {
+              "after": 51.1,
+              "before": 51.1,
+              "name": "Mana measured recovery",
+              "unit": "/s"
+            },
+            {
+              "after": -66.38,
+              "before": -66.38,
+              "name": "Mana surplus after main skill cost",
+              "unit": "/s"
+            },
+            {
+              "after": 1037.92254,
+              "before": 2594.80635,
+              "name": "EnergyShield measured recovery",
+              "unit": "/s"
+            }
+          ],
+          "status": "estimated"
+        },
+        "name": "Reduced Recovery",
+        "pattern": "recovery rate of life",
+        "rating": "dangerous",
+        "reason": "EnergyShield: 2594.81/s measured continuous recovery becomes 1037.92/s. Recovery is weakened; this alone does not demonstrate that the build stops functioning. Assumes 60% less Life/ES recovery rate; Mana recovery and instant gains are not reduced by this affix.",
+        "rule_id": "reduced_recovery",
+        "strict_avoid": false,
+        "category": "Other",
+        "tags": []
+      },
+      {
+        "assessment_basis": "snapshot_model",
+        "assessment_status": "counter",
+        "conclusion": "risk",
+        "confidence": "medium",
+        "dependency_axes": [
+          "defence"
+        ],
+        "dependency_evidence": [
+          "58% effective attack block / 75% effective spell block"
+        ],
+        "id": "minus_max_res",
+        "measurement": {
+          "engine": "saved_snapshot",
+          "limitations": [
+            "The complete build is not recalculated under this modifier.",
+            "Resistance-only model; conversion, penetration and other mitigation are excluded."
+          ],
+          "quantities": [
+            {
+              "after": 68,
+              "before": 80,
+              "name": "Fire resistance",
+              "unit": "%"
+            },
+            {
+              "after": 1.6,
+              "before": 1,
+              "name": "Fire damage taken",
+              "unit": "relative"
+            },
+            {
+              "after": 63,
+              "before": 75,
+              "name": "Cold resistance",
+              "unit": "%"
+            },
+            {
+              "after": 1.48,
+              "before": 1,
+              "name": "Cold damage taken",
+              "unit": "relative"
+            },
+            {
+              "after": 68,
+              "before": 80,
+              "name": "Lightning resistance",
+              "unit": "%"
+            },
+            {
+              "after": 1.6,
+              "before": 1,
+              "name": "Lightning damage taken",
+              "unit": "relative"
+            }
+          ],
+          "status": "estimated"
+        },
+        "name": "Reduced Maximum Resistances",
+        "pattern": "maximum.*resistan",
+        "rating": "dangerous",
+        "reason": "Fire: 80% to 68% (1.60x damage taken); Cold: 75% to 63% (1.48x damage taken); Lightning: 80% to 68% (1.60x damage taken). Resistance-only estimate, before conversion, penetration and other mitigation. No encounter-specific lethal threshold is assumed.",
+        "rule_id": "minus_max_res",
+        "strict_avoid": false,
+        "category": "Other",
+        "tags": []
+      },
+      {
+        "assessment_basis": "snapshot_model",
+        "assessment_status": "counter",
+        "conclusion": "risk",
+        "confidence": "medium",
+        "dependency_axes": [
+          "activation",
+          "scaling"
+        ],
+        "dependency_evidence": [
+          "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
+        ],
+        "id": "avoid_ailments",
+        "measurement": {
+          "engine": "saved_snapshot",
+          "limitations": [
+            "The complete build is not recalculated under this modifier.",
+            "This is not final ailment chance or a DPS multiplier. Hit rate, duration, existing ailments and alternate sources are unmeasured."
+          ],
+          "quantities": [
+            {
+              "after": 30,
+              "before": 100,
+              "name": "Applications passing this avoidance check",
+              "unit": "%"
+            }
+          ],
+          "status": "estimated"
+        },
+        "name": "Monsters Avoid Elemental Ailments",
+        "pattern": "avoid elemental ailments",
+        "rating": "dangerous",
+        "reason": "70% elemental ailment avoidance can interrupt conditional main-skill damage: {fractured}49% increased damage with hits against chilled enemies. The bonus contribution and alternate ailment sources are unmeasured. This is not proof that the main skill stops functioning; review before allowing it.",
+        "rule_id": "avoid_ailments",
+        "strict_avoid": false,
+        "category": "Other",
+        "tags": []
+      },
+      {
+        "assessment_basis": "conservative_policy",
+        "assessment_status": "counter",
+        "conclusion": "policy",
+        "confidence": "low",
+        "dependency_axes": [
+          "defence",
+          "scaling"
+        ],
+        "dependency_evidence": [
+          "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated.",
+          "58% effective attack block / 75% effective spell block"
+        ],
+        "id": "reduced_block_and_armour",
+        "measurement": {
+          "engine": "saved_snapshot",
+          "limitations": [
+            "The complete build is not recalculated under this modifier."
+          ],
+          "quantities": [],
+          "status": "unsupported"
+        },
+        "name": "Reduced Chance to Block and Armour",
+        "pattern": "reduced chance to block",
+        "rating": "brick",
+        "reason": "40% reduced chance to block and 30% less Armour. Your block-investment policy applies: attack plus spell block totals 133 percentage points (threshold 75). These are separate chances, not a combined hit-block probability. This affix counters measured build layers: 58% effective attack block / 75% effective spell block. Exact post-map values are not simulated.",
+        "rule_id": "reduced_block_and_armour",
+        "strict_avoid": false,
+        "category": "Other",
+        "tags": []
+      },
+      {
+        "assessment_basis": "dependency_rule",
+        "assessment_status": "counter",
+        "conclusion": "risk",
+        "confidence": "medium",
+        "dependency_axes": [
+          "activation",
+          "scaling",
+          "defence"
+        ],
+        "dependency_evidence": [
+          "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated.",
+          "58% effective attack block / 75% effective spell block"
+        ],
+        "id": "charge_theft",
+        "measurement": {
+          "engine": "saved_snapshot",
+          "limitations": [
+            "The complete build is not recalculated under this modifier."
+          ],
+          "quantities": [],
+          "status": "unsupported"
+        },
+        "name": "Monsters Steal Charges",
+        "pattern": "steal.*charges",
+        "rating": "uncomfortable",
+        "reason": "This build has at least 5 maximum Power, Frenzy charges and either detected generation or 5+ configured active charges. Charge theft is a Maximum Filtering choice; configured charges do not prove real uptime.",
+        "rule_id": "charge_theft",
+        "strict_avoid": true,
+        "category": "Other",
+        "tags": []
+      },
+      {
+        "assessment_basis": "snapshot_model",
+        "assessment_status": "counter",
+        "conclusion": "risk",
+        "confidence": "medium",
+        "dependency_axes": [
+          "scaling"
+        ],
+        "dependency_evidence": [
+          "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
+        ],
+        "id": "monster_crit_reduction",
+        "measurement": {
+          "engine": "saved_snapshot",
+          "limitations": [
+            "The complete build is not recalculated under this modifier.",
+            "Hit-only expectation; enemy mitigation, secondary skills and encounter thresholds are excluded."
+          ],
+          "quantities": [
+            {
+              "after": 0.653191489361702,
+              "before": 1,
+              "name": "Expected main hit damage",
+              "unit": "relative"
+            }
+          ],
+          "status": "estimated"
+        },
+        "name": "Monsters Take Reduced Critical Damage",
+        "pattern": "reduced extra damage from critical strikes",
+        "rating": "dangerous",
+        "reason": "At 40% reduced extra critical damage, estimated main hit damage is 65.3% of baseline (34.7% lower). Balanced excludes an estimated hit-damage loss of 25% or more. This is a comfort policy, not a lethal threshold. This estimates hit damage only; ailments, secondary skills and target-specific effects need review. Damage loss alone does not prove a Brick.",
+        "rule_id": "monster_crit_reduction",
+        "strict_avoid": false,
+        "category": "Other",
+        "tags": []
+      }
+    ],
+    "wanted": [],
+    "warnings": [
+      "3 modifier(s) still need review and are allowed by this search."
+    ],
+    "valid": true,
+    "parts": [
+      {
+        "kind": "exclude",
+        "text": "\"!elemental thorns|thorns reflecting|cannot leech|recovery rate of life|maximum.*resistan|avoid elemental ailments|reduced chance to block|steal.*charges|reduced extra damage from critical strikes\""
+      },
+      {
+        "kind": "preference",
+        "text": "\"m q.*([4-9].|[1-9]..)%\""
+      }
+    ],
+    "split": []
+  },
+  "balanced": {
+    "regex": "\"!elemental thorns|thorns reflecting|cannot leech|recovery rate of life|maximum.*resistan|avoid elemental ailments|reduced chance to block|reduced extra damage from critical strikes\" \"m q.*([4-9].|[1-9]..)%\"",
+    "length": 207,
+    "blocked": [
+      {
+        "assessment_basis": "dependency_rule",
+        "assessment_status": "counter",
+        "conclusion": "risk",
+        "confidence": "medium",
+        "dependency_axes": [
+          "delivery",
+          "defence",
+          "sustain"
+        ],
+        "dependency_evidence": [
+          "Selected main skill: Winter Orb; player delivery. A utility minion/totem does not determine this.",
+          "51.1 /s; continuous",
+          "100 /s; continuous",
+          "2494.81 /s; requires damage to a leechable target",
+          "58% effective attack block / 75% effective spell block"
+        ],
+        "id": "elemental_thorns",
+        "measurement": {
+          "engine": "saved_snapshot",
+          "limitations": [
+            "The complete build is not recalculated under this modifier."
+          ],
+          "quantities": [],
+          "status": "unsupported"
+        },
+        "name": "Elemental Thorns",
+        "pattern": "elemental thorns",
+        "rating": "dangerous",
+        "reason": "Winter Orb can trigger Elemental Thorns: up to 1,500 flat damage before mitigation, roughly 375 after 75% Cold Resistance per trigger. Channelling does not prevent the skill's hits from triggering Thorns. Evasion, block, conditional effects, and actual hit rate are not simulated.",
+        "rule_id": "elemental_thorns",
+        "strict_avoid": false,
+        "category": "Other",
+        "tags": []
+      },
+      {
+        "assessment_basis": "dependency_rule",
+        "assessment_status": "counter",
+        "conclusion": "risk",
+        "confidence": "medium",
+        "dependency_axes": [
+          "delivery",
+          "defence",
+          "sustain"
+        ],
+        "dependency_evidence": [
+          "Selected main skill: Winter Orb; player delivery. A utility minion/totem does not determine this.",
+          "51.1 /s; continuous",
+          "100 /s; continuous",
+          "2494.81 /s; requires damage to a leechable target",
+          "58% effective attack block / 75% effective spell block"
+        ],
+        "id": "combined_thorns",
+        "measurement": {
+          "engine": "saved_snapshot",
+          "limitations": [
+            "The complete build is not recalculated under this modifier."
+          ],
+          "quantities": [],
+          "status": "unsupported"
+        },
+        "name": "Physical and Elemental Thorns",
+        "pattern": "thorns reflecting",
+        "rating": "dangerous",
+        "reason": "Winter Orb is not classified as dealing physical hits. Check secondary skills. Winter Orb can trigger Elemental Thorns: up to 2,500 flat damage before mitigation, roughly 625 after 75% Cold Resistance per trigger. Channelling does not prevent the skill's hits from triggering Thorns. Evasion, block, conditional effects, and actual hit rate are not simulated.",
+        "rule_id": "combined_thorns",
+        "strict_avoid": false,
+        "category": "Other",
+        "tags": []
+      },
+      {
+        "assessment_basis": "snapshot_model",
+        "assessment_status": "counter",
+        "conclusion": "risk",
+        "confidence": "medium",
+        "dependency_axes": [
+          "sustain"
+        ],
+        "dependency_evidence": [
+          "51.1 /s; continuous",
+          "100 /s; continuous",
+          "2494.81 /s; requires damage to a leechable target"
+        ],
+        "id": "no_leech",
+        "measurement": {
+          "engine": "saved_snapshot",
+          "limitations": [
+            "The complete build is not recalculated under this modifier.",
+            "Leech requires targets; unconfirmed recharge, flasks, recoup and gains are not guaranteed continuous income. Missing channels are not treated as zero."
+          ],
+          "quantities": [
+            {
+              "after": 0,
+              "before": 0,
+              "name": "Life measured recovery",
+              "unit": "/s"
+            },
+            {
+              "after": 51.1,
+              "before": 51.1,
+              "name": "Mana measured recovery",
+              "unit": "/s"
+            },
+            {
+              "after": -66.38,
+              "before": -66.38,
+              "name": "Mana surplus after main skill cost",
+              "unit": "/s"
+            },
+            {
+              "after": 100,
+              "before": 2594.80635,
+              "name": "EnergyShield measured recovery",
+              "unit": "/s"
+            }
+          ],
+          "status": "estimated"
+        },
+        "name": "Cannot Leech",
+        "pattern": "cannot leech",
+        "rating": "brick",
+        "reason": "Mana: 117.48/s cost, 51.1/s measured income, 51.1/s after this modifier. EnergyShield: 2594.81/s measured continuous recovery becomes 100/s. Saved Mana income already falls below the cost before the modifier; confirm the missing sustain source. This removes the main measured EnergyShield recovery during combat.",
+        "rule_id": "no_leech",
+        "strict_avoid": false,
+        "category": "Other",
+        "tags": []
+      },
+      {
+        "assessment_basis": "snapshot_model",
+        "assessment_status": "counter",
+        "conclusion": "risk",
+        "confidence": "medium",
+        "dependency_axes": [
+          "sustain"
+        ],
+        "dependency_evidence": [
+          "51.1 /s; continuous",
+          "100 /s; continuous",
+          "2494.81 /s; requires damage to a leechable target"
+        ],
+        "id": "reduced_recovery",
+        "measurement": {
+          "engine": "saved_snapshot",
+          "limitations": [
+            "The complete build is not recalculated under this modifier.",
+            "Leech requires targets; unconfirmed recharge, flasks, recoup and gains are not guaranteed continuous income. Missing channels are not treated as zero."
+          ],
+          "quantities": [
+            {
+              "after": 0,
+              "before": 0,
+              "name": "Life measured recovery",
+              "unit": "/s"
+            },
+            {
+              "after": 51.1,
+              "before": 51.1,
+              "name": "Mana measured recovery",
+              "unit": "/s"
+            },
+            {
+              "after": -66.38,
+              "before": -66.38,
+              "name": "Mana surplus after main skill cost",
+              "unit": "/s"
+            },
+            {
+              "after": 1037.92254,
+              "before": 2594.80635,
+              "name": "EnergyShield measured recovery",
+              "unit": "/s"
+            }
+          ],
+          "status": "estimated"
+        },
+        "name": "Reduced Recovery",
+        "pattern": "recovery rate of life",
+        "rating": "dangerous",
+        "reason": "EnergyShield: 2594.81/s measured continuous recovery becomes 1037.92/s. Recovery is weakened; this alone does not demonstrate that the build stops functioning. Assumes 60% less Life/ES recovery rate; Mana recovery and instant gains are not reduced by this affix.",
+        "rule_id": "reduced_recovery",
+        "strict_avoid": false,
+        "category": "Other",
+        "tags": []
+      },
+      {
+        "assessment_basis": "snapshot_model",
+        "assessment_status": "counter",
+        "conclusion": "risk",
+        "confidence": "medium",
+        "dependency_axes": [
+          "defence"
+        ],
+        "dependency_evidence": [
+          "58% effective attack block / 75% effective spell block"
+        ],
+        "id": "minus_max_res",
+        "measurement": {
+          "engine": "saved_snapshot",
+          "limitations": [
+            "The complete build is not recalculated under this modifier.",
+            "Resistance-only model; conversion, penetration and other mitigation are excluded."
+          ],
+          "quantities": [
+            {
+              "after": 68,
+              "before": 80,
+              "name": "Fire resistance",
+              "unit": "%"
+            },
+            {
+              "after": 1.6,
+              "before": 1,
+              "name": "Fire damage taken",
+              "unit": "relative"
+            },
+            {
+              "after": 63,
+              "before": 75,
+              "name": "Cold resistance",
+              "unit": "%"
+            },
+            {
+              "after": 1.48,
+              "before": 1,
+              "name": "Cold damage taken",
+              "unit": "relative"
+            },
+            {
+              "after": 68,
+              "before": 80,
+              "name": "Lightning resistance",
+              "unit": "%"
+            },
+            {
+              "after": 1.6,
+              "before": 1,
+              "name": "Lightning damage taken",
+              "unit": "relative"
+            }
+          ],
+          "status": "estimated"
+        },
+        "name": "Reduced Maximum Resistances",
+        "pattern": "maximum.*resistan",
+        "rating": "dangerous",
+        "reason": "Fire: 80% to 68% (1.60x damage taken); Cold: 75% to 63% (1.48x damage taken); Lightning: 80% to 68% (1.60x damage taken). Resistance-only estimate, before conversion, penetration and other mitigation. No encounter-specific lethal threshold is assumed.",
+        "rule_id": "minus_max_res",
+        "strict_avoid": false,
+        "category": "Other",
+        "tags": []
+      },
+      {
+        "assessment_basis": "snapshot_model",
+        "assessment_status": "counter",
+        "conclusion": "risk",
+        "confidence": "medium",
+        "dependency_axes": [
+          "activation",
+          "scaling"
+        ],
+        "dependency_evidence": [
+          "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
+        ],
+        "id": "avoid_ailments",
+        "measurement": {
+          "engine": "saved_snapshot",
+          "limitations": [
+            "The complete build is not recalculated under this modifier.",
+            "This is not final ailment chance or a DPS multiplier. Hit rate, duration, existing ailments and alternate sources are unmeasured."
+          ],
+          "quantities": [
+            {
+              "after": 30,
+              "before": 100,
+              "name": "Applications passing this avoidance check",
+              "unit": "%"
+            }
+          ],
+          "status": "estimated"
+        },
+        "name": "Monsters Avoid Elemental Ailments",
+        "pattern": "avoid elemental ailments",
+        "rating": "dangerous",
+        "reason": "70% elemental ailment avoidance can interrupt conditional main-skill damage: {fractured}49% increased damage with hits against chilled enemies. The bonus contribution and alternate ailment sources are unmeasured. This is not proof that the main skill stops functioning; review before allowing it.",
+        "rule_id": "avoid_ailments",
+        "strict_avoid": false,
+        "category": "Other",
+        "tags": []
+      },
+      {
+        "assessment_basis": "conservative_policy",
+        "assessment_status": "counter",
+        "conclusion": "policy",
+        "confidence": "low",
+        "dependency_axes": [
+          "defence",
+          "scaling"
+        ],
+        "dependency_evidence": [
+          "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated.",
+          "58% effective attack block / 75% effective spell block"
+        ],
+        "id": "reduced_block_and_armour",
+        "measurement": {
+          "engine": "saved_snapshot",
+          "limitations": [
+            "The complete build is not recalculated under this modifier."
+          ],
+          "quantities": [],
+          "status": "unsupported"
+        },
+        "name": "Reduced Chance to Block and Armour",
+        "pattern": "reduced chance to block",
+        "rating": "brick",
+        "reason": "40% reduced chance to block and 30% less Armour. Your block-investment policy applies: attack plus spell block totals 133 percentage points (threshold 75). These are separate chances, not a combined hit-block probability. This affix counters measured build layers: 58% effective attack block / 75% effective spell block. Exact post-map values are not simulated.",
+        "rule_id": "reduced_block_and_armour",
+        "strict_avoid": false,
+        "category": "Other",
+        "tags": []
+      },
+      {
+        "assessment_basis": "snapshot_model",
+        "assessment_status": "counter",
+        "conclusion": "risk",
+        "confidence": "medium",
+        "dependency_axes": [
+          "scaling"
+        ],
+        "dependency_evidence": [
+          "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
+        ],
+        "id": "monster_crit_reduction",
+        "measurement": {
+          "engine": "saved_snapshot",
+          "limitations": [
+            "The complete build is not recalculated under this modifier.",
+            "Hit-only expectation; enemy mitigation, secondary skills and encounter thresholds are excluded."
+          ],
+          "quantities": [
+            {
+              "after": 0.653191489361702,
+              "before": 1,
+              "name": "Expected main hit damage",
+              "unit": "relative"
+            }
+          ],
+          "status": "estimated"
+        },
+        "name": "Monsters Take Reduced Critical Damage",
+        "pattern": "reduced extra damage from critical strikes",
+        "rating": "dangerous",
+        "reason": "At 40% reduced extra critical damage, estimated main hit damage is 65.3% of baseline (34.7% lower). Balanced excludes an estimated hit-damage loss of 25% or more. This is a comfort policy, not a lethal threshold. This estimates hit damage only; ailments, secondary skills and target-specific effects need review. Damage loss alone does not prove a Brick.",
+        "rule_id": "monster_crit_reduction",
+        "strict_avoid": false,
+        "category": "Other",
+        "tags": []
+      }
+    ],
+    "wanted": [],
+    "warnings": [
+      "3 modifier(s) still need review and are allowed by this search."
+    ],
+    "valid": true,
+    "parts": [
+      {
+        "kind": "exclude",
+        "text": "\"!elemental thorns|thorns reflecting|cannot leech|recovery rate of life|maximum.*resistan|avoid elemental ailments|reduced chance to block|reduced extra damage from critical strikes\""
+      },
+      {
+        "kind": "preference",
+        "text": "\"m q.*([4-9].|[1-9]..)%\""
+      }
+    ],
+    "split": []
+  },
+  "greedy": {
+    "regex": "\"!cannot leech|reduced chance to block\" \"m q.*([4-9].|[1-9]..)%\"",
+    "length": 64,
+    "blocked": [
+      {
+        "assessment_basis": "snapshot_model",
+        "assessment_status": "counter",
+        "conclusion": "risk",
+        "confidence": "medium",
+        "dependency_axes": [
+          "sustain"
+        ],
+        "dependency_evidence": [
+          "51.1 /s; continuous",
+          "100 /s; continuous",
+          "2494.81 /s; requires damage to a leechable target"
+        ],
+        "id": "no_leech",
+        "measurement": {
+          "engine": "saved_snapshot",
+          "limitations": [
+            "The complete build is not recalculated under this modifier.",
+            "Leech requires targets; unconfirmed recharge, flasks, recoup and gains are not guaranteed continuous income. Missing channels are not treated as zero."
+          ],
+          "quantities": [
+            {
+              "after": 0,
+              "before": 0,
+              "name": "Life measured recovery",
+              "unit": "/s"
+            },
+            {
+              "after": 51.1,
+              "before": 51.1,
+              "name": "Mana measured recovery",
+              "unit": "/s"
+            },
+            {
+              "after": -66.38,
+              "before": -66.38,
+              "name": "Mana surplus after main skill cost",
+              "unit": "/s"
+            },
+            {
+              "after": 100,
+              "before": 2594.80635,
+              "name": "EnergyShield measured recovery",
+              "unit": "/s"
+            }
+          ],
+          "status": "estimated"
+        },
+        "name": "Cannot Leech",
+        "pattern": "cannot leech",
+        "rating": "brick",
+        "reason": "Mana: 117.48/s cost, 51.1/s measured income, 51.1/s after this modifier. EnergyShield: 2594.81/s measured continuous recovery becomes 100/s. Saved Mana income already falls below the cost before the modifier; confirm the missing sustain source. This removes the main measured EnergyShield recovery during combat.",
+        "rule_id": "no_leech",
+        "strict_avoid": false,
+        "category": "Other",
+        "tags": []
+      },
+      {
+        "assessment_basis": "conservative_policy",
+        "assessment_status": "counter",
+        "conclusion": "policy",
+        "confidence": "low",
+        "dependency_axes": [
+          "defence",
+          "scaling"
+        ],
+        "dependency_evidence": [
+          "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated.",
+          "58% effective attack block / 75% effective spell block"
+        ],
+        "id": "reduced_block_and_armour",
+        "measurement": {
+          "engine": "saved_snapshot",
+          "limitations": [
+            "The complete build is not recalculated under this modifier."
+          ],
+          "quantities": [],
+          "status": "unsupported"
+        },
+        "name": "Reduced Chance to Block and Armour",
+        "pattern": "reduced chance to block",
+        "rating": "brick",
+        "reason": "40% reduced chance to block and 30% less Armour. Your block-investment policy applies: attack plus spell block totals 133 percentage points (threshold 75). These are separate chances, not a combined hit-block probability. This affix counters measured build layers: 58% effective attack block / 75% effective spell block. Exact post-map values are not simulated.",
+        "rule_id": "reduced_block_and_armour",
+        "strict_avoid": false,
+        "category": "Other",
+        "tags": []
+      }
+    ],
+    "wanted": [],
+    "warnings": [
+      "3 modifier(s) still need review and are allowed by this search."
+    ],
+    "valid": true,
+    "parts": [
+      {
+        "kind": "exclude",
+        "text": "\"!cannot leech|reduced chance to block\""
+      },
+      {
+        "kind": "preference",
+        "text": "\"m q.*([4-9].|[1-9]..)%\""
+      }
+    ],
+    "split": []
+  }
+}

@@ -1,12 +1,12 @@
+import exampleExport from '../../../../fixtures/test-build.pob.txt?raw';
 import type { FormEvent, KeyboardEvent } from 'react';
-import { Button, OrnamentDivider, Panel, Sigil } from '../../components/UI';
+import { Button, OrnamentDivider, Panel, Sigil, SectionHeading } from '../../components/UI';
 import { useAppStore } from '../../store/useAppStore';
 
 export function BuildImport() {
   const source = useAppStore(state => state.source);
   const setSource = useAppStore(state => state.setSource);
   const analyze = useAppStore(state => state.analyze);
-  const loadExample = useAppStore(state => state.loadExample);
   const loading = useAppStore(state => state.loading);
   const error = useAppStore(state => state.error);
   const analysis = useAppStore(state => state.analysis);
@@ -16,20 +16,15 @@ export function BuildImport() {
     if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') { event.preventDefault(); void analyze(); }
   }
 
-  return <section id="generator" className="hero-section">
-    <div className="hero-halo" aria-hidden="true" />
-    <div className="hero-heading">
-      <p className="eyebrow hero-overline"><span className="eyebrow-rule" /> PATH OF EXILE 1 · MAP SEARCH TOOL <span className="eyebrow-rule" /></p>
-      <h1>Know Your <em>Maps.</em></h1>
-      <p>Paste a pobb.in link. We find the mods that could stop your build and write the regex for you.</p>
-    </div>
+  return <section id="generator" className="content-section import-section">
+    <SectionHeading number="02" title="Bring your build" subtitle="Paste a pobb.in link or your Path of Building export. We will read the saved snapshot." />
     <Panel className="import-panel">
       <div className="import-panel__head">
         <div className="import-title"><Sigil className="import-title__sigil" /><div><span className="panel-kicker">BUILD IMPORT</span><strong>Path of Building profile</strong></div></div>
         <span className="import-panel__edition">POE 1 / ENGLISH</span>
       </div>
       <OrnamentDivider />
-      <form onSubmit={submit}>
+      <form onSubmit={submit} aria-busy={loading}>
         <label htmlFor="build-source" className="field-label">POBB.IN LINK OR EXPORT CODE</label>
         <div className="import-control">
           <textarea id="build-source" value={source} onChange={event => setSource(event.target.value)} onKeyDown={shortcut}
@@ -40,7 +35,7 @@ export function BuildImport() {
         </div>
         <div className="import-foot">
           <span id="import-help">Raw Path of Building export codes also work. Press Ctrl+Enter to analyze.</span>
-          <button className="text-link" type="button" onClick={() => void loadExample()} disabled={loading}>Try an example build <span aria-hidden="true">↗</span></button>
+          <button className="text-link" type="button" onClick={() => { setSource(exampleExport.trim()); void analyze(); }} disabled={loading}>Try an example build <span aria-hidden="true">↗</span></button>
         </div>
       </form>
       <div id="import-error" className={`import-message ${error ? 'import-message--error' : ''}`} role={error ? 'alert' : 'status'} aria-live="polite">
@@ -48,6 +43,6 @@ export function BuildImport() {
       </div>
       {loading && <div className="loading-skeleton" aria-hidden="true"><span /><span /><span /></div>}
     </Panel>
-    <div className="hero-bottom"><span>01 / IMPORT</span><span className="hero-bottom__line" /><span>ANALYZE · REVIEW · COPY</span></div>
+    <p className="import-privacy">Your export is sent to our analyzer. No account or build database. <a href="#faq">How your data is handled</a>.</p><div className="hero-bottom"><span>01 / IMPORT</span><span className="hero-bottom__line" /><span>ANALYZE · REVIEW · COPY</span></div>
   </section>;
 }

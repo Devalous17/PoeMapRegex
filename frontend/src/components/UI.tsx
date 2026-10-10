@@ -1,3 +1,4 @@
+import { Corners, Crest } from './Ornaments';
 import { useEffect, useId } from 'react';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import type { Rating } from '../types';
@@ -13,7 +14,7 @@ export function Sigil({ className = '' }: { className?: string }) {
 }
 
 export function Panel({ children, className = '', id }: { children: ReactNode; className?: string; id?: string }) {
-  return <section id={id} className={`poe-panel ${className}`}>{children}</section>;
+  return <section id={id} className={`poe-panel ${className}`}><Corners />{children}<span className="panel-edge-emblem" aria-hidden="true">◆</span></section>;
 }
 
 export function OrnamentDivider() {
@@ -21,7 +22,7 @@ export function OrnamentDivider() {
 }
 
 export function SectionHeading({ number, title, subtitle, aside }: { number: string; title: string; subtitle?: string; aside?: ReactNode }) {
-  return <div className="section-heading">
+  return <div className="section-heading"><Crest />
     <div><p className="eyebrow">{number} / MAPREGEX</p><h2>{title}</h2>{subtitle && <p className="section-subtitle">{subtitle}</p>}</div>
     {aside && <div className="section-heading-aside">{aside}</div>}
   </div>;

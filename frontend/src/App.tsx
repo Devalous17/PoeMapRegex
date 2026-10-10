@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useReducedMotion } from 'framer-motion';
-import { Sigil, Toast } from './components/UI';
+import { Button, Sigil, Toast } from './components/UI';
+import { Atmosphere, AtlasArt, Crest, NavEnds, Reveal } from './components/Ornaments';
+import { FAQ, HowToUse, Tour } from './components/Guide';
+import { HighlightProvider } from './components/HighlightContext';
 import { BuildImport } from './features/analyzer/BuildImport';
 import { BuildSummary } from './features/analyzer/BuildSummary';
 import { ModAnalysis } from './features/mods/ModAnalysis';
@@ -18,7 +21,8 @@ export default function App() {
   const analysis = useAppStore(state => state.analysis);
   const source = useAppStore(state => state.analysisSource);
   const mapPool = useAppStore(state => state.mapPool);
-  const showToast = useAppStore(state => state.showToast);
+  const [tour, setTour] = useState(false);
+  const [menu, setMenu] = useState(false);
   const reducedMotion = useReducedMotion();
   const [active, setActive] = useState('generator');
   const visibleMods = (analysis?.mods ?? manualMods).filter(mod => !mod.mapPool || mod.mapPool === mapPool);
@@ -37,7 +41,7 @@ export default function App() {
   useEffect(() => {
     const onScroll = () => {
       let section = 'generator';
-      for (const [id] of [['generator'], ['mods'], ['how-it-works'], ['about']]) {
+      for (const [id] of [['how-it-works'], ['generator'], ['mods'], ['about']]) {
         const element = document.getElementById(id);
         if (element && element.getBoundingClientRect().top <= window.innerHeight * .35) section = id;
       }
@@ -47,15 +51,22 @@ export default function App() {
     onScroll();
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
-  return <div className="site-shell site-shell--has-results" id="top">
-    <div className="page-grain" aria-hidden="true" />
+  useEffect(() => {
+    try { if (localStorage.getItem('mapregex-tour-v1')) return; } catch { return; }
+    const timer = window.setTimeout(() => setTour(true), 1600); return () => clearTimeout(timer);
+  }, []);
+  return <HighlightProvider><div className="site-shell site-shell--has-results" id="top">
+    <Atmosphere />
+    <div className="utility-bar page-wrap"><button type="button" className="utility-tour" onClick={() => setTour(true)}>Quick guide ›</button><span>PATH OF EXILE 1 · ENGLISH MAP SEARCH</span><a href="https://github.com/Devalous17/PoeMapRegex" target="_blank" rel="noreferrer">Community project ↗</a></div>
     <a className="skip-link" href="#generator">Skip to generator</a>
-    <header className="site-header"><div className="site-header__inner page-wrap">
-      <a className="brand" href="#top" aria-label="MapRegex home"><Sigil /><span>MAP<span>REGEX</span></span></a>
-      <nav className="main-nav" aria-label="Main navigation">{navigation.map(([id, label]) => <a key={id} href={`#${id}`} className={active === id ? 'is-active' : ''} aria-current={active === id ? 'location' : undefined} onClick={event => { event.preventDefault(); document.getElementById(id)?.scrollIntoView({ behavior: reducedMotion ? 'instant' : 'smooth', block: 'start' }); history.replaceState(null, '', `#${id}`); setActive(id); }}>{label}</a>)}</nav>
+    <header className="site-header"><div className="site-header__inner page-wrap"><NavEnds />
+      <a className="brand" href="#top" aria-label="MapRegex home"><Sigil /><span>MAP<span>REGEX</span></span><small>THE CARTOGRAPHER'S COMPANION</small></a>
+      <button type="button" className="mobile-menu poe-button" aria-expanded={menu} aria-controls="main-navigation" onClick={() => setMenu(!menu)}>Menu {menu ? "−" : "+"}</button><nav id="main-navigation" className={`main-nav ${menu ? "is-open" : ""}`} aria-label="Main navigation">{navigation.map(([id, label]) => <a key={id} href={`#${id}`} className={active === id ? 'is-active' : ''} aria-current={active === id ? 'location' : undefined} onClick={event => { event.preventDefault(); setMenu(false); document.getElementById(id)?.scrollIntoView({ behavior: reducedMotion ? 'instant' : 'smooth', block: 'start' }); history.replaceState(null, '', `#${id}`); setActive(id); }}>{label}</a>)}</nav>
       <div className="league-indicator"><span className="league-indicator__dot" /><span>POE 1</span><span className="league-indicator__divider">/</span><span>STANDARD</span></div>
     </div></header>
-    <main className="page-wrap"><BuildImport />
+    <main className="page-wrap">
+      <section className="atlas-hero" aria-labelledby="hero-title"><AtlasArt /><div className="hero-copy"><p className="eyebrow">READ YOUR BUILD. CHART YOUR ATLAS.</p><h1 id="hero-title">Know Your <em>Maps.</em></h1><p>Turn your Path of Building into a map search that avoids the modifiers that could break your character.</p><Button variant="primary" onClick={() => document.getElementById('generator')?.scrollIntoView({ behavior: reducedMotion ? 'instant' : 'smooth' })}>Import your build <span aria-hidden="true">›</span></Button><a className="text-link" href="#how-it-works">New here? See how it works</a><div className="hero-plates">{[['generator','01','Import'],['mods','02','Review'],['output','03','Copy']].map(([id,n,label]) => <button key={id} type="button" onClick={() => document.getElementById(id)?.scrollIntoView({behavior: reducedMotion ? 'instant' : 'smooth'})}>{n} <b>{label}</b></button>)}</div><p className="hero-note">Free to use · No account needed · A baseline, never a guarantee</p></div><Crest /></section>
+      <Reveal><HowToUse onTour={() => setTour(true)} /></Reveal><Reveal><BuildImport /></Reveal>
       <RegexOutput mods={visibleMods} limit={analysis?.regexLimit ?? 250} mode={analysis?.mode ?? 'manual'} />
       <div id="results">
         {analysis && <Presets mods={visibleMods} />}
@@ -63,9 +74,9 @@ export default function App() {
         <Preferences />
         {analysis && <BuildSummary analysis={analysis} />}
       </div>
-      <section id="how-it-works" className="how-section"><div className="how-section__header"><span className="panel-kicker">THE METHOD</span><h2>Read the build. <em>Review the map.</em></h2></div><div className="how-steps"><div><span>01</span><h3>Import</h3><p>Paste a pobb.in link or your Path of Building export.</p></div><div><span>02</span><h3>Review</h3><p>See which map mods can break or strain this saved build.</p></div><div><span>03</span><h3>Copy</h3><p>Choose a preset, refine decisions, then copy the search string.</p></div></div></section>
+      <Reveal><FAQ /></Reveal>
     </main>
-    <footer id="about" className="site-footer"><div className="page-wrap site-footer__inner"><div><div className="footer-brand"><Sigil /><span>MAPREGEX</span></div><p>This is a fan-made tool and is not affiliated with or endorsed by Grinding Gear Games.</p></div><div className="footer-links"><a href="https://github.com/Devalous17/PoeMapRegex" target="_blank" rel="noreferrer">GitHub</a><button type="button" onClick={() => showToast('Discord community coming later.')}>Discord</button><button type="button" onClick={() => showToast('Changelog coming later.')}>Changelog</button></div></div></footer>
-    <Toast />
-  </div>;
+    <footer id="about" className="site-footer"><Crest /><div className="page-wrap site-footer__inner"><div><div className="footer-brand"><Sigil /><span>MAPREGEX</span></div><p>This is a fan-made tool and is not affiliated with or endorsed by Grinding Gear Games.</p></div><div className="footer-links"><a href="https://github.com/Devalous17/PoeMapRegex" target="_blank" rel="noreferrer">GitHub</a><button type="button" onClick={() => setTour(true)}>Replay guide</button><a href="#faq">Questions & privacy</a></div></div></footer>
+    <Tour open={tour} onClose={() => setTour(false)} /><Toast />
+  </div></HighlightProvider>;
 }

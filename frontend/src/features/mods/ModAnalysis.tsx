@@ -1,3 +1,5 @@
+import { useModHighlight } from '../../components/HighlightContext';
+import { Arch, Corners } from '../../components/Ornaments';
 import { useMemo, useState } from 'react';
 import { Button, SectionHeading, SeverityOrb, ratingLabels } from '../../components/UI';
 import { recommendedDecision } from '../../services/regexBuilder';
@@ -17,6 +19,7 @@ function modifierText(mod: ClassifiedMod): string {
 const basisLabels = { snapshot_model: 'Calculated estimate', dependency_rule: 'Detected dependency', user_confirmation: 'Your confirmation', conservative_policy: 'Conservative exclusion', policy_allowance: 'Policy allowance', unknown: 'Needs review' };
 
 function ModRow({ mod, action, explain }: { mod: ClassifiedMod; action: 'block' | 'want'; explain: boolean }) {
+  const { ids, setIds } = useModHighlight();
   const preset = useAppStore(state => state.preset);
   const override = useAppStore(state => state.overrides[mod.id]);
   const setDecision = useAppStore(state => state.setDecision);
@@ -25,7 +28,7 @@ function ModRow({ mod, action, explain }: { mod: ClassifiedMod; action: 'block' 
   const description = modifierText(mod);
   const basis = mod.assessment_basis ? basisLabels[mod.assessment_basis] : '';
   const detail = [basis, mod.reason, mod.combination_reason, mod.confidence && `Confidence: ${mod.confidence}`, mod.affixName && `${mod.affixName} · ${mod.affixKind} · spawn weight ${mod.spawnWeight}`, mod.rewardText].filter(Boolean).join('\n');
-  return <button type="button" className={`mod-pick mod-pick--${action} mod-pick--rating-${mod.rating} ${active ? 'is-selected' : ''}`}
+  return <button type="button" className={`mod-pick mod-pick--${action} mod-pick--rating-${mod.rating} ${active ? 'is-selected' : ''} ${ids.includes(mod.id) ? 'is-linked' : ''}`} onMouseEnter={() => setIds([mod.id])} onMouseLeave={() => setIds([])} onFocus={() => setIds([mod.id])} onBlur={() => setIds([])}
     aria-pressed={active} aria-label={`${active ? 'Remove' : 'Add'} ${description} ${active ? 'from' : 'to'} ${action === 'block' ? 'avoided' : 'wanted'} mods`}
     title={detail} onClick={() => setDecision(mod.id, active ? 'allow' : action)}>
     <span className="mod-pick__check" aria-hidden="true">{active ? '✓' : '+'}</span>
@@ -41,12 +44,12 @@ function Filters({ mods }: { mods: ClassifiedMod[] }) {
   const categories = useAppStore(state => state.categories);
   const toggleCategory = useAppStore(state => state.toggleCategory);
   const availableCategories = categoryOrder.filter(category => mods.some(mod => mod.category === category));
-  return <details className="mod-filters"><summary>Filter by build rating or category <span aria-hidden="true">⌄</span></summary>
+  return <details className="mod-filters" open><summary>Filter by build rating or category <span aria-hidden="true">⌄</span></summary>
     <div className="mod-filters__body"><div className="mod-filters__group"><strong>Build rating</strong>
       <button type="button" className={ratingFilter === 'all' ? 'is-active' : ''} aria-pressed={ratingFilter === 'all'} onClick={() => setRatingFilter('all')}>All <small>{mods.length}</small></button>
       {ratingOrder.map(rating => <button type="button" key={rating} className={ratingFilter === rating ? 'is-active' : ''} aria-pressed={ratingFilter === rating} onClick={() => setRatingFilter(rating)}>{ratingLabels[rating]} <small>{mods.filter(mod => mod.rating === rating).length}</small></button>)}
     </div><div className="mod-filters__group"><strong>Category</strong>
-      {availableCategories.map(category => <button type="button" key={category} className={categories.includes(category) ? 'is-active' : ''} aria-pressed={categories.includes(category)} onClick={() => toggleCategory(category)}>{category} <small>{mods.filter(mod => mod.category === category).length}</small></button>)}
+      {availableCategories.map((category, index) => <button type="button" key={category} className={categories.includes(category) ? 'is-active' : ''} aria-pressed={categories.includes(category)} onClick={() => toggleCategory(category)}><svg viewBox="0 0 28 28" aria-hidden="true" className="category-glyph"><circle cx="14" cy="14" r="10" fill="none"/><path d={index % 3 === 0 ? "m14 2 8 12-8 12-8-12 8-12Zm0 5v14M7 14h14" : index % 3 === 1 ? "M4 21 14 3l10 18H4Zm4-5h12M14 9v15" : "M4 8h20L14 24 4 8Zm10-5v21M7 4l7 4 7-4"} fill="none" /></svg>{category} <small>{mods.filter(mod => mod.category === category).length}</small></button>)}
     </div></div>
   </details>;
 }
@@ -96,8 +99,8 @@ export function ModAnalysis({ mods, mode }: { mods: ClassifiedMod[]; mode: 'live
       (!search.trim() || `${modifierText(mod)} ${mod.category} ${mod.tags.join(' ')}`.toLowerCase().includes(search.toLowerCase().trim()));
   }), [mods, overrides, preset, ratingFilter, categories, selectedOnly, action, search]);
   return <section id="mods" className="content-section">
-    <SectionHeading number="03" title="Map modifier database" subtitle={mode === 'manual' ? 'Browse and select modifiers. Import a build for personalised ratings.' : 'Click a modifier to add or remove it from your regex.'} aside={<span className="edition-tag">POE 1 · NORMAL & NIGHTMARE</span>} />
-    <div className="mod-picker">
+    <SectionHeading number="03" title="Choose mods to avoid" subtitle={mode === 'manual' ? 'Browse and select modifiers. Import a build for personalised ratings.' : 'Click a modifier to add or remove it from your regex.'} aside={<span className="edition-tag">POE 1 · NORMAL & NIGHTMARE</span>} />
+    <div className="mod-picker"><Arch className="workspace-arch" /><Corners />
       <div className="mod-picker__header">
         <div className="map-pool-tabs" role="group" aria-label="Map type">
           <button type="button" className={mapPool === 'normal' ? 'is-active' : ''} aria-pressed={mapPool === 'normal'} onClick={() => setMapPool('normal')}>Normal maps <small>78</small></button>
@@ -111,10 +114,10 @@ export function ModAnalysis({ mods, mode }: { mods: ClassifiedMod[]; mode: 'live
       </div>
       <SelectedModsWindow blocked={selected.block} wanted={selected.want} />
       <div className="mod-picker__tools"><label className="sr-only" htmlFor="mod-search">Search modifiers</label><input id="mod-search" className="poe-input" value={search} onChange={event => setSearch(event.target.value)} placeholder="Search for a modifier…" /><label className="mod-picker__selected"><input type="checkbox" checked={selectedOnly} onChange={event => setSelectedOnly(event.target.checked)} /> Selected only</label></div>
-      {mode !== 'manual' && <Filters mods={mods} />}
+      <Filters mods={mods} />
       {mode !== 'manual' && mapPool === 'nightmare' && <p className="scope-note">Nightmare recommendations follow your reviewed modifier policy, with build checks for attacks, flasks, Chaos Resistance, critical-strike protection and stuns. Show explanations to see why each mod is selected.</p>}
       <label className="mod-picker__selected"><input type="checkbox" checked={explain} onChange={event => setExplain(event.target.checked)} /> Show assessment explanations</label>
-      <div className="mod-picker__status"><span><strong>{visible.length}</strong> of {mods.length} modifiers</span><span>Click a row to {action === 'block' ? 'block or unblock' : 'want or remove'} it</span></div>
+      <div className="rating-legend" aria-label="Rating legend">{ratingOrder.map(rating => <span key={rating}><SeverityOrb rating={rating} small />{ratingLabels[rating]}</span>)}</div><div className="mod-picker__status"><span><strong>{visible.length}</strong> of {mods.length} modifiers</span><span>Click a row to {action === 'block' ? 'block or unblock' : 'want or remove'} it</span></div>
       <div className="mod-picker__list" role="list" aria-label={`${mapPool === 'nightmare' ? 'Nightmare' : 'Normal'} map modifiers`}>
         {visible.map(mod => <div role="listitem" key={mod.id}><ModRow mod={mod} action={action} explain={explain} /></div>)}
         {!visible.length && <div className="empty-mods"><strong>No modifiers match.</strong><p>Try a different search or clear the filters.</p></div>}

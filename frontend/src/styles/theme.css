@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
-/* A font by Jos Buivenga (exljbris) -> www.exljbris.com */
-@font-face { font-family: Fontin; src: url('/fonts/Fontin-Regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
-@font-face { font-family: Fontin; src: url('/fonts/Fontin-Bold.ttf') format('truetype'); font-weight: 700; font-display: swap; }
-@font-face { font-family: Fontin; src: url('/fonts/Fontin-Italic.ttf') format('truetype'); font-style: italic; font-display: swap; }
-@font-face { font-family: 'Fontin SmallCaps'; src: url('/fonts/Fontin-SmallCaps.ttf') format('truetype'); font-display: swap; }
+/* Structural styles retained; redesign.css and tokens.css define the current presentation. */
+
+
+
+
 
 @theme {
   --color-abyss: #0b0a08;
@@ -13,8 +13,8 @@
   --color-gold: #c8aa6e;
   --color-gold-bright: #e6cf9a;
   --color-magic: #9c9cff;
-  --font-poe: Fontin, Georgia, serif;
-  --font-poe-small: 'Fontin SmallCaps', Georgia, serif;
+  --font-poe: 'Crimson Pro', Georgia, serif;
+  --font-poe-small: 'Cormorant SC', Georgia, serif;
 }
 
 :root {
@@ -24,14 +24,14 @@
   --gold-text: #c8aa6e; --gold-bright: #e6cf9a; --text-main: #c5bbaa; --text-dim: #a09685;
   --rarity-magic: #a2a2ff; --rarity-rare: #ffff77; --rarity-unique: #c47a3d; --gem: #54b7ad;
   --sev-break: #cc665a; --sev-danger: #dc994c; --sev-annoy: #d2ba62; --sev-safe: #77ae7c; --sev-review: #a49b89;
-  --font-body: Fontin, 'Palatino Linotype', Georgia, serif;
-  --font-heading: 'Fontin SmallCaps', Fontin, Georgia, serif;
+  --font-body: 'Crimson Pro', Georgia, serif;
+  --font-heading: 'Cormorant SC', Georgia, serif;
   --font-code: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
 }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: var(--regex-scroll-offset, 96px); }
-body { margin: 0; min-width: 320px; background: #020407 url('/images/627187.jpg') left top / cover no-repeat fixed; color: var(--text-main); font: 16px/1.48 var(--font-body); }
+body { margin: 0; min-width: 320px; background: #020407 none left top / cover no-repeat fixed; color: var(--text-main); font: 16px/1.48 var(--font-body); }
 button, input, textarea { font: inherit; }
 button { cursor: pointer; }
 button:disabled { cursor: not-allowed; opacity: .48; }
