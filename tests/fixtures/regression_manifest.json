@@ -1,0 +1,244 @@
+{
+  "schema_version": 1,
+  "sample": {
+    "source": "User-supplied saved exports",
+    "league": null,
+    "snapshot_date": null,
+    "population_size": null,
+    "weights_available": false,
+    "coverage_target_percent": 90,
+    "note": "Development regressions only; no independent held-out or population coverage claim."
+  },
+  "builds": [
+    {
+      "id": "righteous_fire",
+      "fixture": "righteous_fire.xml",
+      "sha256": "8b8f4c2bf7849b19e1792462879aad78e61038ec519799fb30895cbc86b9dbaa",
+      "split": "development",
+      "expectations": [
+        {
+          "modifier": "no_regen",
+          "rating": "brick",
+          "label_origin": "reviewer_judgment",
+          "rationale": "User identified continuous RF sustain as a required dependency."
+        }
+      ]
+    },
+    {
+      "id": "vaal_righteous_fire",
+      "fixture": "vaal_righteous_fire.xml",
+      "sha256": "416e2a80ba2bd8de8ef864af125d167148e9479b9e2ce45bb36440d1485ba774",
+      "split": "development",
+      "expectations": [
+        {
+          "modifier": "no_regen",
+          "rating": "brick",
+          "label_origin": "reviewer_judgment",
+          "rationale": "RF fixture must retain its regeneration exclusion."
+        }
+      ]
+    },
+    {
+      "id": "storm_burst_totems",
+      "fixture": "storm_burst_totems.xml",
+      "sha256": "edbce50fa19bdaaada1952c13c14785a59f3d5c6706bee5cacd23f2cf8215d02",
+      "split": "development",
+      "expectations": [
+        {
+          "modifier": "no_regen",
+          "rating": "brick",
+          "label_origin": "reviewer_judgment",
+          "rationale": "User reported regeneration-dependent main skill sustain."
+        },
+        {
+          "modifier": "reduced_cooldown",
+          "rating": "free",
+          "label_origin": "reviewer_judgment",
+          "rationale": "Utility guard cooldown does not gate main totem damage."
+        },
+        {
+          "modifier": "less_accuracy",
+          "rating": "free",
+          "label_origin": "reviewer_judgment",
+          "rationale": "The selected main damage is a spell totem."
+        },
+        {
+          "modifier": "avoid_ailments",
+          "rating": "free",
+          "label_origin": "reviewer_judgment",
+          "rationale": "Secondary shock/chill is not established as core damage."
+        }
+      ]
+    },
+    {
+      "id": "kinetic_blast_strength",
+      "fixture": "kinetic_blast_strength.xml",
+      "sha256": "9c3cd193f631db817b955cfa4ef3cbd445e73743537229567814669eff7d85b2",
+      "split": "development",
+      "expectations": [
+        {
+          "modifier": "reduced_cooldown",
+          "rating": "free",
+          "label_origin": "reviewer_judgment",
+          "rationale": "Recognized main attack has no core cooldown dependency."
+        }
+      ]
+    },
+    {
+      "id": "viper_strike_mamba",
+      "fixture": "viper_strike_mamba.xml",
+      "sha256": "9c02326524a0571133ae76391c7e790bb7fc8cf28241cf9459d5fb7152466b9b",
+      "split": "development",
+      "expectations": [
+        {
+          "modifier": "avoid_poison_bleed_impale",
+          "rating": "brick",
+          "label_origin": "conservative_policy",
+          "rationale": "Protect normal mapping from unreliable main poison application; not immunity."
+        },
+        {
+          "modifier": "avoid_ailments",
+          "rating": "free",
+          "label_origin": "reviewer_judgment",
+          "rationale": "Poison is separate from elemental ailments."
+        },
+        {
+          "modifier": "map-1117764869",
+          "rating": "free",
+          "label_origin": "conservative_policy",
+          "rationale": "User explicitly reviewed Nightmare #29 as Free, including poison builds; preserve this selection policy separately from mechanical safety."
+        },
+        {
+          "modifier": "map--1940135977",
+          "rating": "dangerous",
+          "label_origin": "conservative_policy",
+          "rationale": "Attack block denies initial Mamba hit/application; throughput is unmeasured so this is not assumed Brick."
+        }
+      ]
+    },
+    {
+      "id": "death_aura",
+      "fixture": "death_aura.xml",
+      "sha256": "63554d514b44a5589b7013462224515f232bccbfbd226a8125a873d7703ad5ec",
+      "split": "development",
+      "expectations": [
+        {
+          "modifier": "reduced_auras",
+          "rating": "brick",
+          "label_origin": "conservative_policy",
+          "rationale": "Preserve the requested primary-damage-aura exclusion without claiming zero damage."
+        }
+      ]
+    },
+    {
+      "id": "armour_stacker",
+      "fixture": "armour_stacker.xml",
+      "sha256": "7371df4b75e0fbb5790da4157e1c3e19bd2d32597738fb601ece0743e9d3afb9",
+      "split": "development",
+      "expectations": [
+        {
+          "modifier": "reduced_block_and_armour",
+          "rating": "brick",
+          "label_origin": "conservative_policy",
+          "rationale": "Preserve the established armour/block investment policy."
+        },
+        {
+          "modifier": "map-1464066514",
+          "rating": "brick",
+          "label_origin": "conservative_policy",
+          "rationale": "Armour is both damage scaling and defence; less Defences counters both under the requested core-scaling policy."
+        }
+      ]
+    },
+    {
+      "id": "winter_orb",
+      "fixture": "winter_orb.xml",
+      "sha256": "f46cb8741259038137b1bd2302255c0267766d43f45bd6ee32e334bcbd153db9",
+      "split": "development",
+      "expectations": [
+        {
+          "modifier": "reduced_cooldown",
+          "rating": "free",
+          "label_origin": "conservative_policy",
+          "rationale": "User requested ordinary utility cooldowns and one/two damage curses remain allowed in every preset unless a core dependency is established."
+        },
+        {
+          "modifier": "hexproof",
+          "rating": "free",
+          "label_origin": "conservative_policy",
+          "rationale": "User requested ordinary utility cooldowns and one/two damage curses remain allowed in every preset unless a core dependency is established."
+        },
+        {
+          "modifier": "reduced_monster_curse_effect",
+          "rating": "free",
+          "label_origin": "conservative_policy",
+          "rationale": "User requested ordinary utility cooldowns and one/two damage curses remain allowed in every preset unless a core dependency is established."
+        }
+      ]
+    },
+    {
+      "id": "rf_chieftain_recovery",
+      "fixture": "rf_chieftain_recovery.xml",
+      "sha256": "3aac1ad88fd6544d23546b4d11a8143106d86cf49355a8519c880af585e12e26",
+      "split": "development",
+      "expectations": [
+        {
+          "modifier": "reduced_recovery",
+          "rating": "dangerous",
+          "label_origin": "conservative_policy",
+          "rationale": "Requested Balanced exclusion for substantial regeneration reliance; no regeneration defeats saved RF sustain, while the Vaal activation cooldown does not gate the continuing RF burn."
+        },
+        {
+          "modifier": "no_regen",
+          "rating": "brick",
+          "label_origin": "conservative_policy",
+          "rationale": "Requested Balanced exclusion for substantial regeneration reliance; no regeneration defeats saved RF sustain, while the Vaal activation cooldown does not gate the continuing RF burn."
+        },
+        {
+          "modifier": "reduced_cooldown",
+          "rating": "free",
+          "label_origin": "conservative_policy",
+          "rationale": "Requested Balanced exclusion for substantial regeneration reliance; no regeneration defeats saved RF sustain, while the Vaal activation cooldown does not gate the continuing RF burn."
+        },
+        {
+          "modifier": "map--1940135977",
+          "rating": "free",
+          "label_origin": "reviewer_judgment",
+          "rationale": "RF direct damage over time is not attack-hit damage."
+        },
+        {
+          "modifier": "map-poedb-MapMonstersChanceToSuppressSpells",
+          "rating": "uncomfortable",
+          "label_origin": "conservative_policy",
+          "rationale": "User explicitly reviewed Nightmare #44 as a Safe-only exclusion, regardless of whether the main damage is spell-hit damage."
+        }
+      ]
+    },
+    {
+      "id": "accuracy_stacker_reave",
+      "fixture": "accuracy_stacker_reave.xml",
+      "sha256": "77ecd1ab4377928de3d416d36a33881fde1bacdf443a174d8a112c210f044f9a",
+      "split": "development",
+      "expectations": [
+        {
+          "modifier": "less_accuracy",
+          "rating": "dangerous",
+          "label_origin": "conservative_policy",
+          "rationale": "Accuracy-stacking attack has equipped offensive scaling per Accuracy; less Accuracy belongs in Balanced. Utility cooldowns do not gate Reave; measured Mana sustain requires leech."
+        },
+        {
+          "modifier": "reduced_cooldown",
+          "rating": "free",
+          "label_origin": "conservative_policy",
+          "rationale": "Accuracy-stacking attack has equipped offensive scaling per Accuracy; less Accuracy belongs in Balanced. Utility cooldowns do not gate Reave; measured Mana sustain requires leech."
+        },
+        {
+          "modifier": "no_leech",
+          "rating": "brick",
+          "label_origin": "conservative_policy",
+          "rationale": "Accuracy-stacking attack has equipped offensive scaling per Accuracy; less Accuracy belongs in Balanced. Utility cooldowns do not gate Reave; measured Mana sustain requires leech."
+        }
+      ]
+    }
+  ]
+}

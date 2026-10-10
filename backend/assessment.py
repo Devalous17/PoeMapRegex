@@ -125,7 +125,7 @@ def recovery_assessment(profile: dict, modifier: str, penalty: float = 60) -> tu
                             f"This removes the main measured {pool} recovery during combat."
                             + (" Recharge/conditional recovery remains, but uptime is not established." if conditional else "")))
         else:
-            results.append(("dangerous" if capacity > 0 and affected >= capacity * .03 and after < base * .4 else "uncomfortable",
+            results.append(("dangerous" if capacity > 0 and affected >= capacity * .03 and after <= base * .4 + 1e-9 else "uncomfortable",
                             "Recovery is weakened; this alone does not demonstrate that the build stops functioning."))
     elif not known:
         results.append(("review", f"Complete {pool} regeneration and leech values are not saved."))
@@ -136,6 +136,10 @@ def recovery_assessment(profile: dict, modifier: str, penalty: float = 60) -> tu
     rank = {"free": 0, "uncomfortable": 1, "review": 2, "dangerous": 3, "brick": 4}
     rating = max(results, key=lambda row: rank[row[0]])[0]
     explanations = [text for _, text in results]
+    regen_reliance = capacity > 0 and regen >= capacity * .03 and regen >= base * .5
+    if modifier == "reduced_recovery" and penalty >= 60 and affected > 0 and regen_reliance and rank[rating] <= rank['dangerous']:
+        rating = 'dangerous'
+        explanations.append('Regeneration reliance policy: Life/ES regeneration supplies at least half of measured continuous recovery and at least 3% of the pool per second. A 60% or greater recovery penalty is excluded by Balanced even when the saved self-drain is barely sustained. This is a comfort/sustain exclusion, not proof of a Brick.')
     if modifier == "reduced_leech" and rating == "brick":
         rating = "dangerous"
         explanations.append("The leech-cap estimate does not recalculate additive cap modifiers or instant leech, so it cannot establish a Brick.")
@@ -174,9 +178,9 @@ def assessed_rule(profile: dict, rule: str, value: float | None = None) -> tuple
         reduction = 40 if value is None else value
         factor = critical_damage_factor(c, m, reduction)
         loss = 1 - factor
-        rating = "dangerous" if loss >= .4 else "uncomfortable" if loss >= .1 else "free"
+        rating = "dangerous" if loss >= .25 else "uncomfortable" if loss >= .1 else "free"
         return rating, (f"At {reduction:g}% reduced extra critical damage, estimated main hit damage is {factor:.1%} of baseline ({loss:.1%} lower). "
-                        "This estimates hit damage only; ailments, secondary skills and target-specific effects need review. Damage loss alone does not prove a Brick.")
+                        "Balanced excludes an estimated hit-damage loss of 25% or more. This is a comfort policy, not a lethal threshold. This estimates hit damage only; ailments, secondary skills and target-specific effects need review. Damage loss alone does not prove a Brick.")
     if rule == "minus_max_res":
         loss = 12 if value is None else value
         caps = profile.get("maximum_resistances", {})
@@ -204,20 +208,16 @@ def assessed_rule(profile: dict, rule: str, value: float | None = None) -> tuple
         role = assumptions.get("curse_role", "unknown")
         if role == "mechanic":
             return "brick", "You confirmed that functioning Hexes are required for the build's core mechanic, and no Hexproof bypass is active."
-        if role == "damage":
-            return "dangerous", "You confirmed important Hex damage contribution. Its size is not recalculated from this snapshot."
-        if role == "utility":
-            return "uncomfortable", "You confirmed utility Hexes; losing their benefit may affect comfort or defence."
-        return "review", "Hexes are enabled, but their contribution and any tree-based Hexproof bypass are not calculated. Confirm their role below."
+        if profile.get("curse_dependent"):
+            return "dangerous", "Anathema and more than two enabled Hexes establish a specialized multi-Hex setup. Hexproof removes their benefits without bypass; exact damage loss is unmeasured."
+        return "free", "Ordinary damage or utility Hexes do not establish a core curse mechanic. Hexproof may reduce boss damage, but is not automatically excluded, including in Safe. You can block it manually or confirm an essential mechanic."
     if rule == "reduced_monster_curse_effect":
         if not profile.get("uses_hexes") and not profile.get("uses_marks"):
             return "free", "No enabled Hex or Mark detected."
         role = assumptions.get("curse_role", "unknown")
-        if role == "utility":
-            return "uncomfortable", "Less curse effect weakens confirmed utility curses."
-        if role in {"damage", "mechanic"} or profile.get("curse_dependent"):
-            return "dangerous", "Less curse effect weakens curse benefits; Anathema or Impending Doom presence alone does not prove that reduced effect disables the build."
-        return "review", "Curse contribution is unmeasured. Reduced effect does not inherently remove curse application or curse triggers."
+        if role == "mechanic" or profile.get("curse_dependent") or profile.get("core_hex_trigger"):
+            return "dangerous", "A specialized or confirmed core curse mechanic is established. Less curse effect weakens its curse benefits; this does not inherently prevent Hex application or triggers, and is not proof of a Brick."
+        return "free", "Ordinary damage or utility curses do not establish a core curse mechanic. Less curse effect may lower boss damage, but is not automatically excluded, including in Safe."
     if rule == "reduced_auras":
         if profile.get("primary_damage_aura"):
             reduction = 60 if value is None else value
@@ -234,7 +234,7 @@ def assessed_rule(profile: dict, rule: str, value: float | None = None) -> tuple
             return "dangerous", "You confirmed important aura contribution. Reduced effect weakens it; exact damage, defence and sustain changes require recalculation."
         return "review", "Auras are enabled, but their contribution is not recalculated. Confirm their role; presence alone does not establish a Brick."
     if rule == "reduced_flask_charges" and "flask_essential" in assumptions:
-        return ("brick", "You confirmed essential flask uptime; reduced charge supply can stop the usual setup.") if assumptions["flask_essential"] else ("uncomfortable", "You confirmed flasks are optional for the usual setup; charge supply is still reduced.")
+        return ("brick", "You confirmed essential flask uptime; reduced charge supply can stop the usual setup.") if assumptions["flask_essential"] else ("free", "You confirmed flasks are optional for the usual setup; reduced charge supply is not an automatic exclusion.")
     if rule == "charge_theft" and assumptions.get("charge_sustain") == "reliable":
         return "uncomfortable", "You confirmed rapid charge recovery. Theft still causes temporary losses when hit, so it is excluded by Safe only."
     if rule == "charge_theft" and assumptions.get("charge_sustain") == "required":

@@ -1,6 +1,7 @@
 import rawCatalogue from './mapPool.json';
 import modifierRules from '../../../backend/modifier_rules.json';
 import normalFreePolicy from '../../../backend/normal_free_policy.json';
+import nightmarePolicy from '../../../backend/nightmare_policy.json';
 import poedbNightmareAffixes from './poedbNightmareAffixes.json';
 import poedbNormalAffixes from './poedbNormalAffixes.json';
 import type { Category, ClassifiedMod, Rating } from '../types';
@@ -18,6 +19,7 @@ const analyzedGroups: Record<string, string> = modifierRules;
 // policy, not a simulation of every possible interaction; manual block remains
 // available.
 const normalFree = new Set(normalFreePolicy);
+const nightmareAvoid = new Set(nightmarePolicy.filter(row => !['free', 'safe_only'].includes(row.decision)).map(row => row.id));
 
 function categoryFor(text: string): Category {
   const line = text.toLowerCase();
@@ -58,19 +60,19 @@ export const mapCatalogue: ClassifiedMod[] = (rawCatalogue as RawMapMod[]).map(r
   mapPool: row.nightmare ? 'nightmare' as const : 'normal' as const,
   matchText: affix?.text ?? row.text,
   effectText: row.text,
-  suppliedAvoid: playerFree ? false : row.suppliedAvoid,
+  suppliedAvoid: row.nightmare ? nightmareAvoid.has(row.id) : playerFree ? false : row.suppliedAvoid,
   affixName: affix?.name,
   affixKind: affix?.kind,
   spawnWeight: affix?.weight,
   rewardText: affix?.rewards.join(' · '),
 }; });
 
-export function classifyCatalogue(analyzed: { id: string; rating: Rating; reason: string; confidence?: 'low' | 'medium' | 'high'; combination_avoid?: boolean; combination_reason?: string; combination_partners?: string[][]; assessment_status?: ClassifiedMod['assessment_status']; dependency_axes?: string[]; dependency_evidence?: string[] }[]): ClassifiedMod[] {
+export function classifyCatalogue(analyzed: { strict_avoid?: boolean; id: string; rating: Rating; reason: string; confidence?: 'low' | 'medium' | 'high'; combination_avoid?: boolean; combination_reason?: string; combination_partners?: string[][]; assessment_status?: ClassifiedMod['assessment_status']; assessment_basis?: ClassifiedMod['assessment_basis']; measurement?: ClassifiedMod['measurement']; dependency_axes?: string[]; dependency_evidence?: string[] }[]): ClassifiedMod[] {
   const byGroup = new Map(analyzed.map(row => [row.id, row]));
   return mapCatalogue.map(mod => {
     const group = analyzedGroups[mod.id.slice(4)];
     const rule = byGroup.get(mod.id) ?? (group ? byGroup.get(group) : undefined);
-    return rule ? { ...mod, rating: rule.rating, reason: rule.reason, confidence: rule.confidence, assessment_status: rule.assessment_status, dependency_axes: rule.dependency_axes, dependency_evidence: rule.dependency_evidence,
+    return rule ? { ...mod, rating: rule.rating, strict_avoid: rule.strict_avoid, reason: rule.reason, confidence: rule.confidence, assessment_basis: rule.assessment_basis, measurement: rule.measurement, assessment_status: rule.assessment_status, dependency_axes: rule.dependency_axes, dependency_evidence: rule.dependency_evidence,
       combination_avoid: rule.combination_avoid, combination_reason: rule.combination_reason,
       combination_partners: rule.combination_partners?.map(partners => mapCatalogue.filter(candidate => candidate.mapPool === mod.mapPool && partners.includes(analyzedGroups[candidate.id.slice(4)])).map(candidate => candidate.id)) } : mod;
   });

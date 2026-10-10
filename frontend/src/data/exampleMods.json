@@ -18,7 +18,19 @@
       "2494.81 /s; requires damage to a leechable target",
       "58% effective attack block / 75% effective spell block"
     ],
-    "assessment_status": "counter"
+    "assessment_status": "counter",
+    "strict_avoid": false,
+    "rule_id": "elemental_thorns",
+    "assessment_basis": "dependency_rule",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "risk"
   },
   {
     "id": "physical_thorns",
@@ -39,7 +51,19 @@
       "2494.81 /s; requires damage to a leechable target",
       "58% effective attack block / 75% effective spell block"
     ],
-    "assessment_status": "unaffected"
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "physical_thorns",
+    "assessment_basis": "dependency_rule",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "unaffected"
   },
   {
     "id": "combined_thorns",
@@ -60,7 +84,19 @@
       "2494.81 /s; requires damage to a leechable target",
       "58% effective attack block / 75% effective spell block"
     ],
-    "assessment_status": "counter"
+    "assessment_status": "counter",
+    "strict_avoid": false,
+    "rule_id": "combined_thorns",
+    "assessment_basis": "dependency_rule",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "risk"
   },
   {
     "id": "no_leech",
@@ -77,7 +113,45 @@
       "100 /s; continuous",
       "2494.81 /s; requires damage to a leechable target"
     ],
-    "assessment_status": "counter"
+    "assessment_status": "counter",
+    "strict_avoid": false,
+    "rule_id": "no_leech",
+    "assessment_basis": "snapshot_model",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "estimated",
+      "quantities": [
+        {
+          "name": "Life measured recovery",
+          "before": 0,
+          "after": 0,
+          "unit": "/s"
+        },
+        {
+          "name": "Mana measured recovery",
+          "before": 51.1,
+          "after": 51.1,
+          "unit": "/s"
+        },
+        {
+          "name": "Mana surplus after main skill cost",
+          "before": -66.38,
+          "after": -66.38,
+          "unit": "/s"
+        },
+        {
+          "name": "EnergyShield measured recovery",
+          "before": 2594.80635,
+          "after": 100.0,
+          "unit": "/s"
+        }
+      ],
+      "limitations": [
+        "The complete build is not recalculated under this modifier.",
+        "Leech requires targets; unconfirmed recharge, flasks, recoup and gains are not guaranteed continuous income. Missing channels are not treated as zero."
+      ]
+    },
+    "conclusion": "risk"
   },
   {
     "id": "no_regen",
@@ -95,13 +169,51 @@
       "100 /s; continuous",
       "2494.81 /s; requires damage to a leechable target"
     ],
-    "assessment_status": "uncertain"
+    "assessment_status": "uncertain",
+    "strict_avoid": false,
+    "rule_id": "no_regen",
+    "assessment_basis": "unknown",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "estimated",
+      "quantities": [
+        {
+          "name": "Life measured recovery",
+          "before": 0,
+          "after": 0,
+          "unit": "/s"
+        },
+        {
+          "name": "Mana measured recovery",
+          "before": 51.1,
+          "after": 0,
+          "unit": "/s"
+        },
+        {
+          "name": "Mana surplus after main skill cost",
+          "before": -66.38,
+          "after": -117.48,
+          "unit": "/s"
+        },
+        {
+          "name": "EnergyShield measured recovery",
+          "before": 2594.80635,
+          "after": 2494.80635,
+          "unit": "/s"
+        }
+      ],
+      "limitations": [
+        "The complete build is not recalculated under this modifier.",
+        "Leech requires targets; unconfirmed recharge, flasks, recoup and gains are not guaranteed continuous income. Missing channels are not treated as zero."
+      ]
+    },
+    "conclusion": "uncertain"
   },
   {
     "id": "reduced_recovery",
     "name": "Reduced Recovery",
     "pattern": "recovery rate of life",
-    "rating": "uncomfortable",
+    "rating": "dangerous",
     "reason": "EnergyShield: 2594.81/s measured continuous recovery becomes 1037.92/s. Recovery is weakened; this alone does not demonstrate that the build stops functioning. Assumes 60% less Life/ES recovery rate; Mana recovery and instant gains are not reduced by this affix.",
     "confidence": "medium",
     "dependency_axes": [
@@ -112,7 +224,45 @@
       "100 /s; continuous",
       "2494.81 /s; requires damage to a leechable target"
     ],
-    "assessment_status": "counter"
+    "assessment_status": "counter",
+    "strict_avoid": false,
+    "rule_id": "reduced_recovery",
+    "assessment_basis": "snapshot_model",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "estimated",
+      "quantities": [
+        {
+          "name": "Life measured recovery",
+          "before": 0,
+          "after": 0,
+          "unit": "/s"
+        },
+        {
+          "name": "Mana measured recovery",
+          "before": 51.1,
+          "after": 51.1,
+          "unit": "/s"
+        },
+        {
+          "name": "Mana surplus after main skill cost",
+          "before": -66.38,
+          "after": -66.38,
+          "unit": "/s"
+        },
+        {
+          "name": "EnergyShield measured recovery",
+          "before": 2594.80635,
+          "after": 1037.92254,
+          "unit": "/s"
+        }
+      ],
+      "limitations": [
+        "The complete build is not recalculated under this modifier.",
+        "Leech requires targets; unconfirmed recharge, flasks, recoup and gains are not guaranteed continuous income. Missing channels are not treated as zero."
+      ]
+    },
+    "conclusion": "risk"
   },
   {
     "id": "minus_max_res",
@@ -127,7 +277,57 @@
     "dependency_evidence": [
       "58% effective attack block / 75% effective spell block"
     ],
-    "assessment_status": "counter"
+    "assessment_status": "counter",
+    "strict_avoid": false,
+    "rule_id": "minus_max_res",
+    "assessment_basis": "snapshot_model",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "estimated",
+      "quantities": [
+        {
+          "name": "Fire resistance",
+          "before": 80.0,
+          "after": 68.0,
+          "unit": "%"
+        },
+        {
+          "name": "Fire damage taken",
+          "before": 1,
+          "after": 1.6,
+          "unit": "relative"
+        },
+        {
+          "name": "Cold resistance",
+          "before": 75.0,
+          "after": 63.0,
+          "unit": "%"
+        },
+        {
+          "name": "Cold damage taken",
+          "before": 1,
+          "after": 1.48,
+          "unit": "relative"
+        },
+        {
+          "name": "Lightning resistance",
+          "before": 80.0,
+          "after": 68.0,
+          "unit": "%"
+        },
+        {
+          "name": "Lightning damage taken",
+          "before": 1,
+          "after": 1.6,
+          "unit": "relative"
+        }
+      ],
+      "limitations": [
+        "The complete build is not recalculated under this modifier.",
+        "Resistance-only model; conversion, penetration and other mitigation are excluded."
+      ]
+    },
+    "conclusion": "risk"
   },
   {
     "id": "extra_chaos",
@@ -142,15 +342,27 @@
     "dependency_evidence": [
       "58% effective attack block / 75% effective spell block"
     ],
-    "assessment_status": "unaffected"
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "extra_chaos",
+    "assessment_basis": "dependency_rule",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "unaffected"
   },
   {
     "id": "hexproof",
     "name": "Hexproof Monsters",
     "pattern": "hexproof",
-    "rating": "review",
-    "reason": "Hexes are enabled, but their contribution and any tree-based Hexproof bypass are not calculated. Confirm their role below.",
-    "confidence": "low",
+    "rating": "free",
+    "reason": "Ordinary damage or utility Hexes do not establish a core curse mechanic. Hexproof may reduce boss damage, but is not automatically excluded, including in Safe. You can block it manually or confirm an essential mechanic.",
+    "confidence": "medium",
     "dependency_axes": [
       "activation",
       "scaling"
@@ -158,7 +370,19 @@
     "dependency_evidence": [
       "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
     ],
-    "assessment_status": "uncertain"
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "hexproof",
+    "assessment_basis": "dependency_rule",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "unaffected"
   },
   {
     "id": "reduced_auras",
@@ -179,14 +403,26 @@
       "2494.81 /s; requires damage to a leechable target",
       "58% effective attack block / 75% effective spell block"
     ],
-    "assessment_status": "uncertain"
+    "assessment_status": "uncertain",
+    "strict_avoid": false,
+    "rule_id": "reduced_auras",
+    "assessment_basis": "unknown",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "uncertain"
   },
   {
     "id": "avoid_poison_bleed_impale",
     "name": "Monsters Avoid Poison, Impale and Bleeding",
     "pattern": "avoid poison, impale",
-    "rating": "review",
-    "reason": "Poison, Bleeding or Impale contribution is missing or secondary. Do not assume this avoidance modifier is Free from damage type or class alone.",
+    "rating": "free",
+    "reason": "Optional-mechanic allowance: the recognized main skill has no detected primary Poison, Bleeding or Impale damage or specialized scaling setup. Incidental applications are not an automatic exclusion; missing exact contribution is not proof of zero loss.",
     "confidence": "low",
     "dependency_axes": [
       "activation",
@@ -195,7 +431,19 @@
     "dependency_evidence": [
       "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
     ],
-    "assessment_status": "uncertain"
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "avoid_poison_bleed_impale",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "avoid_ailments",
@@ -211,7 +459,27 @@
     "dependency_evidence": [
       "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
     ],
-    "assessment_status": "counter"
+    "assessment_status": "counter",
+    "strict_avoid": false,
+    "rule_id": "avoid_ailments",
+    "assessment_basis": "snapshot_model",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "estimated",
+      "quantities": [
+        {
+          "name": "Applications passing this avoidance check",
+          "before": 100,
+          "after": 30.0,
+          "unit": "%"
+        }
+      ],
+      "limitations": [
+        "The complete build is not recalculated under this modifier.",
+        "This is not final ailment chance or a DPS multiplier. Hit rate, duration, existing ailments and alternate sources are unmeasured."
+      ]
+    },
+    "conclusion": "risk"
   },
   {
     "id": "extra_projectiles",
@@ -226,7 +494,19 @@
     "dependency_evidence": [
       "58% effective attack block / 75% effective spell block"
     ],
-    "assessment_status": "counter"
+    "assessment_status": "counter",
+    "strict_avoid": false,
+    "rule_id": "extra_projectiles",
+    "assessment_basis": "dependency_rule",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "risk"
   },
   {
     "id": "monster_crit",
@@ -241,7 +521,19 @@
     "dependency_evidence": [
       "58% effective attack block / 75% effective spell block"
     ],
-    "assessment_status": "counter"
+    "assessment_status": "counter",
+    "strict_avoid": false,
+    "rule_id": "monster_crit",
+    "assessment_basis": "dependency_rule",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "risk"
   },
   {
     "id": "monster_life",
@@ -256,7 +548,19 @@
     "dependency_evidence": [
       "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
     ],
-    "assessment_status": "counter"
+    "assessment_status": "counter",
+    "strict_avoid": false,
+    "rule_id": "monster_life",
+    "assessment_basis": "dependency_rule",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "risk"
   },
   {
     "id": "less_accuracy",
@@ -266,13 +570,25 @@
     "reason": "Winter Orb does not use Accuracy Rating to hit. Check secondary attacks.",
     "confidence": "medium",
     "dependency_axes": [
-      "delivery",
+      "scaling",
       "activation"
     ],
     "dependency_evidence": [
-      "Selected main skill: Winter Orb; player delivery. A utility minion/totem does not determine this."
+      "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
     ],
-    "assessment_status": "unaffected"
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "less_accuracy",
+    "assessment_basis": "dependency_rule",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "unaffected"
   },
   {
     "id": "reduced_cooldown",
@@ -285,7 +601,19 @@
       "activation"
     ],
     "dependency_evidence": [],
-    "assessment_status": "unaffected"
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "reduced_cooldown",
+    "assessment_basis": "dependency_rule",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "unaffected"
   },
   {
     "id": "reduced_block_and_armour",
@@ -293,7 +621,7 @@
     "pattern": "reduced chance to block",
     "rating": "brick",
     "reason": "40% reduced chance to block and 30% less Armour. Your block-investment policy applies: attack plus spell block totals 133 percentage points (threshold 75). These are separate chances, not a combined hit-block probability. This affix counters measured build layers: 58% effective attack block / 75% effective spell block. Exact post-map values are not simulated.",
-    "confidence": "medium",
+    "confidence": "low",
     "dependency_axes": [
       "defence",
       "scaling"
@@ -302,7 +630,19 @@
       "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated.",
       "58% effective attack block / 75% effective spell block"
     ],
-    "assessment_status": "counter"
+    "assessment_status": "counter",
+    "strict_avoid": false,
+    "rule_id": "reduced_block_and_armour",
+    "assessment_basis": "conservative_policy",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "reduced_suppression_and_evasion",
@@ -317,7 +657,19 @@
     "dependency_evidence": [
       "58% effective attack block / 75% effective spell block"
     ],
-    "assessment_status": "unaffected"
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "reduced_suppression_and_evasion",
+    "assessment_basis": "dependency_rule",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "unaffected"
   },
   {
     "id": "reduced_leech",
@@ -334,14 +686,52 @@
       "100 /s; continuous",
       "2494.81 /s; requires damage to a leechable target"
     ],
-    "assessment_status": "uncertain"
+    "assessment_status": "uncertain",
+    "strict_avoid": false,
+    "rule_id": "reduced_leech",
+    "assessment_basis": "unknown",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "estimated",
+      "quantities": [
+        {
+          "name": "Life measured recovery",
+          "before": 0,
+          "after": 0,
+          "unit": "/s"
+        },
+        {
+          "name": "Mana measured recovery",
+          "before": 51.1,
+          "after": 51.1,
+          "unit": "/s"
+        },
+        {
+          "name": "Mana surplus after main skill cost",
+          "before": -66.38,
+          "after": -66.38,
+          "unit": "/s"
+        },
+        {
+          "name": "EnergyShield measured recovery",
+          "before": 2594.80635,
+          "after": 1097.92254,
+          "unit": "/s"
+        }
+      ],
+      "limitations": [
+        "The complete build is not recalculated under this modifier.",
+        "Leech requires targets; unconfirmed recharge, flasks, recoup and gains are not guaranteed continuous income. Missing channels are not treated as zero."
+      ]
+    },
+    "conclusion": "uncertain"
   },
   {
     "id": "charge_theft",
     "name": "Monsters Steal Charges",
     "pattern": "steal.*charges",
     "rating": "uncomfortable",
-    "reason": "This build has at least 5 maximum Power, Frenzy charges and either detected generation or 5+ configured active charges. Charge theft is a Safe-preset avoid choice; configured charges do not prove real uptime.",
+    "reason": "This build has at least 5 maximum Power, Frenzy charges and either detected generation or 5+ configured active charges. Charge theft is a Maximum Filtering choice; configured charges do not prove real uptime.",
     "confidence": "medium",
     "dependency_axes": [
       "activation",
@@ -352,15 +742,27 @@
       "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated.",
       "58% effective attack block / 75% effective spell block"
     ],
-    "assessment_status": "counter"
+    "assessment_status": "counter",
+    "strict_avoid": true,
+    "rule_id": "charge_theft",
+    "assessment_basis": "dependency_rule",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "risk"
   },
   {
     "id": "reduced_flask_charges",
     "name": "Reduced Flask Charges Gained",
     "pattern": "reduced flask charges",
-    "rating": "review",
-    "reason": "Flasks are equipped but their contribution and uptime are unmeasured. Being outside Pathfinder/Traitor does not establish optional flasks; confirm their role.",
-    "confidence": "low",
+    "rating": "free",
+    "reason": "No strong Pathfinder or Traitor flask-charge reliance was detected. Flask uptime remains a manual check.",
+    "confidence": "medium",
     "dependency_axes": [
       "sustain",
       "defence"
@@ -371,14 +773,26 @@
       "2494.81 /s; requires damage to a leechable target",
       "58% effective attack block / 75% effective spell block"
     ],
-    "assessment_status": "uncertain"
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "reduced_flask_charges",
+    "assessment_basis": "dependency_rule",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "unaffected"
   },
   {
     "id": "reduced_monster_curse_effect",
     "name": "Less Curse Effect on Monsters",
     "pattern": "less effect of curses on monsters",
-    "rating": "dangerous",
-    "reason": "Less curse effect weakens curse benefits; Anathema or Impending Doom presence alone does not prove that reduced effect disables the build.",
+    "rating": "free",
+    "reason": "Ordinary damage or utility curses do not establish a core curse mechanic. Less curse effect may lower boss damage, but is not automatically excluded, including in Safe.",
     "confidence": "medium",
     "dependency_axes": [
       "scaling",
@@ -388,14 +802,26 @@
       "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated.",
       "58% effective attack block / 75% effective spell block"
     ],
-    "assessment_status": "counter"
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "reduced_monster_curse_effect",
+    "assessment_basis": "dependency_rule",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "unaffected"
   },
   {
     "id": "monster_crit_reduction",
     "name": "Monsters Take Reduced Critical Damage",
     "pattern": "reduced extra damage from critical strikes",
-    "rating": "uncomfortable",
-    "reason": "At 40% reduced extra critical damage, estimated main hit damage is 65.3% of baseline (34.7% lower). This estimates hit damage only; ailments, secondary skills and target-specific effects need review. Damage loss alone does not prove a Brick.",
+    "rating": "dangerous",
+    "reason": "At 40% reduced extra critical damage, estimated main hit damage is 65.3% of baseline (34.7% lower). Balanced excludes an estimated hit-damage loss of 25% or more. This is a comfort policy, not a lethal threshold. This estimates hit damage only; ailments, secondary skills and target-specific effects need review. Damage loss alone does not prove a Brick.",
     "confidence": "medium",
     "dependency_axes": [
       "scaling"
@@ -403,7 +829,27 @@
     "dependency_evidence": [
       "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
     ],
-    "assessment_status": "counter"
+    "assessment_status": "counter",
+    "strict_avoid": false,
+    "rule_id": "monster_crit_reduction",
+    "assessment_basis": "snapshot_model",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "estimated",
+      "quantities": [
+        {
+          "name": "Expected main hit damage",
+          "before": 1,
+          "after": 0.653191489361702,
+          "unit": "relative"
+        }
+      ],
+      "limitations": [
+        "The complete build is not recalculated under this modifier.",
+        "Hit-only expectation; enemy mitigation, secondary skills and encounter thresholds are excluded."
+      ]
+    },
+    "conclusion": "risk"
   },
   {
     "id": "less_player_aoe",
@@ -418,7 +864,19 @@
     "dependency_evidence": [
       "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
     ],
-    "assessment_status": "unaffected"
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "less_player_aoe",
+    "assessment_basis": "dependency_rule",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "unaffected"
   },
   {
     "id": "unstunnable_monsters",
@@ -431,13 +889,25 @@
       "activation"
     ],
     "dependency_evidence": [],
-    "assessment_status": "unaffected"
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "unstunnable_monsters",
+    "assessment_basis": "dependency_rule",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "unaffected"
   },
   {
     "id": "map--2050206104",
-    "name": "of Smothering",
+    "name": "Players have 60% less Recovery Rate of Life and Energy Shield",
     "pattern": "te o",
-    "rating": "uncomfortable",
+    "rating": "dangerous",
     "reason": "Normal pool, worst catalogue roll; 1x map modifier effect. EnergyShield: 2594.81/s measured continuous recovery becomes 1037.92/s. Recovery is weakened; this alone does not demonstrate that the build stops functioning. Assumes 60% less Life/ES recovery rate; Mana recovery and instant gains are not reduced by this affix.",
     "confidence": "medium",
     "dependency_axes": [
@@ -448,26 +918,49 @@
       "100 /s; continuous",
       "2494.81 /s; requires damage to a leechable target"
     ],
-    "assessment_status": "counter"
-  },
-  {
-    "id": "map--2038489408",
-    "name": "of Exposure",
-    "pattern": "m resistances$",
-    "rating": "dangerous",
-    "reason": "Nightmare pool, worst catalogue roll; 1x map modifier effect. Fire: 80% to 60% (2.00x damage taken); Cold: 75% to 55% (1.80x damage taken); Lightning: 80% to 60% (2.00x damage taken). Resistance-only estimate, before conversion, penetration and other mitigation. No encounter-specific lethal threshold is assumed.",
-    "confidence": "medium",
-    "dependency_axes": [
-      "defence"
-    ],
-    "dependency_evidence": [
-      "58% effective attack block / 75% effective spell block"
-    ],
-    "assessment_status": "counter"
+    "assessment_status": "counter",
+    "strict_avoid": false,
+    "rule_id": "reduced_recovery",
+    "assessment_basis": "snapshot_model",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "estimated",
+      "quantities": [
+        {
+          "name": "Life measured recovery",
+          "before": 0,
+          "after": 0,
+          "unit": "/s"
+        },
+        {
+          "name": "Mana measured recovery",
+          "before": 51.1,
+          "after": 51.1,
+          "unit": "/s"
+        },
+        {
+          "name": "Mana surplus after main skill cost",
+          "before": -66.38,
+          "after": -66.38,
+          "unit": "/s"
+        },
+        {
+          "name": "EnergyShield measured recovery",
+          "before": 2594.80635,
+          "after": 1037.92254,
+          "unit": "/s"
+        }
+      ],
+      "limitations": [
+        "The complete build is not recalculated under this modifier.",
+        "Leech requires targets; unconfirmed recharge, flasks, recoup and gains are not guaranteed continuous income. Missing channels are not treated as zero."
+      ]
+    },
+    "conclusion": "risk"
   },
   {
     "id": "map--477049138",
-    "name": "of Exposure",
+    "name": "Players have (-12\u2014-9)% to all maximum Resistances",
     "pattern": "m resistances$",
     "rating": "dangerous",
     "reason": "Normal pool, worst catalogue roll; 1x map modifier effect. Fire: 80% to 68% (1.60x damage taken); Cold: 75% to 63% (1.48x damage taken); Lightning: 80% to 68% (1.60x damage taken). Resistance-only estimate, before conversion, penetration and other mitigation. No encounter-specific lethal threshold is assumed.",
@@ -478,14 +971,64 @@
     "dependency_evidence": [
       "58% effective attack block / 75% effective spell block"
     ],
-    "assessment_status": "counter"
+    "assessment_status": "counter",
+    "strict_avoid": false,
+    "rule_id": "minus_max_res",
+    "assessment_basis": "snapshot_model",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "estimated",
+      "quantities": [
+        {
+          "name": "Fire resistance",
+          "before": 80.0,
+          "after": 68.0,
+          "unit": "%"
+        },
+        {
+          "name": "Fire damage taken",
+          "before": 1,
+          "after": 1.6,
+          "unit": "relative"
+        },
+        {
+          "name": "Cold resistance",
+          "before": 75.0,
+          "after": 63.0,
+          "unit": "%"
+        },
+        {
+          "name": "Cold damage taken",
+          "before": 1,
+          "after": 1.48,
+          "unit": "relative"
+        },
+        {
+          "name": "Lightning resistance",
+          "before": 80.0,
+          "after": 68.0,
+          "unit": "%"
+        },
+        {
+          "name": "Lightning damage taken",
+          "before": 1,
+          "after": 1.6,
+          "unit": "relative"
+        }
+      ],
+      "limitations": [
+        "The complete build is not recalculated under this modifier.",
+        "Resistance-only model; conversion, penetration and other mitigation are excluded."
+      ]
+    },
+    "conclusion": "risk"
   },
   {
     "id": "map--54649013",
-    "name": "of Toughness",
+    "name": "Monsters take (36\u201440)% reduced Extra Damage from Critical Strikes",
     "pattern": "kes$",
-    "rating": "uncomfortable",
-    "reason": "Normal pool, worst catalogue roll; 1x map modifier effect. At 40% reduced extra critical damage, estimated main hit damage is 65.3% of baseline (34.7% lower). This estimates hit damage only; ailments, secondary skills and target-specific effects need review. Damage loss alone does not prove a Brick.",
+    "rating": "dangerous",
+    "reason": "Normal pool, worst catalogue roll; 1x map modifier effect. At 40% reduced extra critical damage, estimated main hit damage is 65.3% of baseline (34.7% lower). Balanced excludes an estimated hit-damage loss of 25% or more. This is a comfort policy, not a lethal threshold. This estimates hit damage only; ailments, secondary skills and target-specific effects need review. Damage loss alone does not prove a Brick.",
     "confidence": "medium",
     "dependency_axes": [
       "scaling"
@@ -493,99 +1036,55 @@
     "dependency_evidence": [
       "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
     ],
-    "assessment_status": "counter"
-  },
-  {
-    "id": "map-1205583947",
-    "name": "of Congealment",
-    "pattern": "ech$",
-    "rating": "review",
-    "reason": "Nightmare pool, worst catalogue roll; 1x map modifier effect. Mana: 117.48/s cost, 51.1/s measured income, 51.1/s after this modifier. EnergyShield: 2594.81/s measured continuous recovery becomes 1097.92/s. Saved Mana income already falls below the cost before the modifier; confirm the missing sustain source. Recovery is weakened; this alone does not demonstrate that the build stops functioning.",
-    "confidence": "low",
-    "dependency_axes": [
-      "sustain"
-    ],
-    "dependency_evidence": [
-      "51.1 /s; continuous",
-      "100 /s; continuous",
-      "2494.81 /s; requires damage to a leechable target"
-    ],
-    "assessment_status": "uncertain"
-  },
-  {
-    "id": "map-poedb-MapMonstersBaseSelfCriticalMultiplier",
-    "name": "of Toughness",
-    "pattern": "extra damage from critical strikes$",
-    "rating": "uncomfortable",
-    "reason": "Nightmare pool, worst catalogue roll; 1x map modifier effect. At 45% reduced extra critical damage, estimated main hit damage is 61.0% of baseline (39.0% lower). This estimates hit damage only; ailments, secondary skills and target-specific effects need review. Damage loss alone does not prove a Brick.",
-    "confidence": "medium",
-    "dependency_axes": [
-      "scaling"
-    ],
-    "dependency_evidence": [
-      "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
-    ],
-    "assessment_status": "counter"
+    "assessment_status": "counter",
+    "strict_avoid": false,
+    "rule_id": "monster_crit_reduction",
+    "assessment_basis": "snapshot_model",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "estimated",
+      "quantities": [
+        {
+          "name": "Expected main hit damage",
+          "before": 1,
+          "after": 0.653191489361702,
+          "unit": "relative"
+        }
+      ],
+      "limitations": [
+        "The complete build is not recalculated under this modifier.",
+        "Hit-only expectation; enemy mitigation, secondary skills and encounter thresholds are excluded."
+      ]
+    },
+    "conclusion": "risk"
   },
   {
     "id": "map--627831782",
-    "name": "Impervious",
+    "name": "Monsters have a 50% chance to avoid Poison, Impale, and Bleeding",
     "pattern": "son,",
-    "rating": "review",
-    "reason": "Normal pool, worst catalogue roll; 1x map modifier effect. Poison, Bleeding or Impale contribution is missing or secondary. Do not assume this avoidance modifier is Free from damage type or class alone.",
-    "confidence": "low",
-    "dependency_axes": [
-      "activation",
-      "scaling"
-    ],
-    "dependency_evidence": [
-      "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
-    ],
-    "assessment_status": "uncertain"
-  },
-  {
-    "id": "map--1772662453",
-    "name": "of Insulation",
-    "pattern": "id e",
-    "rating": "dangerous",
-    "reason": "Normal pool, worst catalogue roll; 1x map modifier effect. 70% elemental ailment avoidance can interrupt conditional main-skill damage: {fractured}49% increased damage with hits against chilled enemies. The bonus contribution and alternate ailment sources are unmeasured. This is not proof that the main skill stops functioning; review before allowing it.",
-    "confidence": "medium",
-    "dependency_axes": [
-      "activation",
-      "scaling"
-    ],
-    "dependency_evidence": [
-      "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
-    ],
-    "assessment_status": "counter"
-  },
-  {
-    "id": "map--2050206104",
-    "name": "Players have 60% less Recovery Rate of Life and Energy Shield",
-    "pattern": "te o",
-    "rating": "uncomfortable",
-    "reason": "Normal pool, worst catalogue roll; 1x map modifier effect. EnergyShield: 2594.81/s measured continuous recovery becomes 1037.92/s. Recovery is weakened; this alone does not demonstrate that the build stops functioning. Assumes 60% less Life/ES recovery rate; Mana recovery and instant gains are not reduced by this affix.",
-    "confidence": "medium",
-    "dependency_axes": [
-      "sustain"
-    ],
-    "dependency_evidence": [
-      "51.1 /s; continuous",
-      "100 /s; continuous",
-      "2494.81 /s; requires damage to a leechable target"
-    ],
-    "assessment_status": "counter"
-  },
-  {
-    "id": "map--1934587276",
-    "name": "Area is inhabited by Cultists of Kitava",
-    "pattern": "va$",
     "rating": "free",
-    "confidence": "low",
-    "assessment_status": "policy",
-    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
-    "dependency_axes": [],
-    "dependency_evidence": []
+    "reason": "Normal pool, worst catalogue roll; 1x map modifier effect. Optional-mechanic allowance: the recognized main skill has no detected primary Poison, Bleeding or Impale damage or specialized scaling setup. Incidental applications are not an automatic exclusion; missing exact contribution is not proof of zero loss.",
+    "confidence": "medium",
+    "dependency_axes": [
+      "activation",
+      "scaling"
+    ],
+    "dependency_evidence": [
+      "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "avoid_poison_bleed_impale",
+    "assessment_basis": "dependency_rule",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "unaffected"
   },
   {
     "id": "map--1772662453",
@@ -601,18 +1100,71 @@
     "dependency_evidence": [
       "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
     ],
-    "assessment_status": "counter"
+    "assessment_status": "counter",
+    "strict_avoid": false,
+    "rule_id": "avoid_ailments",
+    "assessment_basis": "snapshot_model",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "estimated",
+      "quantities": [
+        {
+          "name": "Applications passing this avoidance check",
+          "before": 100,
+          "after": 30.0,
+          "unit": "%"
+        }
+      ],
+      "limitations": [
+        "The complete build is not recalculated under this modifier.",
+        "This is not final ailment chance or a DPS multiplier. Hit rate, duration, existing ailments and alternate sources are unmeasured."
+      ]
+    },
+    "conclusion": "risk"
+  },
+  {
+    "id": "map--1934587276",
+    "name": "Area is inhabited by Cultists of Kitava",
+    "pattern": "va$",
+    "rating": "free",
+    "confidence": "low",
+    "assessment_status": "policy",
+    "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
+    "dependency_axes": [],
+    "dependency_evidence": [],
+    "rule_id": "map--1934587276",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map--1616686189",
-    "name": "Monsters gain (40—49)% of Maximum Life as Extra Maximum Energy Shield",
+    "name": "Monsters gain (40\u201449)% of Maximum Life as Extra Maximum Energy Shield",
     "pattern": "m energy shield$",
     "rating": "free",
     "confidence": "low",
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map--1616686189",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map--1473394034",
@@ -625,14 +1177,26 @@
       "activation"
     ],
     "dependency_evidence": [],
-    "assessment_status": "unaffected"
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "reduced_cooldown",
+    "assessment_basis": "dependency_rule",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "unaffected"
   },
   {
     "id": "map--1358177810",
     "name": "Monsters steal Power, Frenzy and Endurance charges on Hit",
     "pattern": "r, f",
     "rating": "uncomfortable",
-    "reason": "This build has at least 5 maximum Power, Frenzy charges and either detected generation or 5+ configured active charges. Charge theft is a Safe-preset avoid choice; configured charges do not prove real uptime.",
+    "reason": "This build has at least 5 maximum Power, Frenzy charges and either detected generation or 5+ configured active charges. Charge theft is a Maximum Filtering choice; configured charges do not prove real uptime.",
     "confidence": "medium",
     "dependency_axes": [
       "activation",
@@ -643,11 +1207,23 @@
       "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated.",
       "58% effective attack block / 75% effective spell block"
     ],
-    "assessment_status": "counter"
+    "assessment_status": "counter",
+    "strict_avoid": true,
+    "rule_id": "charge_theft",
+    "assessment_basis": "dependency_rule",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "risk"
   },
   {
     "id": "map--1344829253",
-    "name": "Monsters have (360—400)% increased Critical Strike Chance|+(41—45)% to Monster Critical Strike Multiplier",
+    "name": "Monsters have (360\u2014400)% increased Critical Strike Chance|+(41\u201445)% to Monster Critical Strike Multiplier",
     "pattern": "lier$",
     "rating": "uncomfortable",
     "reason": "Monster critical strikes can create damage spikes.",
@@ -658,7 +1234,19 @@
     "dependency_evidence": [
       "58% effective attack block / 75% effective spell block"
     ],
-    "assessment_status": "counter"
+    "assessment_status": "counter",
+    "strict_avoid": false,
+    "rule_id": "monster_crit",
+    "assessment_basis": "dependency_rule",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "risk"
   },
   {
     "id": "map--1204380788",
@@ -669,7 +1257,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map--1204380788",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map--1139261923",
@@ -680,7 +1279,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map--1139261923",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map--1099682289",
@@ -691,7 +1301,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map--1099682289",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map--1094717370",
@@ -702,7 +1323,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map--1094717370",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map--1088873049",
@@ -713,7 +1345,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map--1088873049",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map--1047451686",
@@ -724,7 +1367,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map--1047451686",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map--999805715",
@@ -732,7 +1386,7 @@
     "pattern": "ur$",
     "rating": "brick",
     "reason": "40% reduced chance to block and 30% less Armour. Your block-investment policy applies: attack plus spell block totals 133 percentage points (threshold 75). These are separate chances, not a combined hit-block probability. This affix counters measured build layers: 58% effective attack block / 75% effective spell block. Exact post-map values are not simulated.",
-    "confidence": "medium",
+    "confidence": "low",
     "dependency_axes": [
       "defence",
       "scaling"
@@ -741,7 +1395,19 @@
       "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated.",
       "58% effective attack block / 75% effective spell block"
     ],
-    "assessment_status": "counter"
+    "assessment_status": "counter",
+    "strict_avoid": false,
+    "rule_id": "reduced_block_and_armour",
+    "assessment_basis": "conservative_policy",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map--946283701",
@@ -752,15 +1418,26 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map--946283701",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map--763914456",
     "name": "Players gain 50% reduced Flask Charges",
     "pattern": "ced f",
-    "rating": "review",
-    "reason": "Flasks are equipped but their contribution and uptime are unmeasured. Being outside Pathfinder/Traitor does not establish optional flasks; confirm their role.",
-    "confidence": "low",
+    "rating": "free",
+    "reason": "No strong Pathfinder or Traitor flask-charge reliance was detected. Flask uptime remains a manual check.",
+    "confidence": "medium",
     "dependency_axes": [
       "sustain",
       "defence"
@@ -771,7 +1448,19 @@
       "2494.81 /s; requires damage to a leechable target",
       "58% effective attack block / 75% effective spell block"
     ],
-    "assessment_status": "uncertain"
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "reduced_flask_charges",
+    "assessment_basis": "dependency_rule",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "unaffected"
   },
   {
     "id": "map--737013402",
@@ -782,7 +1471,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map--737013402",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map--694214737",
@@ -793,7 +1493,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map--694214737",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map--688435205",
@@ -804,34 +1515,40 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map--688435205",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map--683043845",
-    "name": "(20—30)% increased number of Rare Monsters",
+    "name": "(20\u201430)% increased number of Rare Monsters",
     "pattern": "d nu",
     "rating": "free",
     "confidence": "low",
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
-  },
-  {
-    "id": "map--627831782",
-    "name": "Monsters have a 50% chance to avoid Poison, Impale, and Bleeding",
-    "pattern": "son,",
-    "rating": "review",
-    "reason": "Normal pool, worst catalogue roll; 1x map modifier effect. Poison, Bleeding or Impale contribution is missing or secondary. Do not assume this avoidance modifier is Free from damage type or class alone.",
-    "confidence": "low",
-    "dependency_axes": [
-      "activation",
-      "scaling"
-    ],
-    "dependency_evidence": [
-      "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
-    ],
-    "assessment_status": "uncertain"
+    "dependency_evidence": [],
+    "rule_id": "map--683043845",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map--617888797",
@@ -842,25 +1559,47 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map--617888797",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map--580302769",
-    "name": "(22—25)% increased Monster Damage",
+    "name": "(22\u201425)% increased Monster Damage",
     "pattern": "r damage$",
     "rating": "free",
     "confidence": "low",
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map--580302769",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map--539026720",
     "name": "60% less effect of Curses on Monsters",
     "pattern": "es on m",
-    "rating": "dangerous",
-    "reason": "Less curse effect weakens curse benefits; Anathema or Impending Doom presence alone does not prove that reduced effect disables the build.",
+    "rating": "free",
+    "reason": "Ordinary damage or utility curses do not establish a core curse mechanic. Less curse effect may lower boss damage, but is not automatically excluded, including in Safe.",
     "confidence": "medium",
     "dependency_axes": [
       "scaling",
@@ -870,7 +1609,19 @@
       "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated.",
       "58% effective attack block / 75% effective spell block"
     ],
-    "assessment_status": "counter"
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "reduced_monster_curse_effect",
+    "assessment_basis": "dependency_rule",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "unaffected"
   },
   {
     "id": "map--481946502",
@@ -881,22 +1632,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
-  },
-  {
-    "id": "map--477049138",
-    "name": "Players have (-12—-9)% to all maximum Resistances",
-    "pattern": "m resistances$",
-    "rating": "dangerous",
-    "reason": "Normal pool, worst catalogue roll; 1x map modifier effect. Fire: 80% to 68% (1.60x damage taken); Cold: 75% to 63% (1.48x damage taken); Lightning: 80% to 68% (1.60x damage taken). Resistance-only estimate, before conversion, penetration and other mitigation. No encounter-specific lethal threshold is assumed.",
-    "confidence": "medium",
-    "dependency_axes": [
-      "defence"
-    ],
-    "dependency_evidence": [
-      "58% effective attack block / 75% effective spell block"
-    ],
-    "assessment_status": "counter"
+    "dependency_evidence": [],
+    "rule_id": "map--481946502",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map--268547495",
@@ -907,7 +1654,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map--268547495",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map--235013251",
@@ -928,7 +1686,19 @@
       "2494.81 /s; requires damage to a leechable target",
       "58% effective attack block / 75% effective spell block"
     ],
-    "assessment_status": "unaffected"
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "physical_thorns",
+    "assessment_basis": "dependency_rule",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "unaffected"
   },
   {
     "id": "map--225071089",
@@ -939,7 +1709,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map--225071089",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map--210607554",
@@ -950,11 +1731,22 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map--210607554",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map--172005981",
-    "name": "(40—49)% more Monster Life",
+    "name": "(40\u201449)% more Monster Life",
     "pattern": "4\\d% more monster life$",
     "rating": "uncomfortable",
     "reason": "More monster life slows clears; how much it matters depends on the encounter and PoB configuration.",
@@ -965,7 +1757,19 @@
     "dependency_evidence": [
       "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
     ],
-    "assessment_status": "counter"
+    "assessment_status": "counter",
+    "strict_avoid": false,
+    "rule_id": "monster_life",
+    "assessment_basis": "dependency_rule",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "risk"
   },
   {
     "id": "map--166549521",
@@ -976,7 +1780,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map--166549521",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map--128171261",
@@ -987,7 +1802,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map--128171261",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map--114660370",
@@ -997,13 +1823,25 @@
     "reason": "Winter Orb does not use Accuracy Rating to hit. Check secondary attacks.",
     "confidence": "medium",
     "dependency_axes": [
-      "delivery",
+      "scaling",
       "activation"
     ],
     "dependency_evidence": [
-      "Selected main skill: Winter Orb; player delivery. A utility minion/totem does not determine this."
+      "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
     ],
-    "assessment_status": "unaffected"
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "less_accuracy",
+    "assessment_basis": "dependency_rule",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "unaffected"
   },
   {
     "id": "map--106750911",
@@ -1014,7 +1852,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map--106750911",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map--106071007",
@@ -1025,7 +1874,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map--106071007",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map--80588106",
@@ -1036,37 +1896,44 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
-  },
-  {
-    "id": "map--54649013",
-    "name": "Monsters take (36—40)% reduced Extra Damage from Critical Strikes",
-    "pattern": "kes$",
-    "rating": "uncomfortable",
-    "reason": "Normal pool, worst catalogue roll; 1x map modifier effect. At 40% reduced extra critical damage, estimated main hit damage is 65.3% of baseline (34.7% lower). This estimates hit damage only; ailments, secondary skills and target-specific effects need review. Damage loss alone does not prove a Brick.",
-    "confidence": "medium",
-    "dependency_axes": [
-      "scaling"
-    ],
-    "dependency_evidence": [
-      "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
-    ],
-    "assessment_status": "counter"
+    "dependency_evidence": [],
+    "rule_id": "map--80588106",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map--26777606",
-    "name": "Monsters deal (90—110)% extra Physical Damage as Fire",
+    "name": "Monsters deal (90\u2014110)% extra Physical Damage as Fire",
     "pattern": "fire$",
     "rating": "free",
     "confidence": "low",
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map--26777606",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map-10729340",
-    "name": "Monsters gain (31—35)% of their Physical Damage as Extra Chaos Damage|Monsters Inflict Withered for 2 seconds on Hit",
+    "name": "Monsters gain (31\u201435)% of their Physical Damage as Extra Chaos Damage|Monsters Inflict Withered for 2 seconds on Hit",
     "pattern": "ds on",
     "rating": "free",
     "reason": "The saved PoB reports an infinite Chaos maximum hit taken (Chaos immunity); negative Chaos Resistance does not imply vulnerability.",
@@ -1077,18 +1944,41 @@
     "dependency_evidence": [
       "58% effective attack block / 75% effective spell block"
     ],
-    "assessment_status": "unaffected"
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "extra_chaos",
+    "assessment_basis": "dependency_rule",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "unaffected"
   },
   {
     "id": "map-17483843",
-    "name": "(25—30)% increased Monster Movement Speed|(35—45)% increased Monster Attack Speed|(35—45)% increased Monster Cast Speed",
+    "name": "(25\u201430)% increased Monster Movement Speed|(35\u201445)% increased Monster Attack Speed|(35\u201445)% increased Monster Cast Speed",
     "pattern": "er at",
     "rating": "free",
     "confidence": "low",
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map-17483843",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map-58884108",
@@ -1099,7 +1989,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map-58884108",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map-151806012",
@@ -1114,7 +2015,19 @@
     "dependency_evidence": [
       "58% effective attack block / 75% effective spell block"
     ],
-    "assessment_status": "unaffected"
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "reduced_suppression_and_evasion",
+    "assessment_basis": "dependency_rule",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "unaffected"
   },
   {
     "id": "map-156744008",
@@ -1125,7 +2038,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map-156744008",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map-194321329",
@@ -1136,7 +2060,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map-194321329",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map-252096506",
@@ -1153,7 +2088,45 @@
       "100 /s; continuous",
       "2494.81 /s; requires damage to a leechable target"
     ],
-    "assessment_status": "counter"
+    "assessment_status": "counter",
+    "strict_avoid": false,
+    "rule_id": "no_leech",
+    "assessment_basis": "snapshot_model",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "estimated",
+      "quantities": [
+        {
+          "name": "Life measured recovery",
+          "before": 0,
+          "after": 0,
+          "unit": "/s"
+        },
+        {
+          "name": "Mana measured recovery",
+          "before": 51.1,
+          "after": 51.1,
+          "unit": "/s"
+        },
+        {
+          "name": "Mana surplus after main skill cost",
+          "before": -66.38,
+          "after": -66.38,
+          "unit": "/s"
+        },
+        {
+          "name": "EnergyShield measured recovery",
+          "before": 2594.80635,
+          "after": 100.0,
+          "unit": "/s"
+        }
+      ],
+      "limitations": [
+        "The complete build is not recalculated under this modifier.",
+        "Leech requires targets; unconfirmed recharge, flasks, recoup and gains are not guaranteed continuous income. Missing channels are not treated as zero."
+      ]
+    },
+    "conclusion": "risk"
   },
   {
     "id": "map-339937661",
@@ -1164,7 +2137,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map-339937661",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map-472035128",
@@ -1175,18 +2159,40 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map-472035128",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map-583869527",
-    "name": "(20—30)% increased Magic Monsters",
+    "name": "(20\u201430)% increased Magic Monsters",
     "pattern": "d mag",
     "rating": "free",
     "confidence": "low",
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map-583869527",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map-775962019",
@@ -1197,7 +2203,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map-775962019",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map-823410479",
@@ -1208,7 +2225,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map-823410479",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map-829751875",
@@ -1223,7 +2251,19 @@
     "dependency_evidence": [
       "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
     ],
-    "assessment_status": "unaffected"
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "less_player_aoe",
+    "assessment_basis": "dependency_rule",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "unaffected"
   },
   {
     "id": "map-955801458",
@@ -1234,7 +2274,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map-955801458",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map-980061401",
@@ -1245,7 +2296,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map-980061401",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map-1062763755",
@@ -1256,7 +2318,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map-1062763755",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map-1078205993",
@@ -1277,7 +2350,19 @@
       "2494.81 /s; requires damage to a leechable target",
       "58% effective attack block / 75% effective spell block"
     ],
-    "assessment_status": "counter"
+    "assessment_status": "counter",
+    "strict_avoid": false,
+    "rule_id": "elemental_thorns",
+    "assessment_basis": "dependency_rule",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "risk"
   },
   {
     "id": "map-1082020744",
@@ -1288,7 +2373,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map-1082020744",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map-1101434369",
@@ -1309,7 +2405,19 @@
       "2494.81 /s; requires damage to a leechable target",
       "58% effective attack block / 75% effective spell block"
     ],
-    "assessment_status": "uncertain"
+    "assessment_status": "uncertain",
+    "strict_avoid": false,
+    "rule_id": "reduced_auras",
+    "assessment_basis": "unknown",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "uncertain"
   },
   {
     "id": "map-1202132179",
@@ -1320,7 +2428,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map-1202132179",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map-1211148661",
@@ -1331,7 +2450,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map-1211148661",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map-1283094925",
@@ -1342,7 +2472,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map-1283094925",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map-1305115176",
@@ -1360,7 +2501,45 @@
       "100 /s; continuous",
       "2494.81 /s; requires damage to a leechable target"
     ],
-    "assessment_status": "uncertain"
+    "assessment_status": "uncertain",
+    "strict_avoid": false,
+    "rule_id": "no_regen",
+    "assessment_basis": "unknown",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "estimated",
+      "quantities": [
+        {
+          "name": "Life measured recovery",
+          "before": 0,
+          "after": 0,
+          "unit": "/s"
+        },
+        {
+          "name": "Mana measured recovery",
+          "before": 51.1,
+          "after": 0,
+          "unit": "/s"
+        },
+        {
+          "name": "Mana surplus after main skill cost",
+          "before": -66.38,
+          "after": -117.48,
+          "unit": "/s"
+        },
+        {
+          "name": "EnergyShield measured recovery",
+          "before": 2594.80635,
+          "after": 2494.80635,
+          "unit": "/s"
+        }
+      ],
+      "limitations": [
+        "The complete build is not recalculated under this modifier.",
+        "Leech requires targets; unconfirmed recharge, flasks, recoup and gains are not guaranteed continuous income. Missing channels are not treated as zero."
+      ]
+    },
+    "conclusion": "uncertain"
   },
   {
     "id": "map-1424047266",
@@ -1371,7 +2550,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map-1424047266",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map-1428847539",
@@ -1382,11 +2572,22 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map-1428847539",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map-1541760497",
-    "name": "(25—30)% more Monster Life|Monsters cannot be Stunned",
+    "name": "(25\u201430)% more Monster Life|Monsters cannot be Stunned",
     "pattern": "unned$",
     "rating": "free",
     "reason": "No stun-triggered main damage or clear mechanic was detected.",
@@ -1395,15 +2596,27 @@
       "activation"
     ],
     "dependency_evidence": [],
-    "assessment_status": "unaffected"
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "unstunnable_monsters",
+    "assessment_basis": "dependency_rule",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "unaffected"
   },
   {
     "id": "map-1551446200",
     "name": "Monsters are Hexproof",
     "pattern": "re he",
-    "rating": "review",
-    "reason": "Hexes are enabled, but their contribution and any tree-based Hexproof bypass are not calculated. Confirm their role below.",
-    "confidence": "low",
+    "rating": "free",
+    "reason": "Ordinary damage or utility Hexes do not establish a core curse mechanic. Hexproof may reduce boss damage, but is not automatically excluded, including in Safe. You can block it manually or confirm an essential mechanic.",
+    "confidence": "medium",
     "dependency_axes": [
       "activation",
       "scaling"
@@ -1411,7 +2624,19 @@
     "dependency_evidence": [
       "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
     ],
-    "assessment_status": "uncertain"
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "hexproof",
+    "assessment_basis": "dependency_rule",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "unaffected"
   },
   {
     "id": "map-1578069823",
@@ -1422,7 +2647,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map-1578069823",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map-1598599541",
@@ -1433,7 +2669,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map-1598599541",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map-1634487773",
@@ -1448,7 +2695,19 @@
     "dependency_evidence": [
       "58% effective attack block / 75% effective spell block"
     ],
-    "assessment_status": "counter"
+    "assessment_status": "counter",
+    "strict_avoid": false,
+    "rule_id": "extra_projectiles",
+    "assessment_basis": "dependency_rule",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "risk"
   },
   {
     "id": "map-1723792253",
@@ -1459,7 +2718,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map-1723792253",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map-1743546402",
@@ -1470,18 +2740,40 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map-1743546402",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map-1799781772",
-    "name": "Monsters deal (90—110)% extra Physical Damage as Cold",
+    "name": "Monsters deal (90\u2014110)% extra Physical Damage as Cold",
     "pattern": "old$",
     "rating": "free",
     "confidence": "low",
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map-1799781772",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map-1882321261",
@@ -1492,7 +2784,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map-1882321261",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map-1899039946",
@@ -1503,7 +2806,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map-1899039946",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map-2080363489",
@@ -1514,7 +2828,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map-2080363489",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map-2105788016",
@@ -1525,7 +2850,18 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map-2105788016",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map-2122294281",
@@ -1536,17 +2872,1707 @@
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map-2122294281",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   },
   {
     "id": "map-2132856290",
-    "name": "Monsters deal (90—110)% extra Physical Damage as Lightning",
+    "name": "Monsters deal (90\u2014110)% extra Physical Damage as Lightning",
     "pattern": "as li",
     "rating": "free",
     "confidence": "low",
     "assessment_status": "policy",
     "reason": "Allowed by your reviewed normal-map Free policy; this is not a verified absence of every possible build interaction.",
     "dependency_axes": [],
-    "dependency_evidence": []
+    "dependency_evidence": [],
+    "rule_id": "map-2132856290",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map--2064669900",
+    "name": "Map Boss is accompanied by a Synthesis Boss",
+    "pattern": "cco",
+    "rating": "free",
+    "reason": "Nightmare review #1. Allowed by your reviewed Nightmare policy. This is an explicit selection preference, not proof of zero risk or zero damage loss. You can still block it manually.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 1,
+    "nightmare_decision": "free",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_free",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map--2038489408",
+    "name": "Players have -20% to all maximum Resistances",
+    "pattern": "m resistances$",
+    "rating": "brick",
+    "reason": "Nightmare review #2. Always blocked by your Nightmare review, including Greedy. This is your exclusion policy, not a claim that every build necessarily fails.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 2,
+    "nightmare_decision": "always_brick",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "counter",
+    "strict_avoid": false,
+    "rule_id": "minus_max_res",
+    "assessment_basis": "conservative_policy",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "estimated",
+      "quantities": [
+        {
+          "name": "Fire resistance",
+          "before": 80.0,
+          "after": 60.0,
+          "unit": "%"
+        },
+        {
+          "name": "Fire damage taken",
+          "before": 1,
+          "after": 2.0,
+          "unit": "relative"
+        },
+        {
+          "name": "Cold resistance",
+          "before": 75.0,
+          "after": 55.0,
+          "unit": "%"
+        },
+        {
+          "name": "Cold damage taken",
+          "before": 1,
+          "after": 1.8,
+          "unit": "relative"
+        },
+        {
+          "name": "Lightning resistance",
+          "before": 80.0,
+          "after": 60.0,
+          "unit": "%"
+        },
+        {
+          "name": "Lightning damage taken",
+          "before": 1,
+          "after": 2.0,
+          "unit": "relative"
+        }
+      ],
+      "limitations": [
+        "The complete build is not recalculated under this modifier.",
+        "Resistance-only model; conversion, penetration and other mitigation are excluded."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map--1940135977",
+    "name": "Monsters have +50% Chance to Block Attack Damage",
+    "pattern": "k damage$",
+    "rating": "free",
+    "reason": "Nightmare review #3. No player attack-hit main damage is established. Allowed by your Nightmare policy; utility attacks and unmeasured minion attack contributions are not treated as a primary dependency.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 3,
+    "nightmare_decision": "attack_hits",
+    "dependency_axes": [
+      "delivery",
+      "activation",
+      "scaling"
+    ],
+    "dependency_evidence": [
+      "Selected main skill: Winter Orb; player delivery. A utility minion/totem does not determine this.",
+      "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_attack_hits",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map--1818595967",
+    "name": "Rare monsters in area are Shaper-Touched",
+    "pattern": "re sha",
+    "rating": "free",
+    "reason": "Nightmare review #4. Allowed by your reviewed Nightmare policy. This is an explicit selection preference, not proof of zero risk or zero damage loss. You can still block it manually.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 4,
+    "nightmare_decision": "free",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_free",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map--1647756153",
+    "name": "(35\u201445)% increased number of Rare Monsters|Rare Monsters each have 1 additional Modifiers",
+    "pattern": "fiers$",
+    "rating": "free",
+    "reason": "Nightmare review #5. Allowed by your reviewed Nightmare policy. This is an explicit selection preference, not proof of zero risk or zero damage loss. You can still block it manually.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 5,
+    "nightmare_decision": "free",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_free",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map--1629200695",
+    "name": "Area contains Unstable Tentacle Fiends",
+    "pattern": "stab",
+    "rating": "brick",
+    "reason": "Nightmare review #6. Always blocked by your Nightmare review, including Greedy. This is your exclusion policy, not a claim that every build necessarily fails.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 6,
+    "nightmare_decision": "always_brick",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "counter",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_always_brick",
+    "assessment_basis": "conservative_policy",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map--1621497665",
+    "name": "Monsters have +1 to Maximum Frenzy Charges|Monsters gain a Frenzy Charge on Hit",
+    "pattern": "mum f",
+    "rating": "free",
+    "reason": "Nightmare review #7. Allowed by your reviewed Nightmare policy. This is an explicit selection preference, not proof of zero risk or zero damage loss. You can still block it manually.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 7,
+    "nightmare_decision": "free",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_free",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map--1430865583",
+    "name": "Rare Monsters have Physical Thorns reflecting 1500 Physical Damage|Rare Monsters have Elemental Thorns reflecting 2500 Elemental Damage",
+    "pattern": "al thorns",
+    "rating": "dangerous",
+    "reason": "Nightmare review #8. Avoid for smooth mapping under your Nightmare review. Blocked by Balanced and Safe; not automatically labeled a mechanical Brick.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 8,
+    "nightmare_decision": "avoid",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "counter",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_avoid",
+    "assessment_basis": "conservative_policy",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map--1158025910",
+    "name": "Monster Damage Penetrates 15% Elemental Resistances",
+    "pattern": "trate",
+    "rating": "free",
+    "reason": "Nightmare review #9. Allowed by your reviewed Nightmare policy. This is an explicit selection preference, not proof of zero risk or zero damage loss. You can still block it manually.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 9,
+    "nightmare_decision": "free",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_free",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map--949334443",
+    "name": "Monsters' skills Chain 3 additional times|Monsters' Projectiles can Chain when colliding with Terrain",
+    "pattern": "idi",
+    "rating": "free",
+    "reason": "Nightmare review #10. Allowed by your reviewed Nightmare policy. This is an explicit selection preference, not proof of zero risk or zero damage loss. You can still block it manually.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 10,
+    "nightmare_decision": "free",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_free",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map--933231182",
+    "name": "(25\u201430)% increased Monster Movement Speed|(35\u201445)% increased Monster Attack Speed|(35\u201445)% increased Monster Cast Speed",
+    "pattern": "r cas",
+    "rating": "dangerous",
+    "reason": "Nightmare review #11. Avoid for smooth mapping under your Nightmare review. Blocked by Balanced and Safe; not automatically labeled a mechanical Brick.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 11,
+    "nightmare_decision": "avoid",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "counter",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_avoid",
+    "assessment_basis": "conservative_policy",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map--931745379",
+    "name": "Monsters inflict 2 Grasping Vines on Hit",
+    "pattern": "g vi",
+    "rating": "free",
+    "reason": "Nightmare review #12. Allowed by your reviewed Nightmare policy. This is an explicit selection preference, not proof of zero risk or zero damage loss. You can still block it manually.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 12,
+    "nightmare_decision": "free",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_free",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map--887278806",
+    "name": "Area contains Drowning Orbs",
+    "pattern": "g or",
+    "rating": "dangerous",
+    "reason": "Nightmare review #13. Avoid for smooth mapping under your Nightmare review. Blocked by Balanced and Safe; not automatically labeled a mechanical Brick.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 13,
+    "nightmare_decision": "avoid",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "counter",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_avoid",
+    "assessment_basis": "conservative_policy",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map--645418310",
+    "name": "Monsters gain (180\u2014200)% of their Physical Damage as Extra Damage of a random Element",
+    "pattern": "element$",
+    "rating": "dangerous",
+    "reason": "Nightmare review #14. Avoid for smooth mapping under your Nightmare review. Blocked by Balanced and Safe; not automatically labeled a mechanical Brick.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 14,
+    "nightmare_decision": "avoid",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "counter",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_avoid",
+    "assessment_basis": "conservative_policy",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map--258709095",
+    "name": "+50% Monster Physical Damage Reduction|+35% Monster Chaos Resistance|+55% Monster Elemental Resistances",
+    "pattern": "er ph",
+    "rating": "free",
+    "reason": "Nightmare review #15. Allowed by your reviewed Nightmare policy. This is an explicit selection preference, not proof of zero risk or zero damage loss. You can still block it manually.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 15,
+    "nightmare_decision": "free",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_free",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map--126908257",
+    "name": "All Monster Damage can Ignite, Freeze and Shock|Monsters Ignite, Freeze and Shock on Hit",
+    "pattern": "hock$",
+    "rating": "free",
+    "reason": "Nightmare review #16. Allowed by your reviewed Nightmare policy. This is an explicit selection preference, not proof of zero risk or zero damage loss. You can still block it manually.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 16,
+    "nightmare_decision": "free",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_free",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map--105914721",
+    "name": "Players have 40% less effect of Flasks applied to them",
+    "pattern": "em$",
+    "rating": "free",
+    "reason": "Nightmare review #17. No established flask investment or confirmed flask dependency meets your Nightmare rule. Merely equipping utility flasks does not automatically exclude this modifier.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 17,
+    "nightmare_decision": "flask_investment",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_flask_investment",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map-127168403",
+    "name": "Monsters gain (80\u2014100)% of their Physical Damage as Extra Chaos Damage",
+    "pattern": "s damage$",
+    "rating": "free",
+    "reason": "Nightmare review #18. Allowed by your Nightmare threshold: Chaos immunity or at least 70% saved Chaos Resistance. Resistance at 70% is not damage immunity or necessarily the resistance cap.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 18,
+    "nightmare_decision": "chaos_threshold",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_chaos_threshold",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map-246480838",
+    "name": "Monsters have (650\u2014700)% increased Critical Strike Chance|+(70\u201475)% to Monster Critical Strike Multiplier",
+    "pattern": "lier$",
+    "rating": "dangerous",
+    "reason": "Nightmare review #19. Avoid under your Nightmare rule: 100% reduced extra damage taken from critical strikes is not established. Saved character crit chance/multiplier does not establish defensive crit protection.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 19,
+    "nightmare_decision": "crit_immunity",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "counter",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_crit_immunity",
+    "assessment_basis": "conservative_policy",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map-284489036",
+    "name": "Players have (25\u201430)% less Area of Effect",
+    "pattern": "ss are",
+    "rating": "free",
+    "reason": "Nightmare review #20. Allowed by your reviewed Nightmare policy. This is an explicit selection preference, not proof of zero risk or zero damage loss. You can still block it manually.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 20,
+    "nightmare_decision": "free",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_free",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map-357242916",
+    "name": "Monsters have +1 to Maximum Endurance Charges|Monsters gain an Endurance Charge when hit",
+    "pattern": "arge w",
+    "rating": "free",
+    "reason": "Nightmare review #21. Allowed by your reviewed Nightmare policy. This is an explicit selection preference, not proof of zero risk or zero damage loss. You can still block it manually.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 21,
+    "nightmare_decision": "free",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_free",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map-639399394",
+    "name": "Unique Monsters have 1 random Shrine Buffs",
+    "pattern": "shrine buffs$",
+    "rating": "free",
+    "reason": "Nightmare review #22. Allowed by your reviewed Nightmare policy. This is an explicit selection preference, not proof of zero risk or zero damage loss. You can still block it manually.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 22,
+    "nightmare_decision": "free",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_free",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map-647925005",
+    "name": "Players are Cursed with Vulnerability|Players are Cursed with Temporal Chains|Players are Cursed with Elemental Weakness",
+    "pattern": "h vu",
+    "rating": "free",
+    "reason": "Nightmare review #23. Allowed by your reviewed Nightmare policy. This is an explicit selection preference, not proof of zero risk or zero damage loss. You can still block it manually.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 23,
+    "nightmare_decision": "free",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_free",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map-670500310",
+    "name": "Monsters cannot be Stunned|Monsters' Action Speed cannot be modified to below Base Value|Monsters' Movement Speed cannot be modified to below Base Value",
+    "pattern": "' m",
+    "rating": "free",
+    "reason": "Nightmare review #24. No established stun-based main damage/clear dependency. Allowed under your Nightmare policy, including the affix\u2019s separate slow restrictions.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 24,
+    "nightmare_decision": "stun_dependency",
+    "dependency_axes": [
+      "delivery",
+      "activation",
+      "scaling"
+    ],
+    "dependency_evidence": [
+      "Selected main skill: Winter Orb; player delivery. A utility minion/totem does not determine this.",
+      "{fractured}49% increased damage with hits against chilled enemies Its share of total damage is not recalculated."
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_stun_dependency",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map-707446389",
+    "name": "Area contains Runes of the Searing Exarch",
+    "pattern": "rch$",
+    "rating": "free",
+    "reason": "Nightmare review #25. Allowed by your reviewed Nightmare policy. This is an explicit selection preference, not proof of zero risk or zero damage loss. You can still block it manually.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 25,
+    "nightmare_decision": "free",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_free",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map-972998450",
+    "name": "Rare monsters in area Temporarily Revive on death",
+    "pattern": "viv",
+    "rating": "free",
+    "reason": "Nightmare review #26. Allowed by your reviewed Nightmare policy. This is an explicit selection preference, not proof of zero risk or zero damage loss. You can still block it manually.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 26,
+    "nightmare_decision": "free",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_free",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map-1014295028",
+    "name": "Monsters Poison on Hit|All Damage from Monsters' Hits can Poison|Monsters have 100% increased Poison Duration",
+    "pattern": "son$",
+    "rating": "free",
+    "reason": "Nightmare review #27. Allowed by your reviewed Nightmare policy. This is an explicit selection preference, not proof of zero risk or zero damage loss. You can still block it manually.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 27,
+    "nightmare_decision": "free",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_free",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map-1061710360",
+    "name": "Players are assaulted by Bloodstained Sawblades",
+    "pattern": "wb",
+    "rating": "free",
+    "reason": "Nightmare review #28. Allowed by your reviewed Nightmare policy. This is an explicit selection preference, not proof of zero risk or zero damage loss. You can still block it manually.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 28,
+    "nightmare_decision": "free",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_free",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map-1117764869",
+    "name": "Debuffs on Monsters expire 100% faster",
+    "pattern": "^deb",
+    "rating": "free",
+    "reason": "Nightmare review #29. Allowed by your reviewed Nightmare policy. This is an explicit selection preference, not proof of zero risk or zero damage loss. You can still block it manually.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 29,
+    "nightmare_decision": "free",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_free",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map-1205583947",
+    "name": "Players have (50\u201460)% reduced Maximum total Life, Mana and Energy Shield Recovery per second from Leech",
+    "pattern": "ech$",
+    "rating": "free",
+    "reason": "Nightmare review #30. Allowed by your reviewed Nightmare policy. This is an explicit selection preference, not proof of zero risk or zero damage loss. You can still block it manually.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 30,
+    "nightmare_decision": "free",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "reduced_leech",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "estimated",
+      "quantities": [
+        {
+          "name": "Life measured recovery",
+          "before": 0,
+          "after": 0,
+          "unit": "/s"
+        },
+        {
+          "name": "Mana measured recovery",
+          "before": 51.1,
+          "after": 51.1,
+          "unit": "/s"
+        },
+        {
+          "name": "Mana surplus after main skill cost",
+          "before": -66.38,
+          "after": -66.38,
+          "unit": "/s"
+        },
+        {
+          "name": "EnergyShield measured recovery",
+          "before": 2594.80635,
+          "after": 1097.92254,
+          "unit": "/s"
+        }
+      ],
+      "limitations": [
+        "The complete build is not recalculated under this modifier.",
+        "Leech requires targets; unconfirmed recharge, flasks, recoup and gains are not guaranteed continuous income. Missing channels are not treated as zero."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map-1313044496",
+    "name": "25% chance for Rare Monsters to Fracture on death",
+    "pattern": "frac",
+    "rating": "free",
+    "reason": "Nightmare review #31. Allowed by your reviewed Nightmare policy. This is an explicit selection preference, not proof of zero risk or zero damage loss. You can still block it manually.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 31,
+    "nightmare_decision": "free",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_free",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map-1333860371",
+    "name": "Players are targeted by a Meteor when they use a Flask",
+    "pattern": "teo",
+    "rating": "free",
+    "reason": "Nightmare review #32. Allowed by your reviewed Nightmare policy. This is an explicit selection preference, not proof of zero risk or zero damage loss. You can still block it manually.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 32,
+    "nightmare_decision": "free",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_free",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map-1464066514",
+    "name": "Players have (25\u201430)% less Defences",
+    "pattern": "s def",
+    "rating": "dangerous",
+    "reason": "Nightmare review #33. Avoid less Defences for smooth Nightmare mapping under your review. Life and Mana are not directly reduced; a universal mechanical Brick is not asserted.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 33,
+    "nightmare_decision": "defences",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "counter",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_defences",
+    "assessment_basis": "conservative_policy",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map-1469490158",
+    "name": "Monsters have 100% increased Area of Effect|Monsters fire 2 additional Projectiles",
+    "pattern": "tiles$",
+    "rating": "dangerous",
+    "reason": "Nightmare review #34. Avoid for smooth mapping under your Nightmare review. Blocked by Balanced and Safe; not automatically labeled a mechanical Brick.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 34,
+    "nightmare_decision": "avoid",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "counter",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_avoid",
+    "assessment_basis": "conservative_policy",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map-1494523238",
+    "name": "Monsters have +1 to Maximum Power Charges|Monsters gain a Power Charge on Hit",
+    "pattern": "mum p",
+    "rating": "free",
+    "reason": "Nightmare review #35. Allowed by your reviewed Nightmare policy. This is an explicit selection preference, not proof of zero risk or zero damage loss. You can still block it manually.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 35,
+    "nightmare_decision": "free",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_free",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map-1538178254",
+    "name": "Area contains Labyrinth Hazards",
+    "pattern": "haz",
+    "rating": "free",
+    "reason": "Nightmare review #36. Allowed by your reviewed Nightmare policy. This is an explicit selection preference, not proof of zero risk or zero damage loss. You can still block it manually.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 36,
+    "nightmare_decision": "free",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_free",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map-1665221611",
+    "name": "Rare Monsters have Volatile Cores",
+    "pattern": "res$",
+    "rating": "dangerous",
+    "reason": "Nightmare review #37. Avoid for smooth mapping under your Nightmare review. Blocked by Balanced and Safe; not automatically labeled a mechanical Brick.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 37,
+    "nightmare_decision": "avoid",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "counter",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_avoid",
+    "assessment_basis": "conservative_policy",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map-1756122717",
+    "name": "The Maven interferes with Players",
+    "pattern": "rfe",
+    "rating": "free",
+    "reason": "Nightmare review #38. Allowed by your reviewed Nightmare policy. This is an explicit selection preference, not proof of zero risk or zero damage loss. You can still block it manually.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 38,
+    "nightmare_decision": "free",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_free",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map-1861748274",
+    "name": "Auras from Player Skills which affect Allies also affect Enemies",
+    "pattern": "^aur",
+    "rating": "free",
+    "reason": "Nightmare review #39. Allowed by your reviewed Nightmare policy. This is an explicit selection preference, not proof of zero risk or zero damage loss. You can still block it manually.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 39,
+    "nightmare_decision": "free",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_free",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map-1932675161",
+    "name": "Area contains patches of moving Marked Ground, inflicting random Marks",
+    "pattern": "rks",
+    "rating": "free",
+    "reason": "Nightmare review #40. Allowed by your reviewed Nightmare policy. This is an explicit selection preference, not proof of zero risk or zero damage loss. You can still block it manually.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 40,
+    "nightmare_decision": "free",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_free",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map-poedb-MapMonsterDamage",
+    "name": "(30\u201440)% increased Monster Damage",
+    "pattern": "monster damage$",
+    "rating": "free",
+    "reason": "Nightmare review #41. Allowed by your reviewed Nightmare policy. This is an explicit selection preference, not proof of zero risk or zero damage loss. You can still block it manually.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 41,
+    "nightmare_decision": "free",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_free",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map-poedb-MapMonstersMaximumLifeAddedEnergyShield",
+    "name": "Monsters gain (70\u201480)% of Maximum Life as Extra Maximum Energy Shield",
+    "pattern": "m energy shield$",
+    "rating": "free",
+    "reason": "Nightmare review #42. Allowed by your reviewed Nightmare policy. This is an explicit selection preference, not proof of zero risk or zero damage loss. You can still block it manually.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 42,
+    "nightmare_decision": "free",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_free",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map-poedb-MapBossIsPossessed",
+    "name": "Unique Bosses are Possessed",
+    "pattern": "are possessed$",
+    "rating": "uncomfortable",
+    "reason": "Nightmare review #43. Optional caution under your Nightmare review. Blocked only by Safe; allowed by Balanced and Greedy.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 43,
+    "nightmare_decision": "safe_only",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "counter",
+    "strict_avoid": true,
+    "rule_id": "nightmare_policy_safe_only",
+    "assessment_basis": "conservative_policy",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map-poedb-MapMonstersChanceToSuppressSpells",
+    "name": "Monsters have +100% chance to Suppress Spell Damage",
+    "pattern": "suppress spell damage$",
+    "rating": "uncomfortable",
+    "reason": "Nightmare review #44. Optional caution under your Nightmare review. Blocked only by Safe; allowed by Balanced and Greedy.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 44,
+    "nightmare_decision": "safe_only",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "counter",
+    "strict_avoid": true,
+    "rule_id": "nightmare_policy_safe_only",
+    "assessment_basis": "conservative_policy",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map-poedb-MapMonstersBaseSelfCriticalMultiplier",
+    "name": "Monsters take (35\u201445)% reduced Extra Damage from Critical Strikes",
+    "pattern": "extra damage from critical strikes$",
+    "rating": "free",
+    "reason": "Nightmare review #45. Allowed by your reviewed Nightmare policy. This is an explicit selection preference, not proof of zero risk or zero damage loss. You can still block it manually.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 45,
+    "nightmare_decision": "free",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "monster_crit_reduction",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "estimated",
+      "quantities": [
+        {
+          "name": "Expected main hit damage",
+          "before": 1,
+          "after": 0.609840425531915,
+          "unit": "relative"
+        }
+      ],
+      "limitations": [
+        "The complete build is not recalculated under this modifier.",
+        "Hit-only expectation; enemy mitigation, secondary skills and encounter thresholds are excluded."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map-poedb-MapMonsterLife",
+    "name": "(90\u2014100)% more Monster Life",
+    "pattern": "more monster life$",
+    "rating": "free",
+    "reason": "Nightmare review #46. Allowed by your reviewed Nightmare policy. This is an explicit selection preference, not proof of zero risk or zero damage loss. You can still block it manually.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 46,
+    "nightmare_decision": "free",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_free",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
+  },
+  {
+    "id": "map-poedb-MapPlayerBuffsExpireFaster",
+    "name": "Buffs on Players expire 100% faster",
+    "pattern": "^buffs on players expire",
+    "rating": "free",
+    "reason": "Nightmare review #47. Allowed by your reviewed Nightmare policy. This is an explicit selection preference, not proof of zero risk or zero damage loss. You can still block it manually.",
+    "confidence": "low",
+    "nightmare_policy": true,
+    "nightmare_review_number": 47,
+    "nightmare_decision": "free",
+    "dependency_axes": [
+      "defence",
+      "sustain"
+    ],
+    "dependency_evidence": [
+      "51.1 /s; continuous",
+      "100 /s; continuous",
+      "2494.81 /s; requires damage to a leechable target",
+      "58% effective attack block / 75% effective spell block"
+    ],
+    "assessment_status": "unaffected",
+    "strict_avoid": false,
+    "rule_id": "nightmare_policy_free",
+    "assessment_basis": "policy_allowance",
+    "measurement": {
+      "engine": "saved_snapshot",
+      "status": "unsupported",
+      "quantities": [],
+      "limitations": [
+        "The complete build is not recalculated under this modifier."
+      ]
+    },
+    "conclusion": "policy"
   }
 ]

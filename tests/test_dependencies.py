@@ -38,7 +38,7 @@ class DependencyTests(unittest.TestCase):
         p = self.profile('Future Unsupported Skill')
         self.assertFalse(p['coverage']['main_skill_recognized'])
         mods = {m['id']: m for m in classify(p)}
-        for key in ['hexproof', 'reduced_auras', 'unstunnable_monsters', 'less_player_aoe']:
+        for key in ['reduced_auras', 'unstunnable_monsters', 'less_player_aoe']:
             self.assertEqual(mods[key]['rating'], 'review')
             self.assertEqual(mods[key]['assessment_status'], 'uncertain')
 

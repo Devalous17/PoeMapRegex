@@ -40,7 +40,7 @@ def load_code(source: str) -> str:
             with urllib.request.build_opener(_NoRedirect).open(request, timeout=12) as response:
                 raw = response.read(MAX_INPUT + 1)
         except (urllib.error.URLError, TimeoutError, OSError) as exc:
-            raise BuildInputError(f"Could not download this pobb.in build: {exc}") from exc
+            raise BuildInputError("Could not download this pobb.in build. Try again or paste the export code.") from exc
         if len(raw) > MAX_INPUT:
             raise BuildInputError("The pobb.in export is too large.")
         try:
@@ -58,16 +58,24 @@ def decode_build(source: str) -> ET.Element:
         compressed = base64.urlsafe_b64decode(code + "=" * (-len(code) % 4))
         inflater = zlib.decompressobj()
         xml = inflater.decompress(compressed, MAX_XML + 1)
-        if len(xml) > MAX_XML or inflater.unconsumed_tail or not inflater.eof:
+        if len(xml) > MAX_XML or inflater.unconsumed_tail or not inflater.eof or inflater.unused_data:
             raise BuildInputError("The decoded build is too large or incomplete.")
     except (ValueError, zlib.error) as exc:
         if isinstance(exc, BuildInputError):
             raise
         raise BuildInputError("The export code could not be decoded.") from exc
-    if b"<!DOCTYPE" in xml.upper() or b"<!ENTITY" in xml.upper():
+    # PoB exports are UTF-8. Decode before checking declarations so alternate
+    # XML encodings cannot hide entity declarations behind embedded NUL bytes.
+    try:
+        xml_text = xml.decode("utf-8-sig")
+    except UnicodeDecodeError as exc:
+        raise BuildInputError("The XML export must use UTF-8 encoding.") from exc
+    if "\x00" in xml_text:
+        raise BuildInputError("The XML export contains unsupported null bytes.")
+    if "<!DOCTYPE" in xml_text.upper() or "<!ENTITY" in xml_text.upper():
         raise BuildInputError("This XML export contains unsupported entities.")
     try:
-        root = ET.fromstring(xml)
+        root = ET.fromstring(xml_text)
     except ET.ParseError as exc:
         raise BuildInputError("The decoded build is not valid XML.") from exc
     if root.tag != "PathOfBuilding":
@@ -229,14 +237,17 @@ def build_profile(root: ET.Element) -> dict:
     }
     flask_effect_lines = re.findall(r"(\d+)% increased (?:effect of flasks|flask effect|effect of magic utility flasks)", item_text)
     flask_effect_investment = sum(int(value) for value in flask_effect_lines)
+    global_flask_effect_investment = flask_effect_investment
+    flask_charge_investment = sum(int(value) for value in re.findall(r"(\d+)% increased (?:flask charges gained|flask charge recovery|charges gained by flasks)", item_text))
     flask_effect_investment += sum(int(value) for flask_text in flask_item_texts for value in re.findall(r"(\d+)% increased effect(?:\n|$)", flask_text))
     nature_adrenaline = "51101" in allocated_nodes
     # For this tool, Balbala plus any empty flask slot is treated as an active
     # The Traitor setup. One empty slot is enough; a filled flask must benefit.
     traitor_likely = (empty_flask_slots or 0) >= 1 and filled_flasks >= 1 and ("the traitor" in item_text or "brutal restraint" in item_text and "balbala" in item_text)
     active_hexes = gem_names & {"frostbite", "flammability", "conductivity", "despair", "elemental weakness", "enfeeble", "temporal chains", "vulnerability", "punishment"}
-    curse_dependent = ("anathema" in item_text or "impending doom" in gem_names or
-                       len(active_hexes) >= 2 or main_skill_lower == "hexblast" and bool(active_hexes))
+    # Ordinary one/two-curse damage setups do not establish a core dependency.
+    # Anathema is relevant only when the active setup actually exceeds two Hexes.
+    curse_dependent = "anathema" in item_text and len(active_hexes) > 2
     crit_chance = stats.get("CritChance")
     raw_multi = stats.get("CritMultiplier")
     crit_multiplier = raw_multi * 100 if raw_multi is not None and raw_multi <= 20 else raw_multi
@@ -315,6 +326,10 @@ def build_profile(root: ET.Element) -> dict:
         "nature_adrenaline": nature_adrenaline,
         "traitor_likely": traitor_likely,
         "flask_effect_investment": flask_effect_investment,
+        "global_flask_effect_investment": global_flask_effect_investment,
+        "flask_charge_investment": flask_charge_investment,
+        "crit_extra_damage_reduction": stats.get('CritExtraDamageReduction') if stats.get('CritExtraDamageReduction') is not None else
+            100 if re.search(r'(?m)^(?:you )?take no extra damage from critical strikes\s*$', item_text) else None,
         "curse_dependent": curse_dependent,
         "crit_chance": crit_chance,
         "crit_multiplier": crit_multiplier,
@@ -339,6 +354,7 @@ def build_profile(root: ET.Element) -> dict:
         "ward": stats.get("Ward"),
         "total_dps": stats.get("TotalDPS"),
         "chaos_resistance": stats.get("ChaosResist"),
+        "ailment_avoidance": {kind: stats.get(kind + 'AvoidChance') for kind in ('Poison','Ignite','Freeze','Shock')},
         "chaos_immune": chaos_immune,
         "elemental_resistances": {name: stats.get(f"{name}Resist") for name in ("Fire", "Cold", "Lightning")},
         "life_leech": stats.get("LifeLeechGainRate") or 0,

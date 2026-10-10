@@ -152,7 +152,7 @@
     "name": "High crit loss slows damage without an automatic Brick",
     "kind": "synthetic scenario; not a full character PoB",
     "mod": "monster_crit_reduction",
-    "expected": "uncomfortable",
+    "expected": "dangerous",
     "profile": {
       "life": 5000,
       "energy_shield": 0,
@@ -336,10 +336,10 @@
     }
   },
   {
-    "name": "Utility Hex is a comfort loss",
+    "name": "Utility Hex is allowed by default",
     "kind": "synthetic scenario; not a full character PoB",
     "mod": "hexproof",
-    "expected": "uncomfortable",
+    "expected": "free",
     "profile": {
       "life": 5000,
       "energy_shield": 0,
@@ -359,10 +359,10 @@
     }
   },
   {
-    "name": "Damage Hex has unmeasured damage impact",
+    "name": "Ordinary damage Hex is allowed by default",
     "kind": "synthetic scenario; not a full character PoB",
     "mod": "hexproof",
-    "expected": "dangerous",
+    "expected": "free",
     "profile": {
       "life": 5000,
       "energy_shield": 0,
@@ -450,10 +450,10 @@
     }
   },
   {
-    "name": "Unmeasured curse contribution stays unknown",
+    "name": "Ordinary curse effect is allowed without a core mechanic",
     "kind": "synthetic scenario; not a full character PoB",
     "mod": "reduced_monster_curse_effect",
-    "expected": "review",
+    "expected": "free",
     "profile": {
       "life": 5000,
       "energy_shield": 0,
@@ -594,7 +594,7 @@
     "name": "Optional flask uptime affects comfort",
     "kind": "synthetic scenario; not a full character PoB",
     "mod": "reduced_flask_charges",
-    "expected": "uncomfortable",
+    "expected": "free",
     "profile": {
       "life": 5000,
       "energy_shield": 0,

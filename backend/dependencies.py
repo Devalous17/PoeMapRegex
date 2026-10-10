@@ -31,21 +31,34 @@ def enrich_profile(profile, root, stats, main_group, groups, item_text, main_ite
         profile['uses_brands'] = 'Brand' in tags
         # Minion buffs are not proof that minions are the main damage source.
         profile['minion_damage_primary'] = 'CreatesMinion' in tags or 'Minion' in tags and 'Attack' not in tags and 'Damage' not in tags
-        profile['main_skill_has_cooldown'] = profile.get('main_skill_has_cooldown') or 'Cooldown' in tags
+        # A saved global Cooldown stat can belong to a utility guard/movement
+        # skill. For recognized skills, use the selected skill's metadata.
+        profile['main_skill_has_cooldown'] = 'Cooldown' in tags
         if profile['damage_type'] == 'unknown' and 'DamageOverTime' in tags and 'Damage' not in tags:
             element = next((e.lower() for e in ['Chaos', 'Fire', 'Cold', 'Physical'] if e in tags), None)
             if element:
                 profile['damage_type'] = element + ' dot'
         profile['main_damage_is_pure_dot'] = 'DamageOverTime' in tags and 'Damage' not in tags and not profile['minion_damage_primary']
+        if profile['main_skill'].lower() in {'righteous fire', 'vaal righteous fire'}:
+            # The Vaal activation's cooldown does not gate the continuing RF burn.
+            profile['main_skill_has_cooldown'] = False
     core_coc = any('cast on critical strike' in s for s in supports)
     profile['uses_cast_on_crit'] = core_coc
+    accuracy_sources = [line.strip() for line in item_text.splitlines()
+                        if re.search(r'per \d+ accuracy rating', line)
+                        and re.search(r'damage|attack speed|critical strike', line)]
+    profile['accuracy_scaling_sources'] = accuracy_sources if profile['main_skill_kind'] == 'attack' else []
+    profile['accuracy_scales_offence'] = bool(profile['accuracy_scaling_sources'])
+    profile['main_accuracy'] = max((stats.get(key) or 0 for key in ('Accuracy', 'MainHandAccuracy', 'OffHandAccuracy')), default=0) or None
     linked_trigger = any('cast when damage taken' in s or 'cast while channelling' in s for s in supports)
     item_trigger = bool(re.search(r'trigger[^\n]*socketed[^\n]*(?:spell|skill)', main_item_text) and 'cooldown' in main_item_text)
     profile['main_trigger_detected'] = core_coc or linked_trigger or item_trigger
-    profile['core_trigger_cooldown'] = core_coc or any('cast while channelling' in s for s in supports) or item_trigger
-    if linked_trigger:
+    profile['core_trigger_cooldown'] = core_coc or item_trigger
+    # CwC uses a fixed trigger interval, not a CDR-scaled trigger cooldown.
+    # An independently cooldown-based selected spell remains relevant.
+    if any('cast when damage taken' in s for s in supports):
         profile['main_skill_has_cooldown'] = True
-    profile['core_hex_trigger'] = any('impending doom' in s for s in supports)
+    profile['core_hex_trigger'] = 'Hex' in tags and any('impending doom' in s for s in supports)
     enabled_meta = [(by_id.get(g.get('skillId')) or by_name.get(g.get('nameSpec', '').lower())) for g in gems]
     profile['uses_auras'] = profile.get('uses_auras', False) or any(m and 'Aura' in m['tags'] and 'Hex' not in m['tags'] and 'Curse' not in m['tags'] for m in enabled_meta)
     profile['uses_hexes'] = profile.get('uses_hexes', False) or any(m and 'Hex' in m['tags'] for m in enabled_meta)
@@ -59,6 +72,18 @@ def enrich_profile(profile, root, stats, main_group, groups, item_text, main_ite
         profile['ailment_damage_primary'] = True
     profile['single_poison_main_skill'] = profile['main_skill'].lower() == 'viper strike of the mamba'
     profile['impale_damage_primary'] = total > 0 and (stats.get('ImpaleDPS') or 0) >= total * .5
+    # These hints preserve Review for an unmeasured specialized ailment setup.
+    # Ordinary elemental damage and chance to shock/chill are not reliance.
+    profile['ailment_scaling_hints'] = {
+        kind: any(word in ' '.join(supports) for word in words)
+              or bool(re.search(item_pattern, item_text))
+              or any(word in profile['main_skill'].lower() for word in skill_words)
+        for kind, words, item_pattern, skill_words in [
+            ('poison', ('poison', 'deadly ailments', 'unbound ailments'), r'poison damage|damage with poison|poison duration', ('viper strike', 'cobra lash', 'pestilent strike')),
+            ('bleed', ('bleed', 'deadly ailments', 'unbound ailments'), r'bleeding damage|damage with bleeding', ('puncture', 'lacerate of haemorrhage')),
+            ('ignite', ('ignite', 'deadly ailments', 'unbound ailments'), r'ignite damage|damage with ignites', ('burning arrow',)),
+            ('impale', ('impale',), r'impale effect|impale damage', ()),
+        ]}
     profile['saved_non_elemental_ailment_dps'] = {kind: stats.get(key) for kind, key in [('poison', 'PoisonDPS'), ('bleed', 'BleedDPS'), ('impale', 'ImpaleDPS')]}
     # Selected supports and equipped conditional modifiers establish a dependency,
     # not its contribution. Utility gems and unequipped items do not count.
@@ -93,6 +118,11 @@ def enrich_profile(profile, root, stats, main_group, groups, item_text, main_ite
         add('conditional_ailment_' + str(i), 'scaling', condition['source'], 'detected', condition['evidence'] + ' Its share of total damage is not recalculated.')
     for attribute in sorted(set(re.findall(r'per \d+ (strength|dexterity|intelligence|maximum mana|maximum energy shield|armour|evasion)', item_text))):
         add('stack_' + attribute.replace(' ', '_'), 'scaling', attribute.title() + ' scaling', 'detected', 'Equipped modifier explicitly scales per ' + attribute + '; the size of this contribution is not recalculated.')
+    if profile.get('accuracy_scales_offence'):
+        add('stack_accuracy', 'scaling', 'Accuracy damage/speed scaling', 'detected',
+            'Equipped offensive scaling per Accuracy: ' + '; '.join(profile['accuracy_scaling_sources'])
+            + '. Saved Accuracy: ' + str(profile.get('main_accuracy') or 'not saved')
+            + '; total damage contribution is not recalculated.')
     for row in profile.get('recovery_channels', []):
         if (row.get('value') or 0) > 0:
             add(row['pool'] + '_' + row['channel'], 'sustain', f"{row['pool']} {row['channel'].replace('_', ' ')}", 'detected', f"{row['value']:g} {row['unit']}; {row['condition']}")
@@ -116,13 +146,22 @@ def enrich_profile(profile, root, stats, main_group, groups, item_text, main_ite
 
 def dependency_assessment(profile, rule, value=None):
     """Only intervene where evidence is stronger than generic presence rules."""
+    if rule == 'less_accuracy' and profile.get('accuracy_scales_offence'):
+        penalty = min(100, max(0, 25 * (1 + profile.get('assumptions', {}).get('map_effect_increased', 0) / 100) if value is None else value))
+        if penalty == 0:
+            return 'free', 'This roll does not reduce Accuracy.'
+        return 'dangerous', (f'{penalty:g}% less Accuracy also reduces the Accuracy-scaled offensive component, even if hit chance stays capped or hits cannot be evaded. '
+                             + 'Equipped scaling: ' + '; '.join(profile.get('accuracy_scaling_sources', []))
+                             + '. Balanced excludes this explicit offensive dependency; total DPS loss and attack-speed breakpoints are not recalculated, so a Brick is not asserted.')
     if rule == 'hexproof' and profile.get('core_hex_trigger') and not profile.get('assumptions', {}).get('hexproof_bypass', profile.get('hexproof_bypass_detected')):
         return 'brick', 'Impending Doom is linked to the selected main Hex. Hexproof prevents the required Hex without bypass; the core trigger cannot work normally.'
     if rule == 'reduced_cooldown' and profile.get('core_trigger_cooldown'):
-        source = 'Cast on Critical Strike' if profile.get('uses_cast_on_crit') else 'a linked channel trigger or socketed item trigger'
+        source = 'Cast on Critical Strike' if profile.get('uses_cast_on_crit') else 'a socketed item trigger'
         return 'brick', f'The selected main skill uses {source} with a cooldown. Reduced cooldown recovery disrupts normal activation; excluded by the core-trigger policy. Exact trigger throughput is not recalculated.'
     if rule == 'reduced_cooldown' and profile.get('skill_metadata_known') and not any(profile.get(key) for key in ('core_trigger_cooldown', 'main_skill_has_cooldown', 'wardloop_detected', 'automated_mine_detonation', 'uses_mines')):
         return 'free', f"The recognized main skill ({profile.get('main_skill', 'main skill')}) has no established cooldown, core trigger loop or mine-detonation dependency. Cooldown recovery does not gate its normal damage delivery. Utility movement/guard cooldowns may be slower; their uptime is not simulated."
+    if rule in {'avoid_poison_bleed_impale', 'avoid_ailments'} and profile.get('ailment_damage_primary') and not profile.get('primary_ailments'):
+        return 'review', 'Primary ailment damage is detected but its ailment type is unconfirmed. Review the affected avoidance mechanic.'
     if rule == 'avoid_poison_bleed_impale':
         affected = [kind for kind in ('poison', 'bleed') if kind in profile.get('primary_ailments', [])]
         if profile.get('impale_damage_primary'):
@@ -146,6 +185,9 @@ def dependency_assessment(profile, rule, value=None):
         saved = profile.get('saved_non_elemental_ailment_dps', {})
         if len(saved) == 3 and all(value is not None and value == 0 for value in saved.values()):
             return 'free', 'Saved main-skill Poison, Bleeding and Impale DPS are all zero; none is an established primary damage mechanic.'
+        if (profile.get('skill_metadata_known') and not profile.get('minion_damage_primary')
+                and not any(profile.get('ailment_scaling_hints', {}).get(kind) for kind in ('poison', 'bleed', 'impale'))):
+            return 'free', 'Optional-mechanic allowance: the recognized main skill has no detected primary Poison, Bleeding or Impale damage or specialized scaling setup. Incidental applications are not an automatic exclusion; missing exact contribution is not proof of zero loss.'
         return 'review', 'Poison, Bleeding or Impale contribution is missing or secondary. Do not assume this avoidance modifier is Free from damage type or class alone.'
     if rule == 'avoid_ailments' and profile.get('primary_ailments') and 'ignite' not in profile['primary_ailments'] and not set(profile.get('main_skill_tags', [])) & {'Fire', 'Cold', 'Lightning'} and not profile.get('conditional_ailment_scaling'):
         return 'free', 'The established main damage ailment is Poison or Bleeding, not an elemental ailment. Elemental ailment avoidance does not prevent Poison/Bleeding; secondary elemental-ailment dependencies still need review.'
@@ -156,6 +198,10 @@ def dependency_assessment(profile, rule, value=None):
         avoid = min(100, 70 * (1 + profile.get('assumptions', {}).get('map_effect_increased', 0) / 100) if value is None else value)
         sources = '; '.join(row['evidence'] for row in profile['conditional_ailment_scaling'])
         return 'dangerous', f'{avoid:g}% elemental ailment avoidance can interrupt conditional main-skill damage: {sources}. The bonus contribution and alternate ailment sources are unmeasured. This is not proof that the main skill stops functioning; review before allowing it.'
+    if rule == 'avoid_ailments' and profile.get('skill_metadata_known') and not profile.get('minion_damage_primary'):
+        if not profile.get('ailment_scaling_hints', {}).get('ignite'):
+            return 'free', 'Optional-mechanic allowance: no primary Ignite damage or required elemental-ailment scaling is detected. Incidental chill, shock or freeze does not make elemental ailment avoidance an automatic exclusion.'
+        return 'review', 'An Ignite scaling setup is detected but its primary damage contribution is not saved; review rather than assuming it is Free.'
     if rule in {'monster_crit_reduction', 'less_accuracy'} and profile.get('main_damage_is_pure_dot'):
         return 'free', 'The recognized main skill deals damage over time without hits or critical strikes. Secondary hit skills still need review.'
     if rule == 'reduced_cooldown' and profile.get('main_skill_has_cooldown') and not (profile.get('uses_cast_on_crit') or profile.get('wardloop_detected') or profile.get('automated_mine_detonation')):
@@ -169,7 +215,7 @@ RULE_AXES = {
     'avoid_poison_bleed_impale': ['activation', 'scaling'], 'avoid_ailments': ['activation', 'scaling'], 'less_accuracy': ['delivery', 'activation'], 'reduced_cooldown': ['activation'],
     'reduced_block_and_armour': ['defence', 'scaling'], 'reduced_suppression_and_evasion': ['defence'], 'charge_theft': ['activation', 'scaling', 'defence'],
     'reduced_flask_charges': ['sustain', 'defence'], 'reduced_monster_curse_effect': ['scaling', 'defence'], 'monster_crit_reduction': ['scaling'],
-    'less_player_aoe': ['scaling'], 'unstunnable_monsters': ['activation'], 'extra_projectiles': ['defence'], 'monster_crit': ['defence'], 'monster_life': ['scaling'],
+    'less_accuracy': ['scaling', 'activation'], 'less_player_aoe': ['scaling'], 'unstunnable_monsters': ['activation'], 'extra_projectiles': ['defence'], 'monster_crit': ['defence'], 'monster_life': ['scaling'],
 }
 
 def annotate_assessment(profile, row, rule=None):
@@ -178,11 +224,10 @@ def annotate_assessment(profile, row, rule=None):
     row['dependency_axes'] = axes
     row['dependency_evidence'] = [d['evidence'] for d in profile.get('dependencies', []) if d['axis'] in axes]
     row['assessment_status'] = 'uncertain' if row['rating'] == 'review' else 'unaffected' if row['rating'] == 'free' else 'counter'
+    row['strict_avoid'] = row['rating'] == 'uncomfortable' and (rule in {'charge_theft', 'less_player_aoe'} or row.get('nightmare_policy', False))
     # Missing evidence must not masquerade as an explicitly unaffected mechanic.
-    if row['rating'] == 'free' and profile.get('skill_metadata_known') is False and rule in {'avoid_ailments', 'reduced_cooldown', 'unstunnable_monsters', 'less_player_aoe', 'reduced_auras', 'hexproof'}:
+    if row['rating'] == 'free' and profile.get('skill_metadata_known') is False and rule in {'avoid_ailments', 'reduced_cooldown', 'unstunnable_monsters', 'less_player_aoe', 'reduced_auras'}:
         row.update(rating='review', confidence='low', assessment_status='uncertain', reason='Unrecognized main skill: a missing dependency is not proof that this modifier is safe. ' + row['reason'])
-    if row['rating'] == 'free' and profile.get('unrecognized_skills') and rule in {'reduced_auras', 'hexproof', 'reduced_monster_curse_effect'}:
+    if row['rating'] == 'free' and profile.get('unrecognized_skills') and rule in {'reduced_auras'}:
         row.update(rating='review', confidence='low', assessment_status='uncertain', reason='Some enabled skills are unrecognized; their aura or curse interactions need review. ' + row['reason'])
-    if row['rating'] == 'free' and rule == 'reduced_flask_charges' and (profile.get('filled_flasks') or 0) and 'flask_essential' not in profile.get('assumptions', {}) and not profile.get('traitor_likely'):
-        row.update(rating='review', confidence='low', assessment_status='uncertain', reason='Flasks are equipped but their contribution and uptime are unmeasured. Being outside Pathfinder/Traitor does not establish optional flasks; confirm their role.')
     return row

@@ -25,6 +25,17 @@ def analyze_request(data: object) -> dict:
     audit = audit_catalogue(mods)
     profile['coverage']['normal_modifiers'] = audit['summary']
     mods.extend(audit['assessments'])
-    return {"profile": profile, "mods": mods,
+    # Deduplicate catalogue-specific overrides before reporting and serving them.
+    mods = list({row['id']: row for row in mods}.values())
+    from .reporting import enrich_assessments, assessment_report
+    from .nightmare import assess_nightmare
+    nightmare = assess_nightmare(profile, mods)
+    ids = {row['id'] for row in nightmare}
+    mods = [row for row in mods if row['id'] not in ids] + nightmare
+    profile['coverage']['nightmare_modifiers'] = {rating: sum(row['rating'] == rating for row in nightmare) for rating in ('brick','dangerous','uncomfortable','free','review')}
+    enrich_assessments(profile, mods)
+    report = assessment_report(profile, mods)
+    profile['assessment_summary'] = report['summary']
+    return {"profile": profile, "mods": mods, "assessment_report": report,
             "presets": {preset: make_regex(mods, preset) for preset in ("safe", "balanced", "greedy")},
             "regex_limit": REGEX_LIMIT}

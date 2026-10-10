@@ -36,7 +36,7 @@ export function SeverityOrb({ rating, small = false }: { rating: Rating; small?:
 }
 
 export const ratingLabels: Record<Rating, string> = {
-  brick: 'Build-breaking', dangerous: 'Dangerous', uncomfortable: 'Uncomfortable', free: 'Safe', review: 'Needs review',
+  brick: 'Build-breaking', dangerous: 'Dangerous', uncomfortable: 'Uncomfortable', free: 'Free', review: 'Needs review',
 };
 
 export function PoeTooltip({ title, children, body, rarity = 'magic', className = '' }: {

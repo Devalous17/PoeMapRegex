@@ -50,7 +50,7 @@ MODS = [
 ]
 
 PRESETS = {
-    "safe": {"brick", "dangerous", "uncomfortable", "review"},
+    "safe": {"brick", "dangerous", "uncomfortable"},
     "balanced": {"brick", "dangerous"},
     "greedy": {"brick"},
 }
@@ -176,7 +176,7 @@ def classify(profile: dict) -> list[dict]:
                          ((profile.get("charge_generation") or {}).get(kind) or
                           ((profile.get("configured_charges") or {}).get(kind) or 0) >= 5)]
             if relied_on:
-                rating, reason = "uncomfortable", f"This build has at least 5 maximum {', '.join(relied_on)} charges and either detected generation or 5+ configured active charges. Charge theft is a Safe-preset avoid choice; configured charges do not prove real uptime."
+                rating, reason = "uncomfortable", f"This build has at least 5 maximum {', '.join(relied_on)} charges and either detected generation or 5+ configured active charges. Charge theft is a Maximum Filtering choice; configured charges do not prove real uptime."
             else:
                 rating, reason = "free", "No charge type meets both the 5-maximum threshold and detected generation or configured uptime. This is not automatically excluded."
         elif mod.id == "reduced_flask_charges":
@@ -195,7 +195,7 @@ def classify(profile: dict) -> list[dict]:
         elif mod.id == "less_player_aoe":
             scaled = profile.get("area_of_effect_increased") or 0
             if scaled >= 75:
-                rating, reason = "uncomfortable", f"The saved build has at least {scaled:g}% increased Area of Effect; this modifier is excluded by the Safe preset only."
+                rating, reason = "uncomfortable", f"The saved build has at least {scaled:g}% increased Area of Effect; this modifier is excluded by the Maximum Filtering preset only."
             else:
                 rating, reason = "free", "The export does not show at least 75% increased Area of Effect; no automatic exclusion."
         elif mod.id == "unstunnable_monsters":
@@ -229,6 +229,14 @@ def classify(profile: dict) -> list[dict]:
     return result
 
 
+def preset_blocks(mod: dict, preset: str) -> bool:
+    if preset != 'greedy' and mod.get('combination_avoid'):
+        return True
+    if mod['rating'] == 'uncomfortable':
+        return preset == 'safe' and bool(mod.get('strict_avoid'))
+    return mod['rating'] in PRESETS[preset]
+
+
 def make_regex(mods: list[dict], preset: str, overrides: dict[str, str] | None = None) -> dict:
     if preset not in PRESETS:
         raise ValueError("Unknown preset")
@@ -238,7 +246,7 @@ def make_regex(mods: list[dict], preset: str, overrides: dict[str, str] | None =
         if mod["id"].startswith("map-"):
             continue  # The frontend uses these for pool-specific ratings.
         choice = overrides.get(mod["id"])
-        if choice == "avoid" or (choice != "allow" and (mod["rating"] in PRESETS[preset] or preset != "greedy" and mod.get("combination_avoid"))):
+        if choice == "avoid" or (choice != "allow" and preset_blocks(mod, preset)):
             blocked.append(mod)
     query = '"!' + "|".join(mod["pattern"] for mod in blocked) + '"' if blocked else ""
     return {

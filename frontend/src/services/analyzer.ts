@@ -4,6 +4,9 @@ import { classifyCatalogue } from '../data/mapCatalogue';
 import type { AnalysisResult, BuildAssumptions, BuildProfile, ClassifiedMod, Rating } from '../types';
 
 interface RawMod {
+  strict_avoid?: boolean;
+  assessment_basis?: ClassifiedMod['assessment_basis'];
+  measurement?: ClassifiedMod['measurement'];
   id: string;
   name: string;
   pattern: string;

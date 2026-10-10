@@ -3,7 +3,7 @@ import suppliedPatterns from '../data/mapPoolPatterns.json' with { type: 'json' 
 import { mapPreferenceTerms } from './mapPreferencesRegex.ts';
 
 const blockedByPreset: Record<Preset, Rating[]> = {
-  safe: ['brick', 'dangerous', 'uncomfortable', 'review'],
+  safe: ['brick', 'dangerous', 'uncomfortable'],
   balanced: ['brick', 'dangerous'],
   greedy: ['brick'],
 };
@@ -11,6 +11,7 @@ const blockedByPreset: Record<Preset, Rating[]> = {
 export function recommendedDecision(mod: ClassifiedMod, preset: Preset): Decision {
   if (mod.manual) return 'neutral';
   if (preset !== 'greedy' && mod.combination_avoid) return 'block';
+  if (mod.rating === 'uncomfortable') return preset === 'safe' && mod.strict_avoid ? 'block' : 'neutral';
   if (blockedByPreset[preset].includes(mod.rating)) return 'block';
   return mod.rating === 'free' ? 'allow' : 'neutral';
 }

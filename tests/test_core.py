@@ -38,7 +38,7 @@ class BuildAnalysisTests(unittest.TestCase):
         self.assertEqual(mods["extra_chaos"]["rating"], "review")
         self.assertEqual(mods["physical_thorns"]["rating"], "free")
         self.assertEqual(mods["less_accuracy"]["rating"], "free")
-        self.assertEqual(mods["hexproof"]["rating"], "review")
+        self.assertEqual(mods["hexproof"]["rating"], "free")
 
     def test_presets_and_override(self):
         mods = classify(build_profile(decode_build(export_code())))
@@ -268,7 +268,7 @@ class BuildAnalysisTests(unittest.TestCase):
         self.assertEqual(profile["filled_flasks"], 2)
         self.assertEqual({row["id"]: row for row in classify(profile)}["reduced_flask_charges"]["rating"], "brick")
         profile.update(ascendancy="Raider", nature_adrenaline=False, flask_effect_investment=0)
-        self.assertEqual({row["id"]: row for row in classify(profile)}["reduced_flask_charges"]["rating"], "review")
+        self.assertEqual({row["id"]: row for row in classify(profile)}["reduced_flask_charges"]["rating"], "free")
         profile.update(ascendancy="Pathfinder", flask_effect_investment=100)
         self.assertEqual({row["id"]: row for row in classify(profile)}["reduced_flask_charges"]["rating"], "brick")
         profile.update(traitor_likely=True, empty_flask_slots=3)
@@ -298,14 +298,14 @@ class BuildAnalysisTests(unittest.TestCase):
         full = build(with_fifth_flask=True)
         self.assertEqual(full["empty_flask_slots"], 0)
         self.assertFalse(full["traitor_likely"])
-        self.assertEqual({row["id"]: row for row in classify(full)}["reduced_flask_charges"]["rating"], "review")
+        self.assertEqual({row["id"]: row for row in classify(full)}["reduced_flask_charges"]["rating"], "free")
 
     def test_curse_crit_area_and_stun_require_build_evidence(self):
         profile = build_profile(decode_build(export_code()))
         profile.update(curse_dependent=False, crit_chance=49, crit_multiplier=400,
                        area_of_effect_increased=74, stun_dependent=False)
         ratings = {row["id"]: row["rating"] for row in classify(profile)}
-        self.assertEqual(ratings["reduced_monster_curse_effect"], "review")
+        self.assertEqual(ratings["reduced_monster_curse_effect"], "free")
         self.assertEqual(ratings["monster_crit_reduction"], "uncomfortable")
         for key in ("less_player_aoe", "unstunnable_monsters"):
             self.assertEqual(ratings[key], "free")
@@ -328,7 +328,8 @@ class BuildAnalysisTests(unittest.TestCase):
         </PathOfBuilding>"""
         profile = build_profile(decode_build(export_code(xml)))
         self.assertTrue(profile["stun_dependent"])
-        self.assertTrue(profile["curse_dependent"])
+        self.assertFalse(profile["curse_dependent"])
+        self.assertFalse(profile["core_hex_trigger"])
         self.assertEqual(profile["crit_multiplier"], 350)
         self.assertEqual(profile["area_of_effect_increased"], 100)
         self.assertTrue(profile["charge_generation"]["Power"])

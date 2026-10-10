@@ -14,6 +14,8 @@ function modifierText(mod: ClassifiedMod): string {
     .replaceAll('|', ' · ');
 }
 
+const basisLabels = { snapshot_model: 'Calculated estimate', dependency_rule: 'Detected dependency', user_confirmation: 'Your confirmation', conservative_policy: 'Conservative exclusion', policy_allowance: 'Policy allowance', unknown: 'Needs review' };
+
 function ModRow({ mod, action, explain }: { mod: ClassifiedMod; action: 'block' | 'want'; explain: boolean }) {
   const preset = useAppStore(state => state.preset);
   const override = useAppStore(state => state.overrides[mod.id]);
@@ -21,12 +23,13 @@ function ModRow({ mod, action, explain }: { mod: ClassifiedMod; action: 'block' 
   const decision = override ?? recommendedDecision(mod, preset);
   const active = decision === action;
   const description = modifierText(mod);
-  const detail = [mod.reason, mod.combination_reason, mod.confidence && `Confidence: ${mod.confidence}`, mod.affixName && `${mod.affixName} · ${mod.affixKind} · spawn weight ${mod.spawnWeight}`, mod.rewardText].filter(Boolean).join('\n');
+  const basis = mod.assessment_basis ? basisLabels[mod.assessment_basis] : '';
+  const detail = [basis, mod.reason, mod.combination_reason, mod.confidence && `Confidence: ${mod.confidence}`, mod.affixName && `${mod.affixName} · ${mod.affixKind} · spawn weight ${mod.spawnWeight}`, mod.rewardText].filter(Boolean).join('\n');
   return <button type="button" className={`mod-pick mod-pick--${action} mod-pick--rating-${mod.rating} ${active ? 'is-selected' : ''}`}
     aria-pressed={active} aria-label={`${active ? 'Remove' : 'Add'} ${description} ${active ? 'from' : 'to'} ${action === 'block' ? 'avoided' : 'wanted'} mods`}
     title={detail} onClick={() => setDecision(mod.id, active ? 'allow' : action)}>
     <span className="mod-pick__check" aria-hidden="true">{active ? '✓' : '+'}</span>
-    <span className="mod-pick__text">{description}{explain && <small className="mod-pick__reason">{mod.reason} {mod.combination_reason}{mod.confidence && ` Confidence: ${mod.confidence}.`}</small>}</span>
+    <span className="mod-pick__text">{description}{explain && <small className="mod-pick__reason">{basis && `${basis}. `}{mod.reason} {mod.combination_reason}{mod.confidence && ` Confidence: ${mod.confidence}.`}</small>}</span>
     {mod.affixName && <span className="mod-pick__meta">{mod.affixName} · {mod.affixKind}</span>}
     <span className="mod-pick__rating"><SeverityOrb rating={mod.rating} small />{mod.manual ? 'Not assessed' : mod.combination_avoid ? 'Recovery pair' : ratingLabels[mod.rating]}</span>
   </button>;
@@ -109,6 +112,7 @@ export function ModAnalysis({ mods, mode }: { mods: ClassifiedMod[]; mode: 'live
       <SelectedModsWindow blocked={selected.block} wanted={selected.want} />
       <div className="mod-picker__tools"><label className="sr-only" htmlFor="mod-search">Search modifiers</label><input id="mod-search" className="poe-input" value={search} onChange={event => setSearch(event.target.value)} placeholder="Search for a modifier…" /><label className="mod-picker__selected"><input type="checkbox" checked={selectedOnly} onChange={event => setSelectedOnly(event.target.checked)} /> Selected only</label></div>
       {mode !== 'manual' && <Filters mods={mods} />}
+      {mode !== 'manual' && mapPool === 'nightmare' && <p className="scope-note">Nightmare recommendations follow your reviewed modifier policy, with build checks for attacks, flasks, Chaos Resistance, critical-strike protection and stuns. Show explanations to see why each mod is selected.</p>}
       <label className="mod-picker__selected"><input type="checkbox" checked={explain} onChange={event => setExplain(event.target.checked)} /> Show assessment explanations</label>
       <div className="mod-picker__status"><span><strong>{visible.length}</strong> of {mods.length} modifiers</span><span>Click a row to {action === 'block' ? 'block or unblock' : 'want or remove'} it</span></div>
       <div className="mod-picker__list" role="list" aria-label={`${mapPool === 'nightmare' ? 'Nightmare' : 'Normal'} map modifiers`}>

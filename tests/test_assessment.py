@@ -175,7 +175,7 @@ class MeasuredAssessmentTests(unittest.TestCase):
         self.assertEqual(profile['maximum_resistances']['Fire'], 90)
 
     def test_saved_character_snapshots(self):
-        for name, expected in [('winter_orb', {'no_regen': 'review', 'monster_crit_reduction': 'uncomfortable', 'extra_chaos': 'free'}),
+        for name, expected in [('winter_orb', {'no_regen': 'review', 'monster_crit_reduction': 'dangerous', 'extra_chaos': 'free'}),
                                ('armour_stacker', {'no_leech': 'brick', 'reduced_block_and_armour': 'brick'}),
                                ('righteous_fire', {'no_regen': 'brick', 'extra_chaos': 'free'})]:
             with self.subTest(build=name):

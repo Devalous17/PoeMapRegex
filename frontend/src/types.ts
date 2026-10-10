@@ -13,9 +13,11 @@ export interface BuildAssumptions {
 }
 export type Category = 'Thorns' | 'Recovery / Leech' | 'Cooldown / Triggers' | 'Defences' | 'Resistances' | 'Charges' | 'Ailments / Curses' | 'Monsters' | 'Area' | 'Other';
 
+export type AssessmentBasis = 'snapshot_model' | 'dependency_rule' | 'user_confirmation' | 'conservative_policy' | 'policy_allowance' | 'unknown';
 export interface BuildProfile {
+  assessment_summary?: { total: number; by_basis: Partial<Record<AssessmentBasis, number>> };
   dependencies?: { id: string; axis: string; label: string; status: 'detected' | 'uncertain'; evidence: string }[];
-  coverage?: { issues: string[]; main_skill_recognized: boolean; metadata_revision: string; normal_modifiers?: Record<string, number> };
+  coverage?: { issues: string[]; main_skill_recognized: boolean; metadata_revision: string; normal_modifiers?: Record<string, number>; nightmare_modifiers?: Record<string, number> };
   game: string;
   class: string;
   ascendancy: string;
@@ -39,6 +41,9 @@ export interface BuildProfile {
   main_uses_channeling?: boolean;
   main_action_rate?: number | null;
   armour_scales_attack_damage?: boolean;
+  accuracy_scales_offence?: boolean;
+  accuracy_scaling_sources?: string[];
+  main_accuracy?: number | null;
   maximum_charges?: Record<string, number | null>;
   configured_charges?: Record<string, number | null>;
   charge_generation?: Record<string, boolean>;
@@ -89,7 +94,10 @@ export interface BuildProfile {
   armour?: number | null;
   evasion?: number | null;
   block?: number | null;
-  ailment_avoidance?: string;
+  ailment_avoidance?: Partial<Record<'Poison' | 'Ignite' | 'Freeze' | 'Shock', number | null>>;
+  global_flask_effect_investment?: number;
+  flask_charge_investment?: number;
+  crit_extra_damage_reduction?: number | null;
   charges?: string;
 }
 
@@ -112,6 +120,9 @@ export interface ModDefinition {
 }
 
 export interface ClassifiedMod extends ModDefinition {
+  strict_avoid?: boolean;
+  assessment_basis?: AssessmentBasis;
+  measurement?: { engine: string; status: 'unsupported' | 'partial' | 'estimated'; quantities: { name: string; before: number; after: number; unit: string }[]; limitations: string[] };
   assessment_status?: 'counter' | 'unaffected' | 'uncertain' | 'policy';
   dependency_axes?: string[];
   dependency_evidence?: string[];

@@ -8,6 +8,15 @@ import { numberRangeRegex } from '../src/services/mapPreferencesRegex.ts';
 import { EMPTY_PREFERENCES } from '../src/types.ts';
 const noMinimums = { ...EMPTY_PREFERENCES, minimums: {} };
 
+test('marginal penalties are not selected by Maximum Filtering without an explicit dependency', () => {
+  const minor = { id: 'minor', rating: 'uncomfortable', name: 'Minor', pattern: 'minor' };
+  assert.equal(recommendedDecision(minor, 'safe'), 'neutral');
+  assert.equal(recommendedDecision({ ...minor, strict_avoid: true }, 'safe'), 'block');
+  assert.equal(recommendedDecision({ ...minor, strict_avoid: true }, 'balanced'), 'neutral');
+  assert.equal(recommendedDecision({ ...minor, combination_avoid: true }, 'balanced'), 'block');
+  assert.equal(buildRegex([{ ...minor, strict_avoid: true }], 'safe', { minor: 'allow' }, noMinimums).blocked.length, 0);
+});
+
 test('manual catalogue never invents preset exclusions or build warnings', () => {
   const mods = catalogue(false).map(mod => ({ ...mod, manual: true }));
   assert.ok(mods.every(mod => recommendedDecision(mod, 'safe') === 'neutral'));
@@ -79,10 +88,10 @@ test('a pattern matching only range endpoints cannot miss the middle rolls', () 
   expectExactCoverage(mods, new Set(['a']), buildRegex(mods, 'greedy', {}, noMinimums));
 });
 
-test('Safe blocks unknowns and Balanced respects measured recovery conflicts', () => {
+test('Unknowns need review in every preset; Balanced respects measured recovery conflicts', () => {
   const unknown = { id: 'unknown', rating: 'review' };
   const conflict = { id: 'pair', rating: 'free', combination_avoid: true };
-  assert.equal(recommendedDecision(unknown, 'safe'), 'block');
+  assert.equal(recommendedDecision(unknown, 'safe'), 'neutral');
   assert.equal(recommendedDecision(unknown, 'balanced'), 'neutral');
   assert.equal(recommendedDecision(conflict, 'balanced'), 'block');
   assert.equal(recommendedDecision(conflict, 'greedy'), 'allow');

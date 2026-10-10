@@ -1,0 +1,237 @@
+[
+  {
+    "number": 1,
+    "id": "-2064669900",
+    "decision": "free"
+  },
+  {
+    "number": 2,
+    "id": "-2038489408",
+    "decision": "always_brick"
+  },
+  {
+    "number": 3,
+    "id": "-1940135977",
+    "decision": "attack_hits"
+  },
+  {
+    "number": 4,
+    "id": "-1818595967",
+    "decision": "free"
+  },
+  {
+    "number": 5,
+    "id": "-1647756153",
+    "decision": "free"
+  },
+  {
+    "number": 6,
+    "id": "-1629200695",
+    "decision": "always_brick"
+  },
+  {
+    "number": 7,
+    "id": "-1621497665",
+    "decision": "free"
+  },
+  {
+    "number": 8,
+    "id": "-1430865583",
+    "decision": "avoid"
+  },
+  {
+    "number": 9,
+    "id": "-1158025910",
+    "decision": "free"
+  },
+  {
+    "number": 10,
+    "id": "-949334443",
+    "decision": "free"
+  },
+  {
+    "number": 11,
+    "id": "-933231182",
+    "decision": "avoid"
+  },
+  {
+    "number": 12,
+    "id": "-931745379",
+    "decision": "free"
+  },
+  {
+    "number": 13,
+    "id": "-887278806",
+    "decision": "avoid"
+  },
+  {
+    "number": 14,
+    "id": "-645418310",
+    "decision": "avoid"
+  },
+  {
+    "number": 15,
+    "id": "-258709095",
+    "decision": "free"
+  },
+  {
+    "number": 16,
+    "id": "-126908257",
+    "decision": "free"
+  },
+  {
+    "number": 17,
+    "id": "-105914721",
+    "decision": "flask_investment"
+  },
+  {
+    "number": 18,
+    "id": "127168403",
+    "decision": "chaos_threshold"
+  },
+  {
+    "number": 19,
+    "id": "246480838",
+    "decision": "crit_immunity"
+  },
+  {
+    "number": 20,
+    "id": "284489036",
+    "decision": "free"
+  },
+  {
+    "number": 21,
+    "id": "357242916",
+    "decision": "free"
+  },
+  {
+    "number": 22,
+    "id": "639399394",
+    "decision": "free"
+  },
+  {
+    "number": 23,
+    "id": "647925005",
+    "decision": "free"
+  },
+  {
+    "number": 24,
+    "id": "670500310",
+    "decision": "stun_dependency"
+  },
+  {
+    "number": 25,
+    "id": "707446389",
+    "decision": "free"
+  },
+  {
+    "number": 26,
+    "id": "972998450",
+    "decision": "free"
+  },
+  {
+    "number": 27,
+    "id": "1014295028",
+    "decision": "free"
+  },
+  {
+    "number": 28,
+    "id": "1061710360",
+    "decision": "free"
+  },
+  {
+    "number": 29,
+    "id": "1117764869",
+    "decision": "free"
+  },
+  {
+    "number": 30,
+    "id": "1205583947",
+    "decision": "free"
+  },
+  {
+    "number": 31,
+    "id": "1313044496",
+    "decision": "free"
+  },
+  {
+    "number": 32,
+    "id": "1333860371",
+    "decision": "free"
+  },
+  {
+    "number": 33,
+    "id": "1464066514",
+    "decision": "defences"
+  },
+  {
+    "number": 34,
+    "id": "1469490158",
+    "decision": "avoid"
+  },
+  {
+    "number": 35,
+    "id": "1494523238",
+    "decision": "free"
+  },
+  {
+    "number": 36,
+    "id": "1538178254",
+    "decision": "free"
+  },
+  {
+    "number": 37,
+    "id": "1665221611",
+    "decision": "avoid"
+  },
+  {
+    "number": 38,
+    "id": "1756122717",
+    "decision": "free"
+  },
+  {
+    "number": 39,
+    "id": "1861748274",
+    "decision": "free"
+  },
+  {
+    "number": 40,
+    "id": "1932675161",
+    "decision": "free"
+  },
+  {
+    "number": 41,
+    "id": "poedb-MapMonsterDamage",
+    "decision": "free"
+  },
+  {
+    "number": 42,
+    "id": "poedb-MapMonstersMaximumLifeAddedEnergyShield",
+    "decision": "free"
+  },
+  {
+    "number": 43,
+    "id": "poedb-MapBossIsPossessed",
+    "decision": "safe_only"
+  },
+  {
+    "number": 44,
+    "id": "poedb-MapMonstersChanceToSuppressSpells",
+    "decision": "safe_only"
+  },
+  {
+    "number": 45,
+    "id": "poedb-MapMonstersBaseSelfCriticalMultiplier",
+    "decision": "free"
+  },
+  {
+    "number": 46,
+    "id": "poedb-MapMonsterLife",
+    "decision": "free"
+  },
+  {
+    "number": 47,
+    "id": "poedb-MapPlayerBuffsExpireFaster",
+    "decision": "free"
+  }
+]

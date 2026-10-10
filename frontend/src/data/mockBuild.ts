@@ -47,7 +47,10 @@ export const mockBuild: BuildProfile = {
   "nature_adrenaline": false,
   "traitor_likely": false,
   "flask_effect_investment": 0,
-  "curse_dependent": true,
+  "global_flask_effect_investment": 0,
+  "flask_charge_investment": 0,
+  "crit_extra_damage_reduction": null,
+  "curse_dependent": false,
   "crit_chance": 100.0,
   "crit_multiplier": 752.0,
   "area_of_effect_increased": 53,
@@ -73,6 +76,12 @@ export const mockBuild: BuildProfile = {
   "ward": 0.0,
   "total_dps": 44203509.605095,
   "chaos_resistance": -45.0,
+  "ailment_avoidance": {
+    "Poison": null,
+    "Ignite": null,
+    "Freeze": null,
+    "Shock": null
+  },
   "chaos_immune": true,
   "elemental_resistances": {
     "Fire": 80.0,
@@ -332,6 +341,9 @@ export const mockBuild: BuildProfile = {
       "evidence": "100 Energy Shield regeneration/s (0.7% of ES)"
     }
   ],
+  "accuracy_scaling_sources": [],
+  "accuracy_scales_offence": false,
+  "main_accuracy": null,
   "dependencies": [
     {
       "id": "delivery",
@@ -385,12 +397,30 @@ export const mockBuild: BuildProfile = {
     "main_skill_recognized": true,
     "normal_modifiers": {
       "total": 78,
-      "counter": 12,
-      "unaffected": 7,
-      "uncertain": 5,
+      "counter": 11,
+      "unaffected": 11,
+      "uncertain": 2,
       "policy": 54
+    },
+    "nightmare_modifiers": {
+      "brick": 2,
+      "dangerous": 8,
+      "uncomfortable": 2,
+      "free": 35,
+      "review": 0
     }
   },
   "assumptions": {},
-  "recovery_conflicts": []
+  "recovery_conflicts": [],
+  "assessment_summary": {
+    "total": 125,
+    "by_basis": {
+      "snapshot_model": 5,
+      "dependency_rule": 16,
+      "user_confirmation": 0,
+      "conservative_policy": 13,
+      "policy_allowance": 89,
+      "unknown": 2
+    }
+  }
 };
