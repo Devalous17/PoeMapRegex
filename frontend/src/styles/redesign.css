@@ -38,3 +38,22 @@ button,a,input,textarea,select,summary{transition:color var(--motion-fast),backg
 @keyframes arrive{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @keyframes regex-update{from{background-color:var(--focus-surface)}to{background-color:var(--bg-0)}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+
+/* Responsive and contrast refinements verified at 360–1920px. */
+.selected-mods-window__columns,.selected-mods-window__group{background:var(--bg-0)}
+.selected-mods-window__group{border:1px solid var(--border-dark);padding:8px}
+.mod-pick--rating-brick .mod-pick__text,.mod-pick--rating-brick.is-selected .mod-pick__text{color:var(--text-main)}
+.mod-pick--rating-brick.is-selected:hover{background:var(--avoid-surface);color:var(--text-main)}
+.preference-note,.metric-note,.check-subtitle,.catalogue-source{color:var(--text-dim)}
+.preset-card__badge,.preset-card__footer{color:var(--text-dim)}
+.preset-card__mark{background:none;color:var(--gold-text)}
+@media(max-width:700px){
+  body{background-size:auto 640px;background-position:10% 72px}
+  .atlas-hero{min-height:0;margin-top:0;align-items:flex-end;padding-top:176px}
+  .hero-copy{background:var(--bg-0);border:1px solid var(--border-gold);padding:32px 16px}
+  .hero-copy h1{font-size:46px}.hero-copy .eyebrow{font-size:9px;letter-spacing:.08em}
+  .hero-copy>.poe-button{min-width:0;width:100%}.hero-plates{gap:8px}.hero-plates>button{font-size:12px;padding:8px 4px}.hero-plates b{font-size:15px;margin-left:2px}
+  .preferences-panel{padding:24px 16px}.value-field{gap:8px;flex-wrap:wrap}.value-field__inputs{gap:8px}.value-field__inputs input{width:64px}
+  .preferences-intro{gap:16px;flex-wrap:wrap}.selected-mods-window__header{flex-wrap:wrap}
+}
+.preset-card::before,.preset-card::after{display:none}.mod-pick.is-selected .mod-pick__meta,.mod-pick.is-selected .mod-pick__rating,.mod-pick.is-selected .mod-pick__reason{color:var(--text-dim)}

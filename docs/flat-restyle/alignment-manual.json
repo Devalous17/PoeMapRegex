@@ -1,0 +1,193 @@
+[
+  {
+    "requestedWidth": 360,
+    "centerErrors": [
+      {
+        "error": 0,
+        "text": "Header container"
+      },
+      {
+        "error": 0,
+        "text": "Your next map, in three steps"
+      },
+      {
+        "error": 0,
+        "text": "Bring your build"
+      },
+      {
+        "error": 0,
+        "text": "Choose mods to avoid"
+      },
+      {
+        "error": 0,
+        "text": "Map preferences"
+      },
+      {
+        "error": 0,
+        "text": "Before you enter the map"
+      }
+    ],
+    "forbidden": [],
+    "overflow": [],
+    "pageOverflow": false,
+    "pass": true,
+    "rowErrors": [],
+    "width": 351
+  },
+  {
+    "requestedWidth": 768,
+    "centerErrors": [
+      {
+        "error": 0,
+        "text": "Header container"
+      },
+      {
+        "error": 0.0078125,
+        "text": "Your next map, in three steps"
+      },
+      {
+        "error": 0.0078125,
+        "text": "Bring your build"
+      },
+      {
+        "error": 0,
+        "text": "Choose mods to avoid"
+      },
+      {
+        "error": 0,
+        "text": "Map preferences"
+      },
+      {
+        "error": 0,
+        "text": "Before you enter the map"
+      }
+    ],
+    "forbidden": [],
+    "overflow": [],
+    "pageOverflow": false,
+    "pass": true,
+    "rowErrors": [
+      {
+        "error": 0,
+        "selector": ".how-steps"
+      },
+      {
+        "error": 0,
+        "selector": ".faq-grid"
+      },
+      {
+        "error": 0,
+        "selector": ".faq-grid"
+      },
+      {
+        "error": 0,
+        "selector": ".faq-grid"
+      }
+    ],
+    "width": 759
+  },
+  {
+    "requestedWidth": 1280,
+    "centerErrors": [
+      {
+        "error": 0,
+        "text": "Header container"
+      },
+      {
+        "error": 0,
+        "text": "Your next map, in three steps"
+      },
+      {
+        "error": 0.0078125,
+        "text": "Bring your build"
+      },
+      {
+        "error": 0.0078125,
+        "text": "Choose mods to avoid"
+      },
+      {
+        "error": 0.0078125,
+        "text": "Map preferences"
+      },
+      {
+        "error": 0.0078125,
+        "text": "Before you enter the map"
+      }
+    ],
+    "forbidden": [],
+    "overflow": [],
+    "pageOverflow": false,
+    "pass": true,
+    "rowErrors": [
+      {
+        "error": 0,
+        "selector": ".how-steps"
+      },
+      {
+        "error": 0,
+        "selector": ".faq-grid"
+      },
+      {
+        "error": 0,
+        "selector": ".faq-grid"
+      },
+      {
+        "error": 0,
+        "selector": ".faq-grid"
+      }
+    ],
+    "width": 1271
+  },
+  {
+    "requestedWidth": 1920,
+    "centerErrors": [
+      {
+        "error": 0,
+        "text": "Header container"
+      },
+      {
+        "error": 0.0078125,
+        "text": "Your next map, in three steps"
+      },
+      {
+        "error": 0.0078125,
+        "text": "Bring your build"
+      },
+      {
+        "error": 0,
+        "text": "Choose mods to avoid"
+      },
+      {
+        "error": 0.0078125,
+        "text": "Map preferences"
+      },
+      {
+        "error": 0,
+        "text": "Before you enter the map"
+      }
+    ],
+    "forbidden": [],
+    "overflow": [],
+    "pageOverflow": false,
+    "pass": true,
+    "rowErrors": [
+      {
+        "error": 0,
+        "selector": ".how-steps"
+      },
+      {
+        "error": 0,
+        "selector": ".faq-grid"
+      },
+      {
+        "error": 0,
+        "selector": ".faq-grid"
+      },
+      {
+        "error": 0,
+        "selector": ".faq-grid"
+      }
+    ],
+    "width": 1911
+  }
+]
