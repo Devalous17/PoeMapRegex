@@ -1,5 +1,4 @@
 import { useModHighlight } from '../../components/HighlightContext';
-import { Arch, Corners } from '../../components/Ornaments';
 import { useMemo, useState } from 'react';
 import { Button, SectionHeading, SeverityOrb, ratingLabels } from '../../components/UI';
 import { recommendedDecision } from '../../services/regexBuilder';
@@ -49,7 +48,7 @@ function Filters({ mods }: { mods: ClassifiedMod[] }) {
       <button type="button" className={ratingFilter === 'all' ? 'is-active' : ''} aria-pressed={ratingFilter === 'all'} onClick={() => setRatingFilter('all')}>All <small>{mods.length}</small></button>
       {ratingOrder.map(rating => <button type="button" key={rating} className={ratingFilter === rating ? 'is-active' : ''} aria-pressed={ratingFilter === rating} onClick={() => setRatingFilter(rating)}>{ratingLabels[rating]} <small>{mods.filter(mod => mod.rating === rating).length}</small></button>)}
     </div><div className="mod-filters__group"><strong>Category</strong>
-      {availableCategories.map((category, index) => <button type="button" key={category} className={categories.includes(category) ? 'is-active' : ''} aria-pressed={categories.includes(category)} onClick={() => toggleCategory(category)}><svg viewBox="0 0 28 28" aria-hidden="true" className="category-glyph"><circle cx="14" cy="14" r="10" fill="none"/><path d={index % 3 === 0 ? "m14 2 8 12-8 12-8-12 8-12Zm0 5v14M7 14h14" : index % 3 === 1 ? "M4 21 14 3l10 18H4Zm4-5h12M14 9v15" : "M4 8h20L14 24 4 8Zm10-5v21M7 4l7 4 7-4"} fill="none" /></svg>{category} <small>{mods.filter(mod => mod.category === category).length}</small></button>)}
+      {availableCategories.map((category) => <button type="button" key={category} className={categories.includes(category) ? 'is-active' : ''} aria-pressed={categories.includes(category)} onClick={() => toggleCategory(category)}>{category} <small>{mods.filter(mod => mod.category === category).length}</small></button>)}
     </div></div>
   </details>;
 }
@@ -100,7 +99,7 @@ export function ModAnalysis({ mods, mode }: { mods: ClassifiedMod[]; mode: 'live
   }), [mods, overrides, preset, ratingFilter, categories, selectedOnly, action, search]);
   return <section id="mods" className="content-section">
     <SectionHeading number="03" title="Choose mods to avoid" subtitle={mode === 'manual' ? 'Browse and select modifiers. Import a build for personalised ratings.' : 'Click a modifier to add or remove it from your regex.'} aside={<span className="edition-tag">POE 1 · NORMAL & NIGHTMARE</span>} />
-    <div className="mod-picker"><Arch className="workspace-arch" /><Corners />
+    <div className="mod-picker">
       <div className="mod-picker__header">
         <div className="map-pool-tabs" role="group" aria-label="Map type">
           <button type="button" className={mapPool === 'normal' ? 'is-active' : ''} aria-pressed={mapPool === 'normal'} onClick={() => setMapPool('normal')}>Normal maps <small>78</small></button>

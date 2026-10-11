@@ -1,20 +1,14 @@
-import { Corners, Crest } from './Ornaments';
 import { useEffect, useId } from 'react';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import type { Rating } from '../types';
 import { useAppStore } from '../store/useAppStore';
 
 export function Sigil({ className = '' }: { className?: string }) {
-  return <svg className={className} viewBox="0 0 42 42" fill="none" aria-hidden="true">
-    <path d="M5 10 15 5l12 5 10-5v27l-10 5-12-5-10 5V10Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
-    <path d="M15 5v8m12-3v3M15 29v3m12-3v8" stroke="currentColor" strokeWidth="1.5" />
-    <circle cx="15" cy="23" r="2" fill="currentColor" />
-    <path d="M27 16v12m-5-9 10 6m-10 0 10-6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-  </svg>;
+  return <span className={`simple-mark ${className}`} aria-hidden="true">M</span>;
 }
 
 export function Panel({ children, className = '', id }: { children: ReactNode; className?: string; id?: string }) {
-  return <section id={id} className={`poe-panel ${className}`}><Corners />{children}<span className="panel-edge-emblem" aria-hidden="true">◆</span></section>;
+  return <section id={id} className={`poe-panel ${className}`}>{children}</section>;
 }
 
 export function OrnamentDivider() {
@@ -22,7 +16,7 @@ export function OrnamentDivider() {
 }
 
 export function SectionHeading({ number, title, subtitle, aside }: { number: string; title: string; subtitle?: string; aside?: ReactNode }) {
-  return <div className="section-heading"><Crest />
+  return <div className="section-heading">
     <div><p className="eyebrow">{number} / MAPREGEX</p><h2>{title}</h2>{subtitle && <p className="section-subtitle">{subtitle}</p>}</div>
     {aside && <div className="section-heading-aside">{aside}</div>}
   </div>;
