@@ -1,0 +1,119 @@
+[
+  {
+    "key": "thorns",
+    "name": "thorny-vine",
+    "author": "Lorc",
+    "url": "https://game-icons.net/1x1/lorc/thorny-vine.html",
+    "source": "https://game-icons.net/icons/ffffff/transparent/1x1/lorc/thorny-vine.svg",
+    "license": "CC BY 3.0",
+    "changes": "White fill changed to currentColor; displayed as a gold CSS mask."
+  },
+  {
+    "key": "recovery",
+    "name": "bleeding-heart",
+    "author": "Lorc",
+    "url": "https://game-icons.net/1x1/lorc/bleeding-heart.html",
+    "source": "https://game-icons.net/icons/ffffff/transparent/1x1/lorc/bleeding-heart.svg",
+    "license": "CC BY 3.0",
+    "changes": "White fill changed to currentColor; displayed as a gold CSS mask."
+  },
+  {
+    "key": "cooldown",
+    "name": "stopwatch",
+    "author": "Lorc",
+    "url": "https://game-icons.net/1x1/lorc/stopwatch.html",
+    "source": "https://game-icons.net/icons/ffffff/transparent/1x1/lorc/stopwatch.svg",
+    "license": "CC BY 3.0",
+    "changes": "White fill changed to currentColor; displayed as a gold CSS mask."
+  },
+  {
+    "key": "defences",
+    "name": "bordered-shield",
+    "author": "Lorc",
+    "url": "https://game-icons.net/1x1/lorc/bordered-shield.html",
+    "source": "https://game-icons.net/icons/ffffff/transparent/1x1/lorc/bordered-shield.svg",
+    "license": "CC BY 3.0",
+    "changes": "White fill changed to currentColor; displayed as a gold CSS mask."
+  },
+  {
+    "key": "resistances",
+    "name": "fire-shield",
+    "author": "Lorc",
+    "url": "https://game-icons.net/1x1/lorc/fire-shield.html",
+    "source": "https://game-icons.net/icons/ffffff/transparent/1x1/lorc/fire-shield.svg",
+    "license": "CC BY 3.0",
+    "changes": "White fill changed to currentColor; displayed as a gold CSS mask."
+  },
+  {
+    "key": "charges",
+    "name": "lightning-trio",
+    "author": "Lorc",
+    "url": "https://game-icons.net/1x1/lorc/lightning-trio.html",
+    "source": "https://game-icons.net/icons/ffffff/transparent/1x1/lorc/lightning-trio.svg",
+    "license": "CC BY 3.0",
+    "changes": "White fill changed to currentColor; displayed as a gold CSS mask."
+  },
+  {
+    "key": "ailments",
+    "name": "poison-bottle",
+    "author": "Lorc",
+    "url": "https://game-icons.net/1x1/lorc/poison-bottle.html",
+    "source": "https://game-icons.net/icons/ffffff/transparent/1x1/lorc/poison-bottle.svg",
+    "license": "CC BY 3.0",
+    "changes": "White fill changed to currentColor; displayed as a gold CSS mask."
+  },
+  {
+    "key": "monsters",
+    "name": "daemon-skull",
+    "author": "Lorc",
+    "url": "https://game-icons.net/1x1/lorc/daemon-skull.html",
+    "source": "https://game-icons.net/icons/ffffff/transparent/1x1/lorc/daemon-skull.svg",
+    "license": "CC BY 3.0",
+    "changes": "White fill changed to currentColor; displayed as a gold CSS mask."
+  },
+  {
+    "key": "area",
+    "name": "treasure-map",
+    "author": "Lorc",
+    "url": "https://game-icons.net/1x1/lorc/treasure-map.html",
+    "source": "https://game-icons.net/icons/ffffff/transparent/1x1/lorc/treasure-map.svg",
+    "license": "CC BY 3.0",
+    "changes": "White fill changed to currentColor; displayed as a gold CSS mask."
+  },
+  {
+    "key": "other",
+    "name": "cog",
+    "author": "Lorc",
+    "url": "https://game-icons.net/1x1/lorc/cog.html",
+    "source": "https://game-icons.net/icons/ffffff/transparent/1x1/lorc/cog.svg",
+    "license": "CC BY 3.0",
+    "changes": "White fill changed to currentColor; displayed as a gold CSS mask."
+  },
+  {
+    "key": "import",
+    "name": "scroll-unfurled",
+    "author": "Lorc",
+    "url": "https://game-icons.net/1x1/lorc/scroll-unfurled.html",
+    "source": "https://game-icons.net/icons/ffffff/transparent/1x1/lorc/scroll-unfurled.svg",
+    "license": "CC BY 3.0",
+    "changes": "White fill changed to currentColor; displayed as a gold CSS mask."
+  },
+  {
+    "key": "copy",
+    "name": "files",
+    "author": "Delapouite",
+    "url": "https://game-icons.net/1x1/delapouite/files.html",
+    "source": "https://game-icons.net/icons/ffffff/transparent/1x1/delapouite/files.svg",
+    "license": "CC BY 3.0",
+    "changes": "White fill changed to currentColor; displayed as a gold CSS mask."
+  },
+  {
+    "key": "help",
+    "name": "book-aura",
+    "author": "Lorc",
+    "url": "https://game-icons.net/1x1/lorc/book-aura.html",
+    "source": "https://game-icons.net/icons/ffffff/transparent/1x1/lorc/book-aura.svg",
+    "license": "CC BY 3.0",
+    "changes": "White fill changed to currentColor; displayed as a gold CSS mask."
+  }
+]

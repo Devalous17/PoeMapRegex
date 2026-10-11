@@ -1,6 +1,7 @@
+import { Icon } from '../../components/Icon';
 import exampleExport from '../../../../fixtures/test-build.pob.txt?raw';
 import type { FormEvent, KeyboardEvent } from 'react';
-import { Button, OrnamentDivider, Panel, Sigil, SectionHeading } from '../../components/UI';
+import { Button, OrnamentDivider, Panel, SectionHeading } from '../../components/UI';
 import { useAppStore } from '../../store/useAppStore';
 
 export function BuildImport() {
@@ -20,7 +21,7 @@ export function BuildImport() {
     <SectionHeading number="02" title="Bring your build" subtitle="Paste a pobb.in link or your Path of Building export. We will read the saved snapshot." />
     <Panel className="import-panel">
       <div className="import-panel__head">
-        <div className="import-title"><Sigil className="import-title__sigil" /><div><span className="panel-kicker">BUILD IMPORT</span><strong>Path of Building profile</strong></div></div>
+        <div className="import-title"><Icon name="import" className="import-title__sigil" /><div><span className="panel-kicker">BUILD IMPORT</span><strong>Path of Building profile</strong></div></div>
         <span className="import-panel__edition">POE 1 / ENGLISH</span>
       </div>
       <OrnamentDivider />

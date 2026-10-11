@@ -1,3 +1,4 @@
+import { Icon } from './components/Icon';
 import { useEffect, useState } from 'react';
 import { useReducedMotion } from 'framer-motion';
 import { Button, Toast } from './components/UI';
@@ -57,7 +58,7 @@ export default function App() {
   }, []);
   return <HighlightProvider><div className="site-shell site-shell--has-results" id="top">
 
-    <div className="utility-bar page-wrap"><button type="button" className="utility-tour" onClick={() => setTour(true)}>Quick guide ›</button><span>PATH OF EXILE 1 · ENGLISH MAP SEARCH</span><a href="https://github.com/Devalous17/PoeMapRegex" target="_blank" rel="noreferrer">Community project ↗</a></div>
+    <div className="utility-bar page-wrap"><button type="button" className="utility-tour" onClick={() => setTour(true)}><Icon name="help" />Quick guide ›</button><span>PATH OF EXILE 1 · ENGLISH MAP SEARCH</span><a href="https://github.com/Devalous17/PoeMapRegex" target="_blank" rel="noreferrer">Community project ↗</a></div>
     <a className="skip-link" href="#generator">Skip to generator</a>
     <header className="site-header"><div className="site-header__inner page-wrap">
       <a className="brand" href="#top" aria-label="MapRegex home"><span>MAP<span>REGEX</span></span><small>THE CARTOGRAPHER'S COMPANION</small></a>
@@ -76,7 +77,7 @@ export default function App() {
       </div>
       <Reveal><FAQ /></Reveal>
     </main>
-    <footer id="about" className="site-footer"><div className="page-wrap site-footer__inner"><div><div className="footer-brand"><span>MAPREGEX</span></div><p>Fan-made tool. Not affiliated with or endorsed by Grinding Gear Games.</p></div><div className="footer-links"><a href="https://github.com/Devalous17/PoeMapRegex" target="_blank" rel="noreferrer">GitHub</a><button type="button" onClick={() => setTour(true)}>Replay guide</button><a href="#faq">Questions & privacy</a></div></div></footer>
+    <footer id="about" className="site-footer"><div className="page-wrap site-footer__inner"><div><div className="footer-brand"><span>MAPREGEX</span></div><p>Fan-made tool. Not affiliated with or endorsed by Grinding Gear Games.</p></div><div className="footer-links"><a href="https://github.com/Devalous17/PoeMapRegex" target="_blank" rel="noreferrer">GitHub</a><button type="button" onClick={() => setTour(true)}>Replay guide</button><a href="#faq">Questions & privacy</a><a href="/credits.html">Icon credits</a></div></div></footer>
     <Tour open={tour} onClose={() => setTour(false)} /><Toast />
   </div></HighlightProvider>;
 }

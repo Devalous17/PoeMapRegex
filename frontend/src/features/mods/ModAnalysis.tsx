@@ -1,3 +1,4 @@
+import { Icon } from '../../components/Icon';
 import { useModHighlight } from '../../components/HighlightContext';
 import { useMemo, useState } from 'react';
 import { Button, SectionHeading, SeverityOrb, ratingLabels } from '../../components/UI';
@@ -5,6 +6,7 @@ import { recommendedDecision } from '../../services/regexBuilder';
 import { useAppStore } from '../../store/useAppStore';
 import type { Category, ClassifiedMod, Decision, Rating } from '../../types';
 
+const categoryIcons: Record<Category, string> = {"Thorns": "thorns", "Recovery / Leech": "recovery", "Cooldown / Triggers": "cooldown", "Defences": "defences", "Resistances": "resistances", "Charges": "charges", "Ailments / Curses": "ailments", "Monsters": "monsters", "Area": "area", "Other": "other"};
 const ratingOrder: Rating[] = ['brick', 'dangerous', 'uncomfortable', 'review', 'free'];
 const categoryOrder: Category[] = ['Thorns', 'Recovery / Leech', 'Cooldown / Triggers', 'Defences', 'Resistances', 'Charges', 'Ailments / Curses', 'Monsters', 'Area', 'Other'];
 
@@ -48,7 +50,7 @@ function Filters({ mods }: { mods: ClassifiedMod[] }) {
       <button type="button" className={ratingFilter === 'all' ? 'is-active' : ''} aria-pressed={ratingFilter === 'all'} onClick={() => setRatingFilter('all')}>All <small>{mods.length}</small></button>
       {ratingOrder.map(rating => <button type="button" key={rating} className={ratingFilter === rating ? 'is-active' : ''} aria-pressed={ratingFilter === rating} onClick={() => setRatingFilter(rating)}>{ratingLabels[rating]} <small>{mods.filter(mod => mod.rating === rating).length}</small></button>)}
     </div><div className="mod-filters__group"><strong>Category</strong>
-      {availableCategories.map((category) => <button type="button" key={category} className={categories.includes(category) ? 'is-active' : ''} aria-pressed={categories.includes(category)} onClick={() => toggleCategory(category)}>{category} <small>{mods.filter(mod => mod.category === category).length}</small></button>)}
+      {availableCategories.map((category) => <button type="button" key={category} className={categories.includes(category) ? 'is-active' : ''} aria-pressed={categories.includes(category)} onClick={() => toggleCategory(category)}><Icon name={categoryIcons[category]} />{category} <small>{mods.filter(mod => mod.category === category).length}</small></button>)}
     </div></div>
   </details>;
 }

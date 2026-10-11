@@ -1,10 +1,11 @@
+import { Icon } from './Icon';
 import { useEffect, useId } from 'react';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import type { Rating } from '../types';
 import { useAppStore } from '../store/useAppStore';
 
 export function Sigil({ className = '' }: { className?: string }) {
-  return <span className={`simple-mark ${className}`} aria-hidden="true">M</span>;
+  return <Icon name="area" className={className} />;
 }
 
 export function Panel({ children, className = '', id }: { children: ReactNode; className?: string; id?: string }) {

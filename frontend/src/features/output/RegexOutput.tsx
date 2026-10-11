@@ -1,3 +1,4 @@
+import { Icon } from '../../components/Icon';
 import { useModHighlight } from '../../components/HighlightContext';
 import { useMemo, useState } from 'react';
 import { Button, Sigil } from '../../components/UI';
@@ -73,7 +74,7 @@ export function RegexOutput({ mods, limit, mode }: { mods: ClassifiedMod[]; limi
         {output.regex ? <code key={output.regex} className="regex-code__live">{output.parts.map((part, index) => <span key={`${index}-${part.text}`}>{index > 0 ? ' ' : ''}<RegexTerm part={part} mods={part.kind === 'exclude' ? output.blocked : output.wanted} /></span>)}</code> : <span className="regex-placeholder">Click modifiers or set map values to build a search.</span>}
       </div><div className="regex-meter"><span className={tooLong ? 'is-over' : ratio >= 80 ? 'is-near' : ''}>{output.length} / {limit}</span><div className="regex-meter__track"><span className={tooLong ? 'is-over' : ratio >= 80 ? 'is-near' : ''} style={{ width: `${ratio}%` }} /></div></div></div>
       <Button type="button" variant="primary" className="regex-copy" disabled={!output.regex || tooLong || !output.valid} onClick={() => void copy(output.regex, mode === 'example' ? 'Example regex copied. Analyze your own build before use.' : 'Regex copied to clipboard')}>
-        {copied ? 'Copied' : 'Copy Regex'} <span aria-hidden="true">{copied ? '✓' : '↗'}</span>
+        <Icon name="copy" />{copied ? 'Copied!' : 'Copy Regex'} <span aria-hidden="true">{copied ? '✓' : '↗'}</span>
       </Button>
     </div>
     <div className="regex-dock__details"><div className="regex-dock__summary"><span><strong>Blocks:</strong> {output.blocked.length}</span><span><strong>Wants:</strong> {output.wanted.length}</span>{preferenceCount > 0 && <span><strong>Applied filters:</strong> {preferenceCount}</span>}</div>

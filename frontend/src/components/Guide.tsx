@@ -1,5 +1,6 @@
+import { Icon } from './Icon';
 import { useEffect, useRef, useState } from 'react';
-import { Button, Panel, SectionHeading, Sigil } from './UI';
+import { Button, Panel, SectionHeading } from './UI';
 import { DiamondPager } from './Ornaments';
 
 const steps = [
@@ -35,7 +36,7 @@ export function Tour({ open, onClose }: { open: boolean; onClose: () => void }) 
   function finish() { try { localStorage.setItem('mapregex-tour-v1', 'done'); } catch { /* Tour remains usable when storage is unavailable. */ } onClose(); }
   return <dialog ref={dialog} className="tour-dialog" aria-labelledby="tour-title" aria-describedby="tour-description" onCancel={finish}>
     <div className="tour-spotlight" style={spot} aria-hidden="true" />
-    <div className="tour-card"><Sigil /><p className="panel-kicker">A QUICK GUIDE · {step + 1} OF {steps.length}</p><h2 id="tour-title">{steps[step].title}</h2><p id="tour-description">{steps[step].text}</p>
+    <div className="tour-card"><Icon name="help" /><p className="panel-kicker">A QUICK GUIDE · {step + 1} OF {steps.length}</p><h2 id="tour-title">{steps[step].title}</h2><p id="tour-description">{steps[step].text}</p>
       <DiamondPager count={steps.length} current={step} onSelect={setStep}/>
       <div className="tour-actions"><button type="button" className="text-link" onClick={finish}>Skip tour</button>{step > 0 && <Button type="button" onClick={() => setStep(step - 1)}>Back</Button>}<Button autoFocus type="button" variant="primary" onClick={() => step === steps.length - 1 ? finish() : setStep(step + 1)}>{step === steps.length - 1 ? 'Start mapping' : 'Next'} <span aria-hidden="true">›</span></Button></div>
     </div>
