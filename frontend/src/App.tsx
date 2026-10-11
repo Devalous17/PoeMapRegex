@@ -76,7 +76,7 @@ export default function App() {
       </div>
       <Reveal><FAQ /></Reveal>
     </main>
-    <footer id="about" className="site-footer"><div className="page-wrap site-footer__inner"><div><div className="footer-brand"><span>MAPREGEX</span></div><p>This is a fan-made tool and is not affiliated with or endorsed by Grinding Gear Games.</p></div><div className="footer-links"><a href="https://github.com/Devalous17/PoeMapRegex" target="_blank" rel="noreferrer">GitHub</a><button type="button" onClick={() => setTour(true)}>Replay guide</button><a href="#faq">Questions & privacy</a></div></div></footer>
+    <footer id="about" className="site-footer"><div className="page-wrap site-footer__inner"><div><div className="footer-brand"><span>MAPREGEX</span></div><p>Fan-made tool. Not affiliated with or endorsed by Grinding Gear Games.</p></div><div className="footer-links"><a href="https://github.com/Devalous17/PoeMapRegex" target="_blank" rel="noreferrer">GitHub</a><button type="button" onClick={() => setTour(true)}>Replay guide</button><a href="#faq">Questions & privacy</a></div></div></footer>
     <Tour open={tour} onClose={() => setTour(false)} /><Toast />
   </div></HighlightProvider>;
 }
