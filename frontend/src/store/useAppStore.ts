@@ -20,6 +20,7 @@ interface AppState {
   preferences: Preferences;
   toast: string;
   setSource: (value: string) => void;
+  resetBuild: () => void;
   analyze: () => Promise<void>;
   refineBuild: (assumptions: BuildAssumptions) => Promise<void>;
   loadExample: () => Promise<void>;
@@ -53,6 +54,7 @@ export const useAppStore = create<AppState>((set, get) => ({
   preferences: { ...EMPTY_PREFERENCES },
   toast: '',
   setSource: source => set({ source, error: '' }),
+  resetBuild: () => set({source:'',analysisSource:'',analysis:null,error:'',overrides:{},search:'',categories:[],ratingFilter:'all'}),
   analyze: async () => {
     const source = get().source.trim();
     if (!source) { set({ error: 'Paste a pobb.in link or a Path of Building export first.' }); return; }
@@ -97,7 +99,7 @@ export const useAppStore = create<AppState>((set, get) => ({
   toggleCategory: category => set(state => ({ categories: state.categories.includes(category)
     ? state.categories.filter(item => item !== category) : [...state.categories, category] })),
   setPreferences: preferences => set({ preferences }),
-  resetPreferences: () => set({ preferences: { ...EMPTY_PREFERENCES, minimums: { quantity: '40' }, rarities: [] } }),
+  resetPreferences: () => set({ preferences: { ...EMPTY_PREFERENCES, minimums: { quantity: '50' }, rarities: [] } }),
   showToast: toast => set({ toast }),
   dismissToast: () => set({ toast: '' }),
 }));

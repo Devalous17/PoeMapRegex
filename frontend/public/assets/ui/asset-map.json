@@ -1,0 +1,147 @@
+{
+  "source": "User supplied UI sheet 5f4d25bc-fd1e-4834-bd04-3851fa749919.png",
+  "sheetSize": [
+    1448,
+    1086
+  ],
+  "crops": {
+    "buttons/bronze.png": [
+      16,
+      15,
+      478,
+      117
+    ],
+    "buttons/import.png": [
+      496,
+      15,
+      954,
+      117
+    ],
+    "buttons/crimson.png": [
+      975,
+      15,
+      1434,
+      117
+    ],
+    "buttons/secondary.png": [
+      17,
+      135,
+      295,
+      225
+    ],
+    "panels/panel.png": [
+      17,
+      248,
+      701,
+      521
+    ],
+    "panels/regex-title.png": [
+      17,
+      547,
+      1146,
+      636
+    ],
+    "tabs/map.png": [
+      20,
+      744,
+      217,
+      826
+    ],
+    "icons/standard-map.png": [
+      43,
+      761,
+      92,
+      809
+    ],
+    "icons/nightmare-map.png": [
+      244,
+      761,
+      292,
+      809
+    ],
+    "icons/waystone.png": [
+      447,
+      760,
+      493,
+      809
+    ],
+    "icons/copy.png": [
+      1260,
+      966,
+      1335,
+      1043
+    ],
+    "icons/document.png": [
+      1348,
+      966,
+      1423,
+      1043
+    ],
+    "icons/success.png": [
+      1080,
+      966,
+      1159,
+      1043
+    ],
+    "icons/warning.png": [
+      1171,
+      966,
+      1248,
+      1043
+    ],
+    "decorations/divider.png": [
+      26,
+      984,
+      678,
+      1035
+    ],
+    "decorations/corner.png": [
+      705,
+      950,
+      798,
+      1054
+    ],
+    "tabs/red.png": [
+      18,
+      848,
+      214,
+      928
+    ],
+    "tabs/purple.png": [
+      215,
+      848,
+      410,
+      928
+    ],
+    "tabs/cyan.png": [
+      410,
+      848,
+      604,
+      928
+    ],
+    "tabs/orange.png": [
+      604,
+      848,
+      799,
+      928
+    ],
+    "tabs/green.png": [
+      800,
+      848,
+      995,
+      928
+    ],
+    "tabs/yellow.png": [
+      997,
+      848,
+      1192,
+      928
+    ],
+    "tabs/neutral.png": [
+      1193,
+      848,
+      1428,
+      928
+    ]
+  }
+}

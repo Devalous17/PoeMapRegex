@@ -6,7 +6,7 @@ import { DiamondPager } from './Ornaments';
 const steps = [
   { target: 'generator', title: 'Bring your build', text: 'Paste a pobb.in link or export code. In Path of Building, open Import/Export Build, then Generate and Copy. No account is needed.' },
   { target: 'mods', title: 'Make the call', text: 'Recommendations are a starting point. Click a modifier to block or allow it. Open the explanations to see what was detected in your build.' },
-  { target: 'preferences', title: 'Choose your rewards', text: 'Set the minimum quantity, pack size or other map values you want. The search updates immediately. Quantity starts at 40%; you can change or clear it.' },
+  { target: 'preferences', title: 'Choose your rewards', text: 'Set the minimum quantity, pack size or other map values you want. The search updates immediately. Quantity starts at 50%; you can change or clear it.' },
   { target: 'output', title: 'Copy, then map', text: 'Copy the search into your in-game stash search. Matching maps pass your selected filters. Missing build data still needs your judgment.' },
 ];
 

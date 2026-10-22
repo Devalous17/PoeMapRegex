@@ -170,7 +170,7 @@ export interface RegexResult {
 }
 
 export const EMPTY_PREFERENCES: Preferences = {
-  minimums: { quantity: '40' },
+  minimums: { quantity: '50' },
   corrupted: false,
   unidentified: false,
   rarities: [],

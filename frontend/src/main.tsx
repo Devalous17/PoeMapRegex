@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import './styles/theme.css';
 import './styles/tokens.css';
-import './styles/redesign.css';
+import './styles/tool.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(<React.StrictMode><App /></React.StrictMode>);
+
+import './styles/figma.css';
+
+import './styles/landing.css';

@@ -1,3 +1,4 @@
+import { Sprite } from './Sprite';
 import { Icon } from './Icon';
 import { useEffect, useId } from 'react';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
@@ -9,7 +10,7 @@ export function Sigil({ className = '' }: { className?: string }) {
 }
 
 export function Panel({ children, className = '', id }: { children: ReactNode; className?: string; id?: string }) {
-  return <section id={id} className={`poe-panel ${className}`}>{children}</section>;
+  return <section id={id} className={`poe-panel ${className}`}><Sprite name="panel" />{children}</section>;
 }
 
 export function OrnamentDivider() {
@@ -24,7 +25,7 @@ export function SectionHeading({ number, title, subtitle, aside }: { number: str
 }
 
 export function Button({ variant = 'secondary', className = '', children, ...props }: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: 'primary' | 'secondary' | 'quiet' }) {
-  return <button className={`poe-button poe-button--${variant} ${className}`} {...props}>{children}</button>;
+  return <button className={`poe-button poe-button--${variant} ${className}`} {...props}>{variant !== 'quiet' && <Sprite name={variant === 'primary' ? 'primary' : 'smallButton'} />}{children}</button>;
 }
 
 export function SeverityOrb({ rating, small = false }: { rating: Rating; small?: boolean }) {
@@ -52,7 +53,7 @@ export function PoeTooltip({ title, children, body, rarity = 'magic', className 
 export function Check({ checked, label, onChange, disabled = false }: { checked: boolean; label: string; onChange: (checked: boolean) => void; disabled?: boolean }) {
   return <label className={`check-row ${disabled ? 'is-disabled' : ''}`}>
     <input type="checkbox" checked={checked} onChange={event => onChange(event.target.checked)} disabled={disabled} />
-    <span className="check-box" aria-hidden="true" />
+    <span className="check-box" aria-hidden="true"><Sprite name="checkbox" />{checked && <b>✓</b>}</span>
     <span>{label}</span>
   </label>;
 }

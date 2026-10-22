@@ -1,0 +1,34 @@
+[
+  {
+    "width": 360,
+    "clientWidth": 351,
+    "headingFont": "\"Fontin SmallCaps\", \"Cormorant SC\", Georgia, serif",
+    "overflow": [],
+    "pass": true,
+    "scrollWidth": 351
+  },
+  {
+    "width": 768,
+    "clientWidth": 759,
+    "headingFont": "\"Fontin SmallCaps\", \"Cormorant SC\", Georgia, serif",
+    "overflow": [],
+    "pass": true,
+    "scrollWidth": 759
+  },
+  {
+    "width": 1024,
+    "clientWidth": 1015,
+    "headingFont": "\"Fontin SmallCaps\", \"Cormorant SC\", Georgia, serif",
+    "overflow": [],
+    "pass": true,
+    "scrollWidth": 1015
+  },
+  {
+    "width": 1440,
+    "clientWidth": 1431,
+    "headingFont": "\"Fontin SmallCaps\", \"Cormorant SC\", Georgia, serif",
+    "overflow": [],
+    "pass": true,
+    "scrollWidth": 1431
+  }
+]

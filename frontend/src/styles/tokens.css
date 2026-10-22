@@ -1,3 +1,7 @@
+/* A font by Jos Buivenga (exljbris) -> www.exljbris.com */
+@font-face{font-family:'Fontin SmallCaps';src:local('Fontin SmallCaps'),url('/fonts/Fontin-SmallCaps.ttf') format('truetype');font-weight:400;font-display:swap}
+/* A font by Jos Buivenga (exljbris) -> www.exljbris.com */
+@font-face{font-family:Fontin;src:local('Fontin'),url('/fonts/Fontin-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
 @font-face { font-family: 'Cormorant SC'; src: url('/fonts/CormorantSC-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
 @font-face { font-family: 'Cormorant SC'; src: url('/fonts/CormorantSC-SemiBold.woff2') format('woff2'); font-weight: 600 700; font-display: swap; }
 @font-face { font-family: 'Crimson Pro'; src: url('/fonts/CrimsonPro-Variable.woff2') format('woff2'); font-weight: 200 900; font-display: swap; }
